@@ -47,7 +47,7 @@ Las **116 horas lectivas** del módulo se organizan en **58 bloques lectivos de 
 ## 🛠️ Novedades y Funcionalidades de la Aplicación
 
 1. **Gestión de Visibilidad y Modo Docente**:
-   * Interruptor de **"Acceso Docente"** (PIN de acceso: `daw2026`).
+   * Interruptor de **"Acceso Docente"**.
    * Permite al profesor **bloquear o desbloquear** contenidos individualmente o por unidades completas para abrirlas a los alumnos al ritmo de las clases.
    * Los alumnos ven los bloques cerrados como protegidos hasta su explicación en el aula.
 2. **Barra Lateral Adaptable**:
