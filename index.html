@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMSGI 1º DAW | CIFP Carlos III - Aula Virtual y Organización Docente (2026/2027)</title>
+  <meta name="description" content="Organización del módulo Lenguajes de Marcas y Sistemas de Gestión de Información de 1º DAW (FP Grado Superior) según RAs en bloques de 2 horas. Curso 2026/2027.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+              950: '#1e1b4b',
+            },
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+              950: '#042f2e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors duration-200 selection:bg-teal-500 selection:text-white">
+
+  <!-- =========================================================================
+       BARRA SUPERIOR (HEADER)
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shrink-0">
+    <div class="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Logotipo & Título del Módulo -->
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Botón menú móvil -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+
+        <!-- Botón para Colapsar/Expandir la barra lateral en Escritorio -->
+        <button onclick="window.LMSGI_APP.toggleSidebarCollapse()" 
+                title="Mostrar/Ocultar barra lateral para maximizar contenido"
+                class="hidden lg:flex p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
+        </button>
+
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 via-indigo-600 to-indigo-700 flex items-center justify-center text-white font-black text-base shadow-md shrink-0">
+          &lt;/&gt;
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">1º DAW · FP Grado Superior</span>
+            <span class="hidden sm:inline-block text-[11px] px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-800/60 font-semibold">
+              CIFP Carlos III · Cartagena
+            </span>
+          </div>
+          <h2 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-50 truncate leading-tight">
+            Lenguajes de Marcas y Sistemas de Gestión de Información
+          </h2>
+        </div>
+      </div>
+
+      <!-- Acciones de Cabecera: Modo Docente, Información y Modo Oscuro -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        
+        <!-- Botón Modo Docente / Modo Alumno -->
+        <button id="admin-mode-toggle" 
+                onclick="window.LMSGI_APP.toggleAdminMode()" 
+                title="Activar Modo Docente para desbloquear/bloquear contenidos">
+          <!-- Rellenado por app.js -->
+        </button>
+
+        <!-- Información de Evaluación Oficial -->
+        <button onclick="window.LMSGI_APP.showEvaluationInfoModal()" 
+                title="Consultar ponderaciones e instrumentos oficiales"
+                class="hidden md:flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors">
+          <svg class="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Ponderación RAs
+        </button>
+
+        <div class="hidden xl:flex flex-col text-right pl-2 border-l border-slate-200 dark:border-slate-800">
+          <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">Curso 2026/2027</span>
+          <span class="text-xs font-medium text-slate-700 dark:text-slate-300">Prof. Virginia Zornoza Martínez</span>
+        </div>
+
+        <!-- Botón Modo Oscuro/Claro -->
+        <button onclick="window.LMSGI_APP.toggleTheme()" 
+                title="Alternar Modo Oscuro / Claro"
+                class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-800">
+          <svg class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <svg class="w-5 h-5 block dark:hidden text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       CONTENEDOR PRINCIPAL: SIDEBAR + RESIZER + CONTENIDO
+       ========================================================================= -->
+  <div class="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 flex flex-col lg:flex-row gap-0 items-stretch relative">
+
+    <!-- Botón flotante para reabrir el sidebar si se ha ocultado -->
+    <button id="sidebar-expand-btn" 
+            onclick="window.LMSGI_APP.toggleSidebarCollapse()" 
+            title="Abrir índice de unidades"
+            class="hidden fixed bottom-6 left-6 z-30 p-3 bg-teal-600 text-white rounded-full shadow-xl hover:bg-teal-700 transition-all flex items-center gap-2 text-xs font-semibold">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      Ver Índice
+    </button>
+
+    <!-- =======================================================================
+         BARRA LATERAL IZQUIERDA (SIDEBAR): 7 UNIDADES & 58 BLOQUES DE 2 HORAS
+         ======================================================================= -->
+    <aside id="sidebar-container" 
+           style="width: 320px;"
+           class="shrink-0 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden max-h-[calc(100vh-6.5rem)] sticky top-20 transition-width duration-75">
+      
+      <!-- Cabecera del Sidebar: Buscador y Progreso -->
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-900/50">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+              Planificación 26/27
+            </h3>
+          </div>
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300">
+            7 RAs · 116h
+          </span>
+        </div>
+
+        <!-- Buscador en tiempo real -->
+        <div class="relative">
+          <input type="text" 
+                 id="search-input"
+                 oninput="window.LMSGI_APP.handleSearch(this.value)"
+                 placeholder="Buscar tema, RA, etiqueta o bloque..." 
+                 class="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+
+        <!-- Estadísticas globales -->
+        <div id="global-stats"></div>
+      </div>
+
+      <!-- Lista con scroll de las 7 unidades -->
+      <div id="sidebar-units" class="flex-1 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
+        <!-- Rellenado dinámicamente por app.js -->
+      </div>
+
+      <!-- Pie del Sidebar: Leyenda pedagógica -->
+      <div class="p-3 bg-slate-50 dark:bg-slate-950/60 border-t border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-teal-600"></span> 1 Bloque = 2h de clase
+        </span>
+        <span class="font-mono">Total: 58 Bloques</span>
+      </div>
+    </aside>
+
+    <!-- Divisor interactivo para redimensionar con el ratón el sidebar -->
+    <div id="sidebar-resizer" 
+         class="resizer-handle hidden lg:block mx-1.5" 
+         title="Arrastra para cambiar el ancho de la columna o doble clic para reiniciar"></div>
+
+    <!-- =======================================================================
+         ÁREA PRINCIPAL DE CONTENIDO: VISOR DEL BLOQUE SELECCIONADO
+         ======================================================================= -->
+    <main class="flex-1 min-w-0 space-y-6 lg:pl-2">
+      
+      <!-- Cabecera del bloque activo -->
+      <div id="block-header" class="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <!-- Rellenado dinámicamente por app.js -->
+      </div>
+
+      <!-- Pestañas del Bloque: 1. Teoría | 2. Cuestionario | 3. Ejercicios & Validador -->
+      <div id="main-content-tabs">
+        <!-- Rellenado dinámicamente por app.js -->
+      </div>
+
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       MODALES DE ACCESO Y SEGURIDAD DOCENTE
+       ========================================================================= -->
+
+  <!-- Modal 1: Acceso a Modo Docente (Contraseña Oculta) -->
+  <div id="modal-admin-login" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl max-w-md w-full p-6 space-y-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-950/70 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zM10 7a2 2 0 012-2h0a2 2 0 012 2v4H10V7z"/></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">Acceso al Modo Docente</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Panel de gestión de la programación didáctica</p>
+          </div>
+        </div>
+        <button onclick="window.LMSGI_APP.closeAdminLoginModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+        Introduce tu contraseña de profesor para gestionar el bloqueo o desbloqueo de las unidades y bloques de clase.
+      </p>
+
+      <form onsubmit="event.preventDefault(); window.LMSGI_APP.submitAdminLogin();" class="space-y-4">
+        <div class="space-y-1.5">
+          <label for="input-teacher-pin" class="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            Contraseña / PIN de Docente
+          </label>
+          <div class="relative">
+            <input type="password" 
+                   id="input-teacher-pin" 
+                   autocomplete="current-password"
+                   placeholder="Introduce tu clave secreta" 
+                   class="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500 pr-10">
+            <button type="button" 
+                    onclick="window.LMSGI_APP.togglePasswordMask('input-teacher-pin')" 
+                    class="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </button>
+          </div>
+          <div id="admin-login-error" class="hidden text-xs text-rose-600 dark:text-rose-400 font-medium pt-1"></div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" 
+                  onclick="window.LMSGI_APP.closeAdminLoginModal()" 
+                  class="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors">
+            Cancelar
+          </button>
+          <button type="submit" 
+                  class="px-5 py-2 text-xs font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-xl shadow-md transition-all">
+            Iniciar Sesión
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Cambiar Contraseña / PIN de Docente -->
+  <div id="modal-change-pin" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl max-w-md w-full p-6 space-y-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">Cambiar Contraseña de Docente</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Personaliza tu clave privada de acceso</p>
+          </div>
+        </div>
+        <button onclick="window.LMSGI_APP.closeChangePinModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form onsubmit="event.preventDefault(); window.LMSGI_APP.submitChangePin();" class="space-y-3.5">
+        <div class="space-y-1">
+          <label for="input-current-pin" class="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            Contraseña Actual
+          </label>
+          <input type="password" 
+                 id="input-current-pin" 
+                 placeholder="Introduce la contraseña actual" 
+                 class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div class="space-y-1">
+          <label for="input-new-pin" class="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            Nueva Contraseña
+          </label>
+          <input type="password" 
+                 id="input-new-pin" 
+                 placeholder="Escribe tu nueva contraseña secreta" 
+                 class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div class="space-y-1">
+          <label for="input-confirm-pin" class="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            Confirmar Nueva Contraseña
+          </label>
+          <input type="password" 
+                 id="input-confirm-pin" 
+                 placeholder="Repite la nueva contraseña" 
+                 class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div id="change-pin-msg" class="hidden text-xs font-medium pt-1"></div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" 
+                  onclick="window.LMSGI_APP.closeChangePinModal()" 
+                  class="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors">
+            Cancelar
+          </button>
+          <button type="submit" 
+                  class="px-5 py-2 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-md transition-all">
+            Guardar Nueva Clave
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script de la aplicación (versión bundle para soporte directo sin CORS) -->
+  <script src="js/bundle.js"></script>
+
+  <!-- Script para menú móvil -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const sidebar = document.getElementById('sidebar-container');
+      if (mobileBtn && sidebar) {
+        mobileBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+/* styles.css - Aula Virtual LMSGI 1º DAW (Curso 2026/2027) */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --sidebar-width: 320px;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+pre, code, textarea {
+  font-family: var(--font-mono);
+}
+
+/* Scrollbars modernos y suaves */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 148, 136, 0.6);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(20, 184, 166, 0.6);
+}
+
+/* Divisor interactivo para redimensionar la barra lateral con el ratón */
+.resizer-handle {
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.15s ease, width 0.15s ease;
+  position: relative;
+  z-index: 30;
+  user-select: none;
+}
+
+.resizer-handle:hover,
+.resizer-handle.resizing {
+  background: #0d9488;
+}
+
+.resizer-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 24px;
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 2px;
+}
+
+.resizer-handle:hover::after,
+.resizer-handle.resizing::after {
+  background: white;
+}
+
+/* Animaciones de entrada y transiciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Modo Docente: Badge pulsante */
+@keyframes pulse-teal {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(13, 148, 136, 0);
+  }
+}
+
+.pulse-badge {
+  animation: pulse-teal 2s infinite;
+}
+
+/* Estado de bloqueo de bloques */
+.block-locked {
+  filter: grayscale(0.2);
+}
+
+/* Estilos de impresión */
+@media print {
+  #sidebar-container,
+  #sidebar-resizer,
+  #sidebar-collapse-btn,
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
