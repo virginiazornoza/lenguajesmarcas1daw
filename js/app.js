@@ -39,6 +39,11 @@ class LMSGIApp {
     this.isSidebarCollapsed = localStorage.getItem("lmsgi_sidebar_collapsed") === "true";
     this.sidebarWidth = parseInt(localStorage.getItem("lmsgi_sidebar_width") || "320", 10);
 
+    // Contenidos teóricos personalizados por el docente (persistentes en localStorage)
+    this.customTheories = JSON.parse(localStorage.getItem("lmsgi_custom_theories") || "{}");
+    this.editingBlockId = null;
+    this.activeEditorInputId = "edit-theory-intro";
+
     this.initTheme();
     this.init();
   }
@@ -301,7 +306,20 @@ class LMSGIApp {
       toggleSolution: (exerciseId) => this.toggleSolution(exerciseId),
       copyCode: (elementId) => this.copyCode(elementId),
       downloadCode: (exerciseId, filename, lang) => this.downloadCode(exerciseId, filename, lang),
-      showEvaluationInfoModal: () => this.showEvaluationInfoModal()
+      showEvaluationInfoModal: () => this.showEvaluationInfoModal(),
+      openTheoryEditor: (blockId) => this.openTheoryEditor(blockId),
+      closeTheoryEditor: () => this.closeTheoryEditor(),
+      switchEditorTab: (tab) => this.switchEditorTab(tab),
+      setActiveEditorInput: (id) => this.setActiveEditorInput(id),
+      insertEditorFormat: (type) => this.insertEditorFormat(type),
+      addEditorSection: () => this.addEditorSection(),
+      removeEditorSection: (btnOrIdx) => this.removeEditorSection(btnOrIdx),
+      saveTheoryEditor: () => this.saveTheoryEditor(),
+      resetTheoryToDefault: (blockId) => this.resetTheoryToDefault(blockId),
+      resetCurrentEditedBlock: () => this.resetCurrentEditedBlock(),
+      exportCustomContent: () => this.exportCustomContent(),
+      importCustomContent: () => this.importCustomContent(),
+      handleImportFile: (e) => this.handleImportFile(e)
     };
 
     this.render();
@@ -497,59 +515,71 @@ class LMSGIApp {
   }
 
   getCurrentBlockData() {
+    let block;
     if (this.currentUnitId === "ut1") {
-      return UNIT_1_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_1_DATA.blocks[0];
+      block = UNIT_1_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_1_DATA.blocks[0];
+    } else {
+      const currentUnit = this.getCurrentUnit();
+      const blockMeta = currentUnit.blocks.find(b => b.id === this.currentBlockId) || currentUnit.blocks[0];
+      const unitOverview = UNITS_OVERVIEW_DATA[this.currentUnitId];
+      const detailed = unitOverview && unitOverview.blocksDetailed ? unitOverview.blocksDetailed[blockMeta.id] : null;
+
+      block = {
+        id: blockMeta.id,
+        blockNumber: blockMeta.blockNumber,
+        title: blockMeta.title,
+        duration: blockMeta.duration || "2 horas",
+        session: blockMeta.session || `Sesión ${blockMeta.blockNumber}`,
+        evaluation: blockMeta.evaluation || currentUnit.evaluation,
+        ce: blockMeta.ce || [],
+        objectives: detailed ? detailed.objectives : ["Dominar los conceptos teóricos y prácticos de este bloque de 2 horas."],
+        theory: {
+          intro: detailed ? detailed.theorySummary : "Contenido didáctico programado para esta sesión de 2 horas del módulo.",
+          sections: [
+            {
+              title: "Desarrollo del Bloque de 2 Horas",
+              content: detailed ? detailed.theorySummary : "Consulta los materiales de la sesión en el aula y realiza los ejercicios propuestos."
+            }
+          ]
+        },
+        quiz: detailed && detailed.quizSample ? [
+          {
+            id: `q-${blockMeta.id}`,
+            question: detailed.quizSample.question,
+            options: detailed.quizSample.options,
+            correctIndex: detailed.quizSample.correctIndex,
+            explanation: detailed.quizSample.explanation
+          }
+        ] : [],
+        exercises: detailed && detailed.exerciseSample ? [
+          {
+            id: `ex-${blockMeta.id}`,
+            title: `Práctica de la sesión: ${blockMeta.title}`,
+            description: detailed.exerciseSample,
+            initialCode: `<!-- Espacio de trabajo para la sesión ${blockMeta.blockNumber} -->\n`,
+            language: this.currentUnitId === "ut2" || this.currentUnitId === "ut3" ? "html" : "xml",
+            tasks: [
+              "1. Abre tu editor Visual Studio Code.",
+              "2. Implementa las especificaciones descritas en el enunciado.",
+              "3. Valida la estructura y prepara tu entrega para el aula virtual de clase."
+            ],
+            solution: `<!-- Solución de referencia trabajada en el aula de informática -->`,
+            hints: "Revisa las explicaciones de clase y la documentación técnica oficial."
+          }
+        ] : []
+      };
     }
 
-    const currentUnit = this.getCurrentUnit();
-    const blockMeta = currentUnit.blocks.find(b => b.id === this.currentBlockId) || currentUnit.blocks[0];
-    const unitOverview = UNITS_OVERVIEW_DATA[this.currentUnitId];
-    const detailed = unitOverview && unitOverview.blocksDetailed ? unitOverview.blocksDetailed[blockMeta.id] : null;
+    // Si el profesor ha modificado la teoría de este bloque, aplicar la versión personalizada
+    if (this.customTheories && this.customTheories[block.id]) {
+      return {
+        ...block,
+        isCustomized: true,
+        theory: this.customTheories[block.id]
+      };
+    }
 
-    return {
-      id: blockMeta.id,
-      blockNumber: blockMeta.blockNumber,
-      title: blockMeta.title,
-      duration: blockMeta.duration || "2 horas",
-      session: blockMeta.session || `Sesión ${blockMeta.blockNumber}`,
-      evaluation: blockMeta.evaluation || currentUnit.evaluation,
-      ce: blockMeta.ce || [],
-      objectives: detailed ? detailed.objectives : ["Dominar los conceptos teóricos y prácticos de este bloque de 2 horas."],
-      theory: {
-        intro: detailed ? detailed.theorySummary : "Contenido didáctico programado para esta sesión de 2 horas del módulo.",
-        sections: [
-          {
-            title: "Desarrollo del Bloque de 2 Horas",
-            content: detailed ? detailed.theorySummary : "Consulta los materiales de la sesión en el aula y realiza los ejercicios propuestos."
-          }
-        ]
-      },
-      quiz: detailed && detailed.quizSample ? [
-        {
-          id: `q-${blockMeta.id}`,
-          question: detailed.quizSample.question,
-          options: detailed.quizSample.options,
-          correctIndex: detailed.quizSample.correctIndex,
-          explanation: detailed.quizSample.explanation
-        }
-      ] : [],
-      exercises: detailed && detailed.exerciseSample ? [
-        {
-          id: `ex-${blockMeta.id}`,
-          title: `Práctica de la sesión: ${blockMeta.title}`,
-          description: detailed.exerciseSample,
-          initialCode: `<!-- Espacio de trabajo para la sesión ${blockMeta.blockNumber} -->\n`,
-          language: this.currentUnitId === "ut2" || this.currentUnitId === "ut3" ? "html" : "xml",
-          tasks: [
-            "1. Abre tu editor Visual Studio Code.",
-            "2. Implementa las especificaciones descritas en el enunciado.",
-            "3. Valida la estructura y prepara tu entrega para el aula virtual de clase."
-          ],
-          solution: `<!-- Solución de referencia trabajada en el aula de informática -->`,
-          hints: "Revisa las explicaciones de clase y la documentación técnica oficial."
-        }
-      ] : []
-    };
+    return block;
   }
 
   getStatistics() {
@@ -661,6 +691,20 @@ class LMSGIApp {
               <svg class="w-3 h-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
               Cambiar Contraseña Docente
             </button>
+            <div class="flex items-center gap-1.5 pt-1.5 border-t border-teal-200/60 dark:border-teal-900/60 mt-1.5">
+              <button onclick="window.LMSGI_APP.exportCustomContent()" 
+                      class="flex-1 py-1 px-1.5 text-[10px] font-semibold rounded bg-white dark:bg-slate-800 text-teal-800 dark:text-teal-200 hover:bg-teal-100 dark:hover:bg-teal-900/60 border border-teal-200 dark:border-teal-800 transition-colors flex items-center justify-center gap-1"
+                      title="Descargar copia de seguridad en JSON de tus textos personalizados">
+                <svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Exportar JSON
+              </button>
+              <button onclick="window.LMSGI_APP.importCustomContent()" 
+                      class="flex-1 py-1 px-1.5 text-[10px] font-semibold rounded bg-white dark:bg-slate-800 text-teal-800 dark:text-teal-200 hover:bg-teal-100 dark:hover:bg-teal-900/60 border border-teal-200 dark:border-teal-800 transition-colors flex items-center justify-center gap-1"
+                      title="Cargar modificaciones previas desde un archivo JSON">
+                <svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                Importar JSON
+              </button>
+            </div>
           </div>
         `
             : ""
@@ -980,6 +1024,50 @@ class LMSGIApp {
 
     let html = `
       <div class="space-y-6 text-slate-800 dark:text-slate-200">
+        <!-- Barra de Gestión Docente (Modo Docente) -->
+        ${
+          this.isAdminMode
+            ? `
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-teal-50 via-teal-50/60 to-indigo-50/60 dark:from-teal-950/40 dark:via-teal-950/20 dark:to-indigo-950/30 border border-teal-200 dark:border-teal-900/60 shadow-xs flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                  <span>Edición Didáctica de la Sesión</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-100 dark:bg-teal-900/60 text-teal-800 dark:text-teal-200 font-semibold">Modo Docente</span>
+                  ${currentBlock.isCustomized ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 font-semibold border border-amber-300 dark:border-amber-700">Contenido Personalizado Activo</span>' : ''}
+                </div>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Personaliza la teoría, separa párrafos o añade listas para adaptarlo a tus explicaciones en clase.</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              ${
+                currentBlock.isCustomized
+                  ? `
+                <button type="button" 
+                        onclick="window.LMSGI_APP.resetTheoryToDefault('${currentBlock.id}')"
+                        class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/50 text-slate-700 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-300 transition-colors flex items-center gap-1.5"
+                        title="Restaurar a la programación oficial">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  Restaurar Original
+                </button>
+              `
+                  : ""
+              }
+              <button type="button" 
+                      onclick="window.LMSGI_APP.openTheoryEditor('${currentBlock.id}')"
+                      class="px-4 py-1.5 text-xs font-semibold rounded-xl bg-teal-600 hover:bg-teal-700 text-white shadow-sm transition-all flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                Editar Teoría
+              </button>
+            </div>
+          </div>
+        `
+            : ""
+        }
+
         <!-- Objetivos formativos -->
         ${
           currentBlock.objectives && currentBlock.objectives.length > 0
@@ -1239,7 +1327,7 @@ class LMSGIApp {
     // 1. Extraer bloques de código multilínea (```...```)
     raw = raw.replace(/```(xml|html|css|javascript)?([\s\S]*?)```/g, (match, lang, code) => {
       const idx = codeTokens.length;
-      const htmlBlock = `<pre class="my-3 p-3 bg-slate-900 text-teal-200 font-mono text-xs rounded-lg overflow-x-auto border border-slate-800 leading-relaxed">${this.escapeHTML(code.trim())}</pre>`;
+      const htmlBlock = `<pre class="my-3 p-3.5 bg-slate-900 text-teal-200 font-mono text-xs rounded-xl overflow-x-auto border border-slate-800 leading-relaxed shadow-sm">${this.escapeHTML(code.trim())}</pre>`;
       codeTokens.push(htmlBlock);
       return `__LMSGI_CODE_BLOCK_${idx}__`;
     });
@@ -1262,16 +1350,30 @@ class LMSGIApp {
     // Cursiva *...*
     raw = raw.replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>');
 
-    // Listas con *
+    // Separadores horizontales
+    raw = raw.replace(/^\s*---\s*$/gm, '<hr class="my-4 border-slate-200 dark:border-slate-800" />');
+
+    // Listas con sangría de nivel 2 (subviñetas)
+    raw = raw.replace(/^\s{2,}[\*\-]\s+(.*)$/gm, '<li class="ml-8 list-circle text-slate-600 dark:text-slate-400 my-0.5 text-xs">$1</li>');
+
+    // Listas principales con viñetas (* o - o &bull;)
     raw = raw.replace(/^\s*&bull;\s+(.*)$/gm, '<li class="ml-4 list-disc text-slate-700 dark:text-slate-300 my-1">$1</li>');
-    raw = raw.replace(/^\s*\*\s+(.*)$/gm, '<li class="ml-4 list-disc text-slate-700 dark:text-slate-300 my-1">$1</li>');
+    raw = raw.replace(/^\s*[\*\-]\s+(.*)$/gm, '<li class="ml-4 list-disc text-slate-700 dark:text-slate-300 my-1">$1</li>');
+
+    // Listas numeradas (1. 2. etc.)
+    raw = raw.replace(/^\s*(\d+)\.\s+(.*)$/gm, '<li class="ml-4 list-decimal text-slate-700 dark:text-slate-300 my-1">$2</li>');
 
     // Citas con &gt;
-    raw = raw.replace(/^\s*&gt;\s+(.*)$/gm, '<blockquote class="my-3 pl-4 border-l-4 border-teal-500 text-slate-600 dark:text-slate-400 italic text-xs sm:text-sm">$1</blockquote>');
+    raw = raw.replace(/^\s*&gt;\s+(.*)$/gm, '<blockquote class="my-3 pl-4 py-2 border-l-4 border-teal-500 bg-teal-50/60 dark:bg-teal-950/30 rounded-r-xl text-slate-700 dark:text-slate-300 italic text-xs sm:text-sm leading-relaxed">$1</blockquote>');
+    // Compactar citas consecutivas
+    raw = raw.replace(/<\/blockquote>\s*<blockquote[^>]*>/g, '<br class="my-1">');
 
     // Párrafos y saltos
     raw = raw.replace(/\n\n+/g, '</p><p class="my-2.5">');
     raw = `<p class="my-2.5">${raw}</p>`;
+
+    // Limpieza de párrafos vacíos
+    raw = raw.replace(/<p class="my-2\.5">\s*<\/p>/g, '');
 
     // 5. Restaurar bloques de código con su HTML escapado correspondiente
     codeTokens.forEach((token, idx) => {
@@ -1280,6 +1382,325 @@ class LMSGIApp {
     });
 
     return raw;
+  }
+
+  // =========================================================================
+  // GESTIÓN DE EDICIÓN DOCENTE DE CONTENIDOS TEÓRICOS
+  // =========================================================================
+
+  openTheoryEditor(blockId) {
+    this.editingBlockId = blockId || this.currentBlockId;
+    const currentBlock = this.getCurrentBlockData();
+    const modal = document.getElementById("modal-edit-theory");
+    const subtitle = document.getElementById("edit-theory-subtitle");
+    const introTextarea = document.getElementById("edit-theory-intro");
+    const sectionsContainer = document.getElementById("edit-theory-sections-container");
+    const restoreBtn = document.getElementById("btn-restore-theory-modal");
+
+    if (!modal || !introTextarea || !sectionsContainer) return;
+
+    if (subtitle) {
+      subtitle.textContent = `${currentBlock.session}: ${currentBlock.title} (${currentBlock.duration})`;
+    }
+
+    introTextarea.value = (currentBlock.theory && currentBlock.theory.intro) ? currentBlock.theory.intro.trim() : "";
+    introTextarea.onfocus = () => this.setActiveEditorInput("edit-theory-intro");
+
+    // Limpiar y renderizar secciones en el modal
+    sectionsContainer.innerHTML = "";
+    const sections = (currentBlock.theory && currentBlock.theory.sections) ? currentBlock.theory.sections : [];
+
+    sections.forEach((sec, idx) => {
+      this.renderEditorSectionCard(idx, sec.title || "", sec.content || "");
+    });
+
+    if (restoreBtn) {
+      if (currentBlock.isCustomized) {
+        restoreBtn.classList.remove("hidden");
+      } else {
+        restoreBtn.classList.add("hidden");
+      }
+    }
+
+    this.switchEditorTab("edit");
+    modal.classList.remove("hidden");
+    introTextarea.focus();
+    this.activeEditorInputId = "edit-theory-intro";
+  }
+
+  closeTheoryEditor() {
+    const modal = document.getElementById("modal-edit-theory");
+    if (modal) modal.classList.add("hidden");
+    this.editingBlockId = null;
+  }
+
+  renderEditorSectionCard(idx, title, content) {
+    const sectionsContainer = document.getElementById("edit-theory-sections-container");
+    if (!sectionsContainer) return;
+
+    const card = document.createElement("div");
+    card.className = "edit-section-card bg-slate-50/70 dark:bg-slate-800/40 p-3.5 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-700/60 space-y-3";
+    card.dataset.index = idx;
+    card.innerHTML = `
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+          Sección <span class="sec-number">${idx + 1}</span>
+        </span>
+        <button type="button" 
+                onclick="window.LMSGI_APP.removeEditorSection(this)" 
+                class="text-xs text-rose-500 hover:text-rose-700 dark:hover:text-rose-400 flex items-center gap-1 transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          Eliminar Sección
+        </button>
+      </div>
+      <div class="space-y-1">
+        <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400">Título de la Sección</label>
+        <input type="text" 
+               class="sec-title-input w-full px-3 py-1.5 text-xs sm:text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-teal-500"
+               value="${this.escapeHTML(title)}" 
+               placeholder="Ej: 1. Elementos fundamentales">
+      </div>
+      <div class="space-y-1">
+        <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400">Contenido (Markdown / Listas / Código)</label>
+        <textarea rows="6" 
+                  class="sec-content-textarea w-full p-3 text-xs sm:text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-teal-500 leading-relaxed"
+                  placeholder="Escribe la explicación teórica, listas con * y ejemplos...">${this.escapeHTML(content)}</textarea>
+      </div>
+    `;
+
+    const textarea = card.querySelector(".sec-content-textarea");
+    if (textarea) {
+      const fieldId = `sec-content-textarea-${Date.now()}-${idx}`;
+      textarea.id = fieldId;
+      textarea.onfocus = () => this.setActiveEditorInput(fieldId);
+    }
+
+    sectionsContainer.appendChild(card);
+  }
+
+  addEditorSection() {
+    const sectionsContainer = document.getElementById("edit-theory-sections-container");
+    if (!sectionsContainer) return;
+    const cards = sectionsContainer.querySelectorAll(".edit-section-card");
+    this.renderEditorSectionCard(cards.length, `Sección ${cards.length + 1}`, "Escribe aquí la teoría en párrafos cortos y listas con *...\n\n* Punto clave 1\n* Punto clave 2");
+    const lastCard = sectionsContainer.lastElementChild;
+    if (lastCard) {
+      lastCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      const input = lastCard.querySelector(".sec-title-input");
+      if (input) input.focus();
+    }
+  }
+
+  removeEditorSection(btnOrIdx) {
+    let card = null;
+    if (typeof btnOrIdx === "number") {
+      const cards = document.querySelectorAll(".edit-section-card");
+      card = cards[btnOrIdx];
+    } else if (btnOrIdx && btnOrIdx.closest) {
+      card = btnOrIdx.closest(".edit-section-card");
+    }
+    if (card) {
+      card.remove();
+      // Renumerar secciones visualmente
+      const remaining = document.querySelectorAll(".edit-section-card");
+      remaining.forEach((c, i) => {
+        const numSpan = c.querySelector(".sec-number");
+        if (numSpan) numSpan.textContent = i + 1;
+      });
+    }
+  }
+
+  setActiveEditorInput(id) {
+    this.activeEditorInputId = id;
+  }
+
+  insertEditorFormat(type) {
+    const activeEl = document.getElementById(this.activeEditorInputId) || document.getElementById("edit-theory-intro");
+    if (!activeEl) return;
+
+    const start = activeEl.selectionStart || 0;
+    const end = activeEl.selectionEnd || 0;
+    const text = activeEl.value || "";
+    const selected = text.substring(start, end);
+
+    let replacement = "";
+    switch (type) {
+      case "bold":
+        replacement = selected ? `**${selected}**` : "**texto en negrita**";
+        break;
+      case "italic":
+        replacement = selected ? `*${selected}*` : "*texto en cursiva*";
+        break;
+      case "bullet":
+        replacement = selected 
+          ? `\n* ${selected}\n` 
+          : "\n* Elemento de lista\n* Segundo elemento\n";
+        break;
+      case "number":
+        replacement = selected 
+          ? `\n1. ${selected}\n` 
+          : "\n1. Primer paso o regla\n2. Segundo paso o regla\n";
+        break;
+      case "quote":
+        replacement = selected 
+          ? `\n> **Nota clave:** ${selected}\n` 
+          : "\n> **Punto clave:** Información destacada para el aula.\n";
+        break;
+      case "code":
+        replacement = selected 
+          ? `\n\`\`\`xml\n${selected}\n\`\`\`\n` 
+          : '\n```xml\n<ejemplo id="1">\n  <dato>Valor</dato>\n</ejemplo>\n```\n';
+        break;
+      case "paragraph":
+        replacement = "\n\n";
+        break;
+      default:
+        replacement = selected;
+    }
+
+    activeEl.value = text.substring(0, start) + replacement + text.substring(end);
+    activeEl.focus();
+    const newCursor = start + replacement.length;
+    activeEl.setSelectionRange(newCursor, newCursor);
+  }
+
+  switchEditorTab(tab) {
+    const tabBtnEditor = document.getElementById("tab-btn-editor");
+    const tabBtnPreview = document.getElementById("tab-btn-preview");
+    const tabEdit = document.getElementById("editor-tab-edit");
+    const tabPreview = document.getElementById("editor-tab-preview");
+    const previewRender = document.getElementById("edit-theory-preview-render");
+
+    if (!tabBtnEditor || !tabBtnPreview || !tabEdit || !tabPreview) return;
+
+    if (tab === "preview") {
+      tabBtnPreview.className = "px-3 py-1 font-semibold rounded-lg bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs transition-all";
+      tabBtnEditor.className = "px-3 py-1 font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all";
+      tabEdit.classList.add("hidden");
+      tabPreview.classList.remove("hidden");
+
+      // Construir vista previa
+      const introText = document.getElementById("edit-theory-intro")?.value || "";
+      const sectionCards = document.querySelectorAll(".edit-section-card");
+      let sectionsHtml = "";
+
+      sectionCards.forEach((card, i) => {
+        const title = card.querySelector(".sec-title-input")?.value || `Sección ${i + 1}`;
+        const content = card.querySelector(".sec-content-textarea")?.value || "";
+        sectionsHtml += `
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+              ${this.escapeHTML(title)}
+            </h3>
+            <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed">
+              ${this.formatMarkdown(content)}
+            </div>
+          </div>
+        `;
+      });
+
+      if (previewRender) {
+        previewRender.innerHTML = `
+          <div class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            ${this.formatMarkdown(introText)}
+          </div>
+          <div class="space-y-4">
+            ${sectionsHtml}
+          </div>
+        `;
+      }
+    } else {
+      tabBtnEditor.className = "px-3 py-1 font-semibold rounded-lg bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs transition-all";
+      tabBtnPreview.className = "px-3 py-1 font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all";
+      tabEdit.classList.remove("hidden");
+      tabPreview.classList.add("hidden");
+    }
+  }
+
+  saveTheoryEditor() {
+    if (!this.editingBlockId) return;
+
+    const intro = document.getElementById("edit-theory-intro")?.value || "";
+    const sectionCards = document.querySelectorAll(".edit-section-card");
+    const sections = [];
+
+    // Recuperar tablas originales si existían
+    const originalBlock = this.getCurrentBlockData();
+    const originalSections = (originalBlock && originalBlock.theory && originalBlock.theory.sections) ? originalBlock.theory.sections : [];
+
+    sectionCards.forEach((card, idx) => {
+      const title = card.querySelector(".sec-title-input")?.value.trim() || `Sección ${idx + 1}`;
+      const content = card.querySelector(".sec-content-textarea")?.value || "";
+      const table = originalSections[idx] ? originalSections[idx].table : null;
+      sections.push({ title, content, ...(table ? { table } : {}) });
+    });
+
+    this.customTheories[this.editingBlockId] = { intro, sections };
+    localStorage.setItem("lmsgi_custom_theories", JSON.stringify(this.customTheories));
+
+    this.closeTheoryEditor();
+    this.render();
+  }
+
+  resetTheoryToDefault(blockId) {
+    const id = blockId || this.editingBlockId || this.currentBlockId;
+    if (!id) return;
+
+    if (confirm("¿Estás seguro de restablecer el contenido original predeterminado de este bloque? Se borrarán tus ediciones personalizadas para esta sesión.")) {
+      delete this.customTheories[id];
+      localStorage.setItem("lmsgi_custom_theories", JSON.stringify(this.customTheories));
+      if (this.editingBlockId) {
+        this.closeTheoryEditor();
+      }
+      this.render();
+    }
+  }
+
+  resetCurrentEditedBlock() {
+    this.resetTheoryToDefault(this.editingBlockId);
+  }
+
+  exportCustomContent() {
+    const count = Object.keys(this.customTheories).length;
+    if (count === 0) {
+      alert("Aún no tienes contenidos modificados para exportar. Edita alguna sesión primero.");
+      return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.customTheories, null, 2));
+    const dlAnchor = document.createElement("a");
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", `lmsgi_contenidos_docente_${new Date().toISOString().slice(0, 10)}.json`);
+    dlAnchor.click();
+  }
+
+  importCustomContent() {
+    const input = document.getElementById("input-import-theories");
+    if (input) input.click();
+  }
+
+  handleImportFile(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const imported = JSON.parse(e.target.result);
+        if (typeof imported !== "object" || imported === null) {
+          throw new Error("Formato JSON no válido.");
+        }
+        this.customTheories = { ...this.customTheories, ...imported };
+        localStorage.setItem("lmsgi_custom_theories", JSON.stringify(this.customTheories));
+        alert("¡Contenidos docentes importados con éxito!");
+        this.render();
+      } catch (err) {
+        alert("Error al importar el archivo JSON: " + err.message);
+      }
+      event.target.value = "";
+    };
+    reader.readAsText(file);
   }
 }
 

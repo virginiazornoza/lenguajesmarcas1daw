@@ -32,40 +32,50 @@ export const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Un **lenguaje de marcas** (o *markup language*) es un sistema formal que combina texto plano con **etiquetas** (*tags*) o marcas sintácticas que aportan información sobre la estructura del documento, su significado o cómo debe presentarse. A diferencia de un lenguaje de programación como Java o Python, un lenguaje de marcas **no ejecuta algoritmos ni bucles**, sino que estructura y cualifica la información.
+          Un **lenguaje de marcas** (*markup language*) es un sistema formal que combina texto plano con **etiquetas** (*tags*) o marcas sintácticas.
+          
+          Estas marcas aportan información sobre la estructura del documento, su significado semántico o su presentación visual.
+          
+          > **Diferencia fundamental con la programación**:
+          > A diferencia de lenguajes como Java, C++ o Python, un lenguaje de marcas **no ejecuta algoritmos ni procesa bucles**, sino que cualifica, organiza y transporta la información.
         `,
         sections: [
           {
             title: "1. ¿Qué es el marcado? Elementos fundamentales",
             content: `
-              El término "marcar" proviene de las imprentas tradicionales, donde los correctores añadían marcas manuscritas al original para indicar al tipógrafo el tamaño de fuente, sangrías o cursivas.
+              El término **marcar** tiene su origen en las imprentas tradicionales, donde los correctores añadían marcas manuscritas al papel para indicar al tipógrafo el tamaño de letra, sangrías o cursivas.
               
               En informática, el marcado se realiza mediante secuencias delimitadas por corchetes angulares (&lt; y &gt;).
               
               Los tres componentes esenciales de cualquier lenguaje de marcado son:
-              * **Etiqueta (Tag)**: Marca sintáctica que delimita el inicio o fin de un dato. Ejemplo: \`<titulo>\` (apertura) y \`</titulo>\` (cierre).
-              * **Elemento (Element)**: Conjunto completo formado por la etiqueta de apertura, el contenido interior y la etiqueta de cierre. Ejemplo: \`<modulo>Lenguajes de Marcas</modulo>\`.
-              * **Atributo (Attribute)**: Par nombre="valor" situado dentro de la etiqueta de apertura que proporciona metadatos adicionales sobre el elemento. Ejemplo: \`<alumno id="A104" estado="matriculado">\`.
+              * **Etiqueta (Tag)**: Marca sintáctica que delimita el inicio o fin de un dato.
+                * *Apertura*: \`<titulo>\`
+                * *Cierre*: \`</titulo>\`
+              * **Elemento (Element)**: Conjunto completo formado por la etiqueta de apertura, el contenido interior y la etiqueta de cierre.
+                * *Ejemplo*: \`<modulo>Lenguajes de Marcas</modulo>\`
+              * **Atributo (Attribute)**: Par \`nombre="valor"\` situado dentro de la etiqueta de apertura que añade metadatos al elemento.
+                * *Ejemplo*: \`<alumno id="A104" estado="matriculado">\`
             `
           },
           {
             title: "2. Tipos de marcado según su finalidad",
             content: `
-              A lo largo de la evolución de la informática se han distinguido tres grandes tipos de marcado:
+              A lo largo de la evolución informática se han consolidado tres grandes tipos de marcado:
               
               1. **Marcado de Presentación (o de formato)**:
-                 Indica visualmente cómo debe lucir el texto en pantalla o papel (negrita, tamaño de letra, colores, alineación).
-                 *Ejemplos*: RTF (*Rich Text Format*), Markdown (\`**negrita**\`), o etiquetas obsoletas de HTML antiguo como \`<font>\` o \`<center>\`.
+                 * Indica cómo debe lucir visualmente el texto (negrita, tamaño, color, alineación).
+                 * *Ejemplos*: RTF (*Rich Text Format*), Markdown (\`**negrita**\`), o etiquetas obsoletas de HTML antiguo como \`<font>\` o \`<center>\`.
                  
               2. **Marcado de Procedimiento**:
-                 Contiene instrucciones de bajo nivel dirigidas a un intérprete o procesador tipográfico sobre cómo imprimir el documento paso a paso.
-                 *Ejemplos*: PostScript, LaTeX, troff.
+                 * Contiene instrucciones paso a paso para que un intérprete o procesador tipográfico imprima el documento.
+                 * *Ejemplos*: PostScript, LaTeX, troff.
                  
               3. **Marcado Descriptivo o Semántico (Estructural)**:
-                 Separa radicalmente el contenido de su apariencia visual. Las etiquetas describen **qué es** el dato (su significado real), no cómo debe pintarse en la pantalla.
-                 *Ejemplos*: **XML**, HTML5 semántico (\`<header>\`, \`<article>\`, \`<nav>\`), SVG (*Scalable Vector Graphics*).
+                 * Separa radicalmente el contenido de su apariencia visual.
+                 * Las etiquetas describen **qué es** el dato (su significado real), no cómo debe pintarse en la pantalla.
+                 * *Ejemplos*: **XML**, HTML5 semántico (\`<header>\`, \`<article>\`, \`<nav>\`), SVG (*Scalable Vector Graphics*).
                  
-              > **Principio clave en DAW**: En el desarrollo web profesional moderno separamos estrictamente la estructura y semántica (HTML / XML) del diseño visual (CSS) y del comportamiento e interacción (JavaScript).
+              > **Principio de oro en DAW**: En el desarrollo web profesional moderno separamos estrictamente la estructura y semántica (HTML / XML) del diseño visual (CSS) y del comportamiento e interactividad (JavaScript).
             `
           },
           {
@@ -73,10 +83,23 @@ export const UNIT_1_DATA = {
             content: `
               Comprender el origen de los lenguajes de marcas es indispensable para entender el desarrollo web moderno:
               
-              * **1969 - GML (Generalized Markup Language)**: Creado en IBM por Charles Goldfarb, Edward Mosher y Raymond Lorie (de sus apellidos surge el acrónimo GML). Permitió por primera vez que documentos de texto se compartieran entre distintos sistemas informáticos independientemente del formato de salida.
-              * **1986 - SGML (Standard Generalized Markup Language - ISO 8879)**: Estándar internacional padre de todos los lenguajes modernos. Es un *metalenguaje* (un lenguaje para definir otros lenguajes de marcas). Muy potente pero sumamente complejo y pesado para ser procesado por los navegadores de la época.
-              * **1990 - HTML (HyperText Markup Language)**: Creado por Tim Berners-Lee en el CERN. Es una aplicación concreta y sencilla de SGML pensada para enlazar y visualizar documentos en la World Wide Web.
-              * **1998 - XML (eXtensible Markup Language)**: Creado por el consorcio **W3C**. Es un subconjunto simplificado y optimizado de SGML diseñado para estructurar, validar y transportar datos entre cualquier sistema de forma universal.
+              * **1969 - GML (Generalized Markup Language)**:
+                * Creado en IBM por Charles Goldfarb, Edward Mosher y Raymond Lorie (de sus apellidos surge el acrónimo GML).
+                * Permitió por primera vez compartir documentos de texto entre sistemas informáticos heterogéneos independientemente del formato de salida.
+                
+              * **1986 - SGML (Standard Generalized Markup Language - ISO 8879)**:
+                * Estándar internacional padre de los lenguajes modernos.
+                * Es un *metalenguaje* (un lenguaje para definir otros lenguajes de marcas).
+                * Muy potente, pero excesivamente complejo y pesado para los primeros navegadores web.
+                
+              * **1990 - HTML (HyperText Markup Language)**:
+                * Creado por Tim Berners-Lee en el CERN.
+                * Es una aplicación concreta y sencilla de SGML diseñada para enlazar y visualizar hipertexto en la World Wide Web.
+                
+              * **1998 - XML (eXtensible Markup Language)**:
+                * Diseñado y estandarizado por el consorcio **W3C**.
+                * Es un subconjunto simplificado y optimizado de SGML.
+                * Su propósito es estructurar, validar y transportar datos entre cualquier sistema de forma universal e interoperable.
             `,
             table: {
               headers: ["Lenguaje", "Año", "Tipo de Lenguaje", "Objetivo Principal"],
@@ -156,7 +179,7 @@ export const UNIT_1_DATA = {
         {
           id: "ex1-1",
           title: "Ejercicio 1: Anatomía de un fragmento de marcado",
-          description: "Analiza el siguiente documento de ejemplo e identifica en el editor sus componentes esenciales: elemento raíz, elementos hijos, atributos y contenido textual.",
+          description: "Analiza el siguiente documento de ejemplo en el visor de código e identifica sus componentes esenciales respondiendo a las preguntas interactivas.",
           initialCode: `<instituto codigo="30019702">
   <nombre>CIFP Carlos III</nombre>
   <localidad>Cartagena</localidad>
@@ -171,8 +194,37 @@ export const UNIT_1_DATA = {
             "2. Identifica los atributos y sus valores entre comillas.",
             "3. Observa la jerarquía: ¿quién es el padre de <curso>?"
           ],
+          interactiveQuestions: [
+            {
+              id: "ex1-1-q1",
+              label: "1. Localiza cuál es el elemento raíz único del documento:",
+              placeholder: "Escribe el elemento raíz (ej: instituto)",
+              expected: "instituto",
+              accepts: ["instituto", "<instituto>"],
+              explanation: "El elemento raíz único es <instituto>, el cual engloba y contiene a todos los demás nodos del documento.",
+              hint: "El elemento raíz es el único nodo que no tiene elemento padre en todo el documento."
+            },
+            {
+              id: "ex1-1-q2",
+              label: "2. Identifica los nombres de los atributos presentes en el código:",
+              placeholder: "Escribe los atributos separados por comas (ej: codigo, nivel, familia)",
+              type: "keywords",
+              requiredKeywords: ["codigo", "nivel", "familia"],
+              explanation: "Los 3 atributos presentes son: 'codigo' (en <instituto>), y 'nivel' y 'familia' (en <ciclo>).",
+              hint: "Busca los pares nombre=\"valor\" situados dentro de las etiquetas de apertura de <instituto> y <ciclo>."
+            },
+            {
+              id: "ex1-1-q3",
+              label: "3. Observa la jerarquía del árbol XML: ¿quién es el elemento padre directo de <curso>?",
+              placeholder: "Escribe el elemento padre (ej: ciclo)",
+              expected: "ciclo",
+              accepts: ["ciclo", "<ciclo>"],
+              explanation: "El elemento padre directo de <curso> es <ciclo>, ya que <curso> se encuentra anidado en su interior.",
+              hint: "Revisa qué etiqueta envuelve directamente a <curso>1</curso>."
+            }
+          ],
           solution: `<!-- Solución comentada:
-1. Elemento raíz: <instituto> (engloba a todos los demás nodos).
+1. Elemento raíz único: <instituto> (engloba a todos los demás nodos).
 2. Atributos:
    - codigo="30019702" en <instituto>
    - nivel="superior" y familia="Informatica" en <ciclo>
@@ -225,33 +277,35 @@ export const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Aunque tanto **HTML** como **XML** emplean corchetes angulares (&lt; y &gt;), sus metas técnicas son radicalmente distintas. Confundirlos es uno de los errores iniciales más comunes.
+          Aunque tanto **HTML** como **XML** emplean corchetes angulares (&lt; y &gt;), sus metas técnicas son radicalmente distintas.
+          
+          Confundir ambos lenguajes es uno de los tropiezos iniciales más habituales en desarrollo web.
         `,
         sections: [
           {
             title: "1. La gran comparativa: HTML vs XML",
             content: `
-              La diferencia nuclear se resume en una frase:
-              * **HTML se diseñó para MOSTRAR datos** (centrado en la presentación y renderizado en navegadores).
+              La diferencia nuclear se resume en dos principios:
+              * **HTML se diseñó para MOSTRAR datos** (centrado en la apariencia y renderizado en navegadores).
               * **XML se diseñó para DESCRIBIR Y TRANSPORTAR datos** (centrado en la estructura e intercambio entre aplicaciones).
               
-              Los 4 pilares diferenciales:
+              Los 4 pilares diferenciales entre ambos:
               
               1. **Vocabulario de etiquetas**:
-                 * *HTML*: Vocabulario cerrado y predefinido por el estándar WHATWG/W3C (\`<p>\`, \`<h1>\`, \`<table>\`, \`<a>\`). No puedes inventar etiquetas con semántica propia.
-                 * *XML*: Vocabulario completamente libre. No existe ninguna etiqueta predefinida. Las etiquetas las inventa el desarrollador según el negocio (\`<factura>\`, \`<cliente>\`, \`<precio>\`).
+                 * *HTML*: Vocabulario cerrado y predefinido por el estándar WHATWG/W3C (\`<p>\`, \`<h1>\`, \`<table>\`, \`<a>\`). No se pueden inventar etiquetas arbitrarias.
+                 * *XML*: Vocabulario completamente extensible y libre. Las etiquetas las define el desarrollador según el dominio del negocio (\`<factura>\`, \`<cliente>\`, \`<precio>\`).
                  
               2. **Tolerancia a fallos sintácticos**:
-                 * *HTML*: Es muy permisivo. Si olvidas cerrar una etiqueta o comillas, el navegador intenta autocorregirlo.
-                 * *XML*: Es **estricto e inflexible** (*draconian error handling*). Ante el menor fallo sintáctico, el analizador XML detiene la lectura inmediatamente.
+                 * *HTML*: Es muy permisivo. Si olvidas cerrar una etiqueta o comillas, el navegador intenta autocorregirlo y continuar.
+                 * *XML*: Aplica una política estricta de **control draconiano de errores** (*draconian error handling*). Ante el menor fallo sintáctico, el analizador detiene la lectura inmediatamente.
                  
-              3. **Sensibilidad a mayúsculas y minúsculas (Case Sensitivity)**:
-                 * *HTML*: Es indiferente (case-insensitive). \`<DIV>\`, \`<div>\` y \`<Div>\` son equivalentes.
-                 * *XML*: Es estrictamente sensible (case-sensitive). \`<Modulo>\` NO coincide con \`</modulo>\`.
+              3. **Distinción entre mayúsculas y minúsculas (Case Sensitivity)**:
+                 * *HTML*: Es indiferente (case-insensitive). \`<DIV>\`, \`<div>\` y \`<Div>\` son interpretados como la misma etiqueta.
+                 * *XML*: Es estrictamente sensible (case-sensitive). \`<Modulo>\` NO coincide con \`</modulo>\` y provocará un error de validación.
                  
               4. **Cierre de elementos vacíos**:
-                 * *HTML*: Permite etiquetas vacías sin cerrar (\`<img src="foto.png">\`, \`<br>\`, \`<input>\`).
-                 * *XML*: Todo elemento sin contenido debe cerrarse obligatoriamente (\`<foto src="foto.png" />\` o \`<foto></foto>\`).
+                 * *HTML*: Permite elementos vacíos sin etiqueta de cierre (\`<img src="foto.png">\`, \`<br>\`, \`<input>\`).
+                 * *XML*: Todo elemento sin contenido debe cerrarse de forma obligatoria mediante autocierre (\`<foto src="foto.png" />\`) o etiqueta de cierre explícita (\`<foto></foto>\`).
             `,
             table: {
               headers: ["Característica", "HTML", "XML"],
@@ -268,14 +322,21 @@ export const UNIT_1_DATA = {
           {
             title: "2. Herramientas de edición en el aula",
             content: `
-              En el CIFP Carlos III empleamos herramientas profesionales para el desarrollo del módulo:
+              En el CIFP Carlos III empleamos las siguientes herramientas profesionales durante las clases:
               
-              * **Visual Studio Code (VS Code)**: Editor de código estándar. Extensiones recomendadas:
-                * *XML Tools*: Formateo automático de código XML y evaluación de expresiones XPath.
-                * *XML by Red Hat*: Validación sintáctica en tiempo real y soporte para esquemas XSD.
-                * *Prettier*: Formateador de código para HTML y CSS.
-              * **Navegadores web (Chrome, Edge, Firefox)**: Incluyen analizadores XML nativos con vista de árbol colapsable y detección de errores.
-              * **XML Copy Editor**: Editor ligero especializado para validaciones contra DTD y esquemas.
+              * **Visual Studio Code (VS Code)**:
+                * Editor de código estándar en la industria del software.
+                * Extensiones imprescindibles para el módulo:
+                  * *XML Tools*: Formateo automático de código XML y evaluador de expresiones XPath.
+                  * *XML by Red Hat*: Validación sintáctica en tiempo real y soporte para esquemas XSD.
+                  * *Prettier*: Formateador de código para HTML y CSS.
+                  
+              * **Navegadores web modernos (Chrome, Edge, Firefox)**:
+                * Incorporan analizadores XML nativos.
+                * Permiten visualizar la estructura arbórea colapsable y muestran avisos de error sintáctico con indicación exacta de línea y columna.
+                
+              * **XML Copy Editor**:
+                * Editor ligero especializado para validaciones rápidas contra DTD y XML Schema.
             `
           }
         ]
@@ -418,65 +479,93 @@ export const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Un documento XML posee una **estructura estrictamente jerárquica en forma de árbol invertido**. La primera exigencia de cualquier archivo XML es estar **bien formado** (*well-formed*). Si viola una sola regla sintáctica, ningún procesador podrá interpretarlo.
+          Un documento XML posee una **estructura estrictamente jerárquica en forma de árbol invertido**.
+          
+          La primera condición innegociable de cualquier archivo XML es estar **bien formado** (*well-formed*). Si se incumple una sola regla sintáctica, ningún procesador informático podrá leerlo.
         `,
         sections: [
           {
             title: "1. El Prólogo XML",
             content: `
-              El prólogo es la cabecera técnica obligatoria en entornos de producción:
+              El prólogo es la cabecera técnica obligatoria que encabeza todo documento XML profesional:
               \`\`\`xml
               <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
               \`\`\`
               
-              Directivas del prólogo:
-              * **version**: Versión de la recomendación XML utilizada (habitualmente \`"1.0"\`).
-              * **encoding**: Codificación de caracteres. \`"UTF-8"\` es el estándar universal (soporta tildes, eñes y caracteres internacionales).
-              * **standalone**: Vale \`"yes"\` si el archivo no depende de declaraciones de tipo externas (como una DTD externa), o \`"no"\` si depende de un archivo exterior.
-              
+              Directivas configurables del prólogo:
+              * **version**: Versión de la especificación XML utilizada (habitualmente \`"1.0"\`).
+              * **encoding**: Codificación de caracteres del archivo. \`"UTF-8"\` es el estándar recomendado para admitir tildes, eñes y caracteres internacionales sin corrupción.
+              * **standalone**:
+                * \`"yes"\`: El archivo es autónomo y no depende de definiciones externas (como una DTD externa).
+                * \`"no"\`: El documento requiere un archivo externo para su validación completa.
+                
               > ⚠️ **Reglas de oro del prólogo**:
-              > * Debe figurar en la **línea 1, columna 1** del archivo (sin espacios previos ni líneas en blanco).
-              > * La palabra \`xml\` debe ir en **minúsculas**.
+              > * Debe figurar en la **línea 1, columna 1** del archivo (sin ningún espacio previo ni línea vacía).
+              > * La palabra \`xml\` debe escribirse estrictamente en **minúsculas**.
             `
           },
           {
             title: "2. Reglas fundamentales de un documento bien formado",
             content: `
-              Un documento XML está **bien formado** si cumple todas las reglas de la especificación:
+              Para que un documento XML se considere **bien formado**, debe cumplir rigurosamente el siguiente decálogo de sintaxis:
               
-              1. **Único elemento raíz**: Todo el contenido debe estar englobado dentro de un único elemento contenedor raíz.
-              2. **Cierre obligatorio**: Toda etiqueta que se abre debe cerrarse.
-              3. **Anidamiento correcto**: Prohibido el solapamiento. El último elemento que se abre debe ser el primero en cerrarse (\`<modulo><nombre>LMSGI</nombre></modulo>\`).
-              4. **Comillas obligatorias en atributos**: Todos los valores de atributos deben ir entre comillas dobles o simples (\`codigo="LMSGI"\`).
-              5. **Nombres válidos**: Las etiquetas deben comenzar por letra o guion bajo (\`_\`), nunca por números, espacios ni por la secuencia reservada \`xml\`.
+              1. **Único elemento raíz**:
+                 * Todo el documento debe estar contenido dentro de una única etiqueta envolvente raíz.
+                 * *Ejemplo*: \`<catalogo> ... </catalogo>\`.
+                 
+              2. **Cierre obligatorio de todas las etiquetas**:
+                 * Cualquier elemento que se abre debe cerrarse (\`<precio>20</precio>\`).
+                 * Los elementos vacíos deben incluir la barra de autocierre (\`<salto />\`).
+                 
+              3. **Anidamiento correcto (sin solapamientos)**:
+                 * La última etiqueta en abrirse debe ser la primera en cerrarse (estructura LIFO / pila).
+                 * *Correcto*: \`<modulo><nombre>LMSGI</nombre></modulo>\`.
+                 * *Incorrecto*: \`<modulo><nombre>LMSGI</modulo></nombre>\`.
+                 
+              4. **Comillas obligatorias en todos los atributos**:
+                 * Los valores de atributos deben ir encerrados entre comillas dobles o simples.
+                 * *Correcto*: \`codigo="LMSGI"\`.
+                 * *Incorrecto*: \`codigo=LMSGI\`.
+                 
+              5. **Nombres de etiquetas válidos**:
+                 * Deben comenzar obligatoriamente por una letra o un guion bajo (\`_\`).
+                 * No pueden comenzar por números, caracteres especiales ni por la secuencia reservada \`xml\` o \`XML\`.
+                 * No pueden contener espacios en blanco.
             `
           },
           {
             title: "3. Caracteres reservados, Entidades y Secciones CDATA",
             content: `
-              En XML los símbolos \`<\` y \`&\` están estrictamente reservados:
-              * \`<\` inicia etiquetas.
-              * \`&\` inicia entidades.
+              En XML existen dos caracteres estrictamente reservados para el analizador:
+              * El símbolo \`<\` (indica el comienzo de una etiqueta).
+              * El símbolo \`&\` (indica el comienzo de una entidad).
               
-              Si necesitas escribir estos símbolos en el texto, debes sustituirlos por su **entidad predefinida**:
-              * \`&lt;\` representa el signo menor que (&lt;)
-              * \`&gt;\` representa el signo mayor que (&gt;)
-              * \`&amp;\` representa el signo ampersand (&amp;)
-              * \`&quot;\` representa comillas dobles (&quot;)
-              * \`&apos;\` representa comilla simple o apóstrofe (&apos;)
+              Para incluir estos caracteres en el texto de un elemento, es obligatorio sustituirlos por su **entidad predefinida**:
+              * \`&lt;\` &rarr; Signo menor que (&lt;)
+              * \`&gt;\` &rarr; Signo mayor que (&gt;)
+              * \`&amp;\` &rarr; Signo ampersand (&amp;)
+              * \`&quot;\` &rarr; Comillas dobles (&quot;)
+              * \`&apos;\` &rarr; Comilla simple o apóstrofe (&apos;)
+              
+              ---
               
               **Secciones CDATA (Character Data)**:
-              Para incrustar bloques de código de programación (JavaScript, scripts SQL o fórmulas con muchos \`<\` y \`&&\`) sin tener que escapar cada carácter, se utiliza:
+              
+              Cuando necesitamos incluir fragmentos extensos con abundantes símbolos especiales (como scripts de JavaScript, sentencias SQL con operadores lógicos o código de fórmulas), escapar carácter por carácter resulta tedioso.
+              
+              Para estos casos se utilizan las secciones **CDATA**:
               \`\`\`xml
-              <script_ejemplo>
+              <script_validacion>
                 <![CDATA[
                   if (nota >= 5 && faltas < 10) {
-                    aprobado = true;
+                    resultado = "Aprobado";
                   }
                 ]]>
-              </script_ejemplo>
+              </script_validacion>
               \`\`\`
-              Todo lo que esté dentro de \`<![CDATA[ ... ]]>\` es tratado como texto plano sin interpretar etiquetas.
+              
+              > **Comportamiento de CDATA**:
+              > Todo el contenido situado entre \`<![CDATA[\` y \`]]>\` es tratado por el procesador como texto plano puro, ignorando etiquetas y símbolos reservados.
             `
           }
         ]
@@ -624,48 +713,53 @@ export const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Al integrar información procedente de múltiples fuentes o vocabularios (por ejemplo, datos comerciales combinados con una tabla HTML o un gráfico SVG), se producen inevitablemente **colisiones de nombres**: dos etiquetas con idéntico nombre pero con propósitos totalmente distintos. Para solucionar esto existen los **Espacios de Nombres en XML (Namespaces)**.
+          Al integrar información procedente de múltiples fuentes o vocabularios dentro de un mismo documento (por ejemplo, datos comerciales junto a tablas XHTML o gráficos SVG), se producen inevitablemente **colisiones de nombres**.
+          
+          Esto sucede cuando dos etiquetas coinciden en su grafía pero tienen propósitos conceptuales completamente distintos.
+          
+          Para resolver este problema de manera universal, el W3C definió los **Espacios de Nombres en XML (Namespaces)**.
         `,
         sections: [
           {
             title: "1. El problema de la colisión de nombres",
             content: `
-              Observa el siguiente dilema en un mismo documento:
+              Observa el siguiente conflicto dentro de un inventario comercial:
               \`\`\`xml
               <inventario>
-                <!-- ¿A qué se refiere 'tabla'? ¿Al mobiliario o a una tabla HTML? -->
+                <!-- ¿A qué hace referencia 'tabla'? ¿Al mobiliario de oficina o a una tabla HTML? -->
                 <tabla>
                   <nombre>Mesa de Roble</nombre>
                   <precio>120</precio>
                 </tabla>
                 <tabla>
-                  <tr><td>Celda de datos</td></tr>
+                  <tr><td>Celda de datos de presentación</td></tr>
                 </tabla>
               </inventario>
               \`\`\`
-              Para un procesador automático es imposible diferenciar ambas etiquetas sin un calificador de contexto.
+              
+              Para cualquier analizador automático o aplicación externa, resulta imposible distinguir ambas etiquetas sin un calificador de contexto unívoco.
             `
           },
           {
             title: "2. Declaración con atributo xmlns y Prefijos",
             content: `
-              Un espacio de nombres asocia un **prefijo** con un identificador unívoco universal (habitualmente una URI / URL):
+              Un espacio de nombres asocia un **prefijo corto** con un identificador unívoco universal (habitualmente una dirección URI o URL):
               \`\`\`xml
               xmlns:prefijo="URI_identificadora"
               \`\`\`
               
-              Ejemplo resuelto mediante prefijos:
+              Resolución del conflicto mediante prefijos cualificados:
               \`\`\`xml
               <inventario xmlns:mueble="https://tienda.es/muebles"
                           xmlns:html="http://www.w3.org/1999/xhtml">
                           
-                <!-- Elemento cualificado del vocabulario de muebles -->
+                <!-- Elemento perteneciente al vocabulario de mobiliario -->
                 <mueble:tabla>
                   <mueble:nombre>Mesa de Roble</mueble:nombre>
                   <mueble:precio>120</mueble:precio>
                 </mueble:tabla>
                 
-                <!-- Elemento cualificado del vocabulario HTML -->
+                <!-- Elemento perteneciente al vocabulario XHTML estándar -->
                 <html:table>
                   <html:tr>
                     <html:td>Celda de datos</html:td>
@@ -675,16 +769,23 @@ export const UNIT_1_DATA = {
               </inventario>
               \`\`\`
               
-              > **Punto clave**: La URI **no necesita ser una página web que exista físicamente en internet**. El analizador XML no descarga nada de esa dirección; simplemente la utiliza como una cadena de texto única para distinguir un vocabulario de otro.
+              > **Aclaración fundamental sobre la URI**:
+              > La URI declarada **no necesita existir físicamente como página web en internet**. El procesador XML no descarga ningún archivo de esa dirección; simplemente la utiliza como una cadena de texto identificadora única en todo el mundo.
             `
           },
           {
             title: "3. Espacio de nombres por defecto y Ámbito (Scope)",
             content: `
               * **Espacio de nombres por defecto**:
-                Si declaramos \`xmlns="URI"\` sin ningún prefijo, todos los elementos contenidos en ese nodo que no lleven prefijo pertenecerán automáticamente a ese espacio de nombres.
-              * **Ámbito (*Scope*)**:
-                Un espacio de nombres tiene vigencia únicamente en el elemento donde se declara y en todos sus elementos descendientes.
+                * Se declara mediante la sintaxis \`xmlns="URI"\` (sin especificar prefijo).
+                * Todos los elementos contenidos dentro de ese nodo que no lleven prefijo pertenecerán automáticamente a dicho espacio de nombres.
+                
+              * **Ámbito de vigencia (*Scope*)**:
+                * Un espacio de nombres tiene validez únicamente en el elemento en el que se declara y en toda su descendencia de elementos hijos y nietos.
+                
+              * **Atributos y espacios de nombres**:
+                * Los atributos sin prefijo **nunca** pertenecen al espacio de nombres por defecto.
+                * Para que un atributo pertenezca a un namespace, debe llevar siempre un prefijo explícito (por ejemplo: \`xml:lang="es"\` o \`xlink:href="..."\`).
             `
           }
         ]

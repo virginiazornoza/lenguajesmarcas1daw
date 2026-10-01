@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LMSGI 1º DAW | CIFP Carlos III (2026/2027)</title>
+  <title>LMSGI 1º DAW | CIFP Carlos III - Aula Virtual y Organización Docente (2026/2027)</title>
   <meta name="description" content="Organización del módulo Lenguajes de Marcas y Sistemas de Gestión de Información de 1º DAW (FP Grado Superior) según RAs en bloques de 2 horas. Curso 2026/2027.">
+  
+  <!-- Icono de pestaña (Favicon con símbolo </> en azul) -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -46,12 +49,12 @@
   <!-- Google Fonts & Custom CSS -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors duration-200 selection:bg-teal-500 selection:text-white">
+<body class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors duration-200 selection:bg-teal-500 selection:text-white">
 
   <!-- =========================================================================
-       BARRA SUPERIOR (HEADER)
+       BARRA SUPERIOR (HEADER) - FIJA Y ESTÁTICA AL HACER SCROLL
        ========================================================================= -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shrink-0">
+  <header class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shrink-0 w-full shadow-xs">
     <div class="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       
       <!-- Logotipo & Título del Módulo -->
@@ -68,7 +71,8 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
         </button>
 
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 via-indigo-600 to-indigo-700 flex items-center justify-center text-white font-black text-base shadow-md shrink-0">
+        <!-- Icono con símbolo </> en azul -->
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-blue-500/40 flex items-center justify-center text-sky-400 font-black text-base shadow-md shrink-0">
           &lt;/&gt;
         </div>
         <div class="min-w-0">
@@ -335,6 +339,158 @@
       </form>
     </div>
   </div>
+
+  <!-- Modal 3: Editor de Contenido Teórico (Modo Docente) -->
+  <div id="modal-edit-theory" class="hidden fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-5 animate-fadeIn">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden">
+      
+      <!-- Cabecera del Editor -->
+      <div class="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/80 dark:bg-slate-950/60">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-950/70 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <span>Editor de Teoría</span>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-teal-100 dark:bg-teal-900/60 text-teal-800 dark:text-teal-200 font-normal">Modo Docente</span>
+            </h3>
+            <p id="edit-theory-subtitle" class="text-xs text-slate-500 dark:text-slate-400 truncate max-w-md sm:max-w-xl">
+              Modifica los textos, listas y ejemplos de la sesión.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Pestañas internas: Edición vs Vista Previa -->
+          <div class="inline-flex rounded-xl bg-slate-200 dark:bg-slate-800 p-1 text-xs">
+            <button type="button" id="tab-btn-editor" onclick="window.LMSGI_APP.switchEditorTab('edit')" class="px-3 py-1 font-semibold rounded-lg bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs transition-all">
+              Editor
+            </button>
+            <button type="button" id="tab-btn-preview" onclick="window.LMSGI_APP.switchEditorTab('preview')" class="px-3 py-1 font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all">
+              Vista Previa
+            </button>
+          </div>
+          <button type="button" onclick="window.LMSGI_APP.closeTheoryEditor()" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de herramientas de formateo rápido -->
+      <div id="editor-toolbar" class="px-4 py-2 bg-slate-100/80 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-1.5 text-xs">
+        <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mr-1 flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Insertar:
+        </span>
+        <button type="button" onclick="window.LMSGI_APP.insertEditorFormat('bold')" class="px-2.5 py-1 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-md border border-slate-200 dark:border-slate-700 font-bold transition-colors" title="Texto en Negrita">
+          B Negrita
+        </button>
+        <button type="button" onclick="window.LMSGI_APP.insertEditorFormat('italic')" class="px-2.5 py-1 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-md border border-slate-200 dark:border-slate-700 italic transition-colors" title="Texto en Cursiva">
+          I Cursiva
+        </button>
+        <button type="button" onclick="window.LMSGI_APP.insertEditorFormat('bullet')" class="px-2.5 py-1 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-md border border-slate-200 dark:border-slate-700 transition-colors flex items-center gap-1" title="Lista con viñetas">
+          <span>&bull;</span> Lista
+        </button>
+        <button type="button" onclick="window.LMSGI_APP.insertEditorFormat('number')" class="px-2.5 py-1 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-md border border-slate-200 dark:border-slate-700 transition-colors flex items-center gap-1" title="Lista numerada">
+          <span>1.</span> Numeración
+        </button>
+        <button type="button" onclick="window.LMSGI_APP.insertEditorFormat('quote')" class="px-2.5 py-1 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-md border border-slate-200 dark:border-slate-700 transition-colors flex items-center gap-1" title="Nota o cita destacada">
+          <span>&gt;</span> Nota Destacada
+        </button>
+        <button type="button" onclick="window.LMSGI_APP.insertEditorFormat('code')" class="px-2.5 py-1 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-md border border-slate-200 dark:border-slate-700 font-mono transition-colors" title="Bloque de código XML/HTML">
+          &lt;/&gt; Código
+        </button>
+        <button type="button" onclick="window.LMSGI_APP.insertEditorFormat('paragraph')" class="px-2.5 py-1 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-md border border-slate-200 dark:border-slate-700 transition-colors" title="Separar en nuevo párrafo">
+          &para; Separar Párrafo
+        </button>
+      </div>
+
+      <!-- Contenido scrolleable del Editor -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+        
+        <!-- Pestaña 1: Campos de Edición -->
+        <div id="editor-tab-edit" class="space-y-6">
+          <!-- Introducción -->
+          <div class="space-y-1.5 bg-slate-50/50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-200 dark:border-slate-700/60">
+            <div class="flex items-center justify-between">
+              <label for="edit-theory-intro" class="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+                Introducción de la Sesión
+              </label>
+              <span class="text-[11px] text-slate-400">Soporta Markdown, negritas y listas</span>
+            </div>
+            <textarea id="edit-theory-intro" 
+                      rows="4" 
+                      class="w-full p-3 text-xs sm:text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-teal-500 leading-relaxed"></textarea>
+          </div>
+
+          <!-- Contenedor dinámico de Secciones -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-800">
+              <h4 class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
+                Secciones Teóricas
+              </h4>
+              <button type="button" 
+                      onclick="window.LMSGI_APP.addEditorSection()" 
+                      class="px-3 py-1 text-xs font-semibold rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 dark:hover:bg-teal-900/60 transition-colors flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Añadir Sección
+              </button>
+            </div>
+
+            <div id="edit-theory-sections-container" class="space-y-4">
+              <!-- Rellenado dinámicamente con las secciones actuales -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Pestaña 2: Vista Previa en Vivo -->
+        <div id="editor-tab-preview" class="hidden space-y-4">
+          <div class="p-3 bg-teal-50/70 dark:bg-teal-950/40 rounded-xl border border-teal-200 dark:border-teal-900/60 text-xs text-teal-800 dark:text-teal-300 flex items-center gap-2">
+            <svg class="w-4 h-4 shrink-0 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            <span>Así es exactamente como verán los alumnos el contenido de la sesión.</span>
+          </div>
+          <div id="edit-theory-preview-render" class="space-y-6">
+            <!-- Rellenado con el renderizado Markdown en vivo -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pie del Editor -->
+      <div class="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-slate-50/80 dark:bg-slate-950/60">
+        <div>
+          <button type="button" 
+                  id="btn-restore-theory-modal"
+                  onclick="window.LMSGI_APP.resetCurrentEditedBlock()" 
+                  class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-slate-700 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-300 transition-colors flex items-center gap-1.5"
+                  title="Eliminar las personalizaciones de esta sesión y volver a la programación oficial">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Restablecer a Original
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button type="button" 
+                  onclick="window.LMSGI_APP.closeTheoryEditor()" 
+                  class="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl transition-colors">
+            Cancelar
+          </button>
+          <button type="button" 
+                  onclick="window.LMSGI_APP.saveTheoryEditor()" 
+                  class="px-5 py-2 text-xs font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-xl shadow-md transition-all flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Guardar Cambios
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Input oculto para importación de contenidos en JSON -->
+  <input type="file" id="input-import-theories" accept=".json" class="hidden" onchange="window.LMSGI_APP.handleImportFile(event)">
 
   <!-- Script de la aplicación (versión bundle para soporte directo sin CORS) -->
   <script src="js/bundle.js"></script>

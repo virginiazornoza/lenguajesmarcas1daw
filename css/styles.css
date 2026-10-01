@@ -111,6 +111,13 @@ pre, code, textarea {
   filter: grayscale(0.2);
 }
 
+/* Cabecera permanentemente estática / sticky */
+header.sticky {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+}
+
 /* Estilos de impresión */
 @media print {
   #sidebar-container,

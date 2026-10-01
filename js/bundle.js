@@ -285,40 +285,50 @@ const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Un **lenguaje de marcas** (o *markup language*) es un sistema formal que combina texto plano con **etiquetas** (*tags*) o marcas sintácticas que aportan información sobre la estructura del documento, su significado o cómo debe presentarse. A diferencia de un lenguaje de programación como Java o Python, un lenguaje de marcas **no ejecuta algoritmos ni bucles**, sino que estructura y cualifica la información.
+          Un **lenguaje de marcas** (*markup language*) es un sistema formal que combina texto plano con **etiquetas** (*tags*) o marcas sintácticas.
+          
+          Estas marcas aportan información sobre la estructura del documento, su significado semántico o su presentación visual.
+          
+          > **Diferencia fundamental con la programación**:
+          > A diferencia de lenguajes como Java, C++ o Python, un lenguaje de marcas **no ejecuta algoritmos ni procesa bucles**, sino que cualifica, organiza y transporta la información.
         `,
         sections: [
           {
             title: "1. ¿Qué es el marcado? Elementos fundamentales",
             content: `
-              El término "marcar" proviene de las imprentas tradicionales, donde los correctores añadían marcas manuscritas al original para indicar al tipógrafo el tamaño de fuente, sangrías o cursivas.
+              El término **marcar** tiene su origen en las imprentas tradicionales, donde los correctores añadían marcas manuscritas al papel para indicar al tipógrafo el tamaño de letra, sangrías o cursivas.
               
               En informática, el marcado se realiza mediante secuencias delimitadas por corchetes angulares (&lt; y &gt;).
               
               Los tres componentes esenciales de cualquier lenguaje de marcado son:
-              * **Etiqueta (Tag)**: Marca sintáctica que delimita el inicio o fin de un dato. Ejemplo: \`<titulo>\` (apertura) y \`</titulo>\` (cierre).
-              * **Elemento (Element)**: Conjunto completo formado por la etiqueta de apertura, el contenido interior y la etiqueta de cierre. Ejemplo: \`<modulo>Lenguajes de Marcas</modulo>\`.
-              * **Atributo (Attribute)**: Par nombre="valor" situado dentro de la etiqueta de apertura que proporciona metadatos adicionales sobre el elemento. Ejemplo: \`<alumno id="A104" estado="matriculado">\`.
+              * **Etiqueta (Tag)**: Marca sintáctica que delimita el inicio o fin de un dato.
+                * *Apertura*: \`<titulo>\`
+                * *Cierre*: \`</titulo>\`
+              * **Elemento (Element)**: Conjunto completo formado por la etiqueta de apertura, el contenido interior y la etiqueta de cierre.
+                * *Ejemplo*: \`<modulo>Lenguajes de Marcas</modulo>\`
+              * **Atributo (Attribute)**: Par \`nombre="valor"\` situado dentro de la etiqueta de apertura que añade metadatos al elemento.
+                * *Ejemplo*: \`<alumno id="A104" estado="matriculado">\`
             `
           },
           {
             title: "2. Tipos de marcado según su finalidad",
             content: `
-              A lo largo de la evolución de la informática se han distinguido tres grandes tipos de marcado:
+              A lo largo de la evolución informática se han consolidado tres grandes tipos de marcado:
               
               1. **Marcado de Presentación (o de formato)**:
-                 Indica visualmente cómo debe lucir el texto en pantalla o papel (negrita, tamaño de letra, colores, alineación).
-                 *Ejemplos*: RTF (*Rich Text Format*), Markdown (\`**negrita**\`), o etiquetas obsoletas de HTML antiguo como \`<font>\` o \`<center>\`.
+                 * Indica cómo debe lucir visualmente el texto (negrita, tamaño, color, alineación).
+                 * *Ejemplos*: RTF (*Rich Text Format*), Markdown (\`**negrita**\`), o etiquetas obsoletas de HTML antiguo como \`<font>\` o \`<center>\`.
                  
               2. **Marcado de Procedimiento**:
-                 Contiene instrucciones de bajo nivel dirigidas a un intérprete o procesador tipográfico sobre cómo imprimir el documento paso a paso.
-                 *Ejemplos*: PostScript, LaTeX, troff.
+                 * Contiene instrucciones paso a paso para que un intérprete o procesador tipográfico imprima el documento.
+                 * *Ejemplos*: PostScript, LaTeX, troff.
                  
               3. **Marcado Descriptivo o Semántico (Estructural)**:
-                 Separa radicalmente el contenido de su apariencia visual. Las etiquetas describen **qué es** el dato (su significado real), no cómo debe pintarse en la pantalla.
-                 *Ejemplos*: **XML**, HTML5 semántico (\`<header>\`, \`<article>\`, \`<nav>\`), SVG (*Scalable Vector Graphics*).
+                 * Separa radicalmente el contenido de su apariencia visual.
+                 * Las etiquetas describen **qué es** el dato (su significado real), no cómo debe pintarse en la pantalla.
+                 * *Ejemplos*: **XML**, HTML5 semántico (\`<header>\`, \`<article>\`, \`<nav>\`), SVG (*Scalable Vector Graphics*).
                  
-              > **Principio clave en DAW**: En el desarrollo web profesional moderno separamos estrictamente la estructura y semántica (HTML / XML) del diseño visual (CSS) y del comportamiento e interacción (JavaScript).
+              > **Principio de oro en DAW**: En el desarrollo web profesional moderno separamos estrictamente la estructura y semántica (HTML / XML) del diseño visual (CSS) y del comportamiento e interactividad (JavaScript).
             `
           },
           {
@@ -326,10 +336,23 @@ const UNIT_1_DATA = {
             content: `
               Comprender el origen de los lenguajes de marcas es indispensable para entender el desarrollo web moderno:
               
-              * **1969 - GML (Generalized Markup Language)**: Creado en IBM por Charles Goldfarb, Edward Mosher y Raymond Lorie (de sus apellidos surge el acrónimo GML). Permitió por primera vez que documentos de texto se compartieran entre distintos sistemas informáticos independientemente del formato de salida.
-              * **1986 - SGML (Standard Generalized Markup Language - ISO 8879)**: Estándar internacional padre de todos los lenguajes modernos. Es un *metalenguaje* (un lenguaje para definir otros lenguajes de marcas). Muy potente pero sumamente complejo y pesado para ser procesado por los navegadores de la época.
-              * **1990 - HTML (HyperText Markup Language)**: Creado por Tim Berners-Lee en el CERN. Es una aplicación concreta y sencilla de SGML pensada para enlazar y visualizar documentos en la World Wide Web.
-              * **1998 - XML (eXtensible Markup Language)**: Creado por el consorcio **W3C**. Es un subconjunto simplificado y optimizado de SGML diseñado para estructurar, validar y transportar datos entre cualquier sistema de forma universal.
+              * **1969 - GML (Generalized Markup Language)**:
+                * Creado en IBM por Charles Goldfarb, Edward Mosher y Raymond Lorie (de sus apellidos surge el acrónimo GML).
+                * Permitió por primera vez compartir documentos de texto entre sistemas informáticos heterogéneos independientemente del formato de salida.
+                
+              * **1986 - SGML (Standard Generalized Markup Language - ISO 8879)**:
+                * Estándar internacional padre de los lenguajes modernos.
+                * Es un *metalenguaje* (un lenguaje para definir otros lenguajes de marcas).
+                * Muy potente, pero excesivamente complejo y pesado para los primeros navegadores web.
+                
+              * **1990 - HTML (HyperText Markup Language)**:
+                * Creado por Tim Berners-Lee en el CERN.
+                * Es una aplicación concreta y sencilla de SGML diseñada para enlazar y visualizar hipertexto en la World Wide Web.
+                
+              * **1998 - XML (eXtensible Markup Language)**:
+                * Diseñado y estandarizado por el consorcio **W3C**.
+                * Es un subconjunto simplificado y optimizado de SGML.
+                * Su propósito es estructurar, validar y transportar datos entre cualquier sistema de forma universal e interoperable.
             `,
             table: {
               headers: ["Lenguaje", "Año", "Tipo de Lenguaje", "Objetivo Principal"],
@@ -478,33 +501,35 @@ const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Aunque tanto **HTML** como **XML** emplean corchetes angulares (&lt; y &gt;), sus metas técnicas son radicalmente distintas. Confundirlos es uno de los errores iniciales más comunes.
+          Aunque tanto **HTML** como **XML** emplean corchetes angulares (&lt; y &gt;), sus metas técnicas son radicalmente distintas.
+          
+          Confundir ambos lenguajes es uno de los tropiezos iniciales más habituales en desarrollo web.
         `,
         sections: [
           {
             title: "1. La gran comparativa: HTML vs XML",
             content: `
-              La diferencia nuclear se resume en una frase:
-              * **HTML se diseñó para MOSTRAR datos** (centrado en la presentación y renderizado en navegadores).
+              La diferencia nuclear se resume en dos principios:
+              * **HTML se diseñó para MOSTRAR datos** (centrado en la apariencia y renderizado en navegadores).
               * **XML se diseñó para DESCRIBIR Y TRANSPORTAR datos** (centrado en la estructura e intercambio entre aplicaciones).
               
-              Los 4 pilares diferenciales:
+              Los 4 pilares diferenciales entre ambos:
               
               1. **Vocabulario de etiquetas**:
-                 * *HTML*: Vocabulario cerrado y predefinido por el estándar WHATWG/W3C (\`<p>\`, \`<h1>\`, \`<table>\`, \`<a>\`). No puedes inventar etiquetas con semántica propia.
-                 * *XML*: Vocabulario completamente libre. No existe ninguna etiqueta predefinida. Las etiquetas las inventa el desarrollador según el negocio (\`<factura>\`, \`<cliente>\`, \`<precio>\`).
+                 * *HTML*: Vocabulario cerrado y predefinido por el estándar WHATWG/W3C (\`<p>\`, \`<h1>\`, \`<table>\`, \`<a>\`). No se pueden inventar etiquetas arbitrarias.
+                 * *XML*: Vocabulario completamente extensible y libre. Las etiquetas las define el desarrollador según el dominio del negocio (\`<factura>\`, \`<cliente>\`, \`<precio>\`).
                  
               2. **Tolerancia a fallos sintácticos**:
-                 * *HTML*: Es muy permisivo. Si olvidas cerrar una etiqueta o comillas, el navegador intenta autocorregirlo.
-                 * *XML*: Es **estricto e inflexible** (*draconian error handling*). Ante el menor fallo sintáctico, el analizador XML detiene la lectura inmediatamente.
+                 * *HTML*: Es muy permisivo. Si olvidas cerrar una etiqueta o comillas, el navegador intenta autocorregirlo y continuar.
+                 * *XML*: Aplica una política estricta de **control draconiano de errores** (*draconian error handling*). Ante el menor fallo sintáctico, el analizador detiene la lectura inmediatamente.
                  
-              3. **Sensibilidad a mayúsculas y minúsculas (Case Sensitivity)**:
-                 * *HTML*: Es indiferente (case-insensitive). \`<DIV>\`, \`<div>\` y \`<Div>\` son equivalentes.
-                 * *XML*: Es estrictamente sensible (case-sensitive). \`<Modulo>\` NO coincide con \`</modulo>\`.
+              3. **Distinción entre mayúsculas y minúsculas (Case Sensitivity)**:
+                 * *HTML*: Es indiferente (case-insensitive). \`<DIV>\`, \`<div>\` y \`<Div>\` son interpretados como la misma etiqueta.
+                 * *XML*: Es estrictamente sensible (case-sensitive). \`<Modulo>\` NO coincide con \`</modulo>\` y provocará un error de validación.
                  
               4. **Cierre de elementos vacíos**:
-                 * *HTML*: Permite etiquetas vacías sin cerrar (\`<img src="foto.png">\`, \`<br>\`, \`<input>\`).
-                 * *XML*: Todo elemento sin contenido debe cerrarse obligatoriamente (\`<foto src="foto.png" />\` o \`<foto></foto>\`).
+                 * *HTML*: Permite elementos vacíos sin etiqueta de cierre (\`<img src="foto.png">\`, \`<br>\`, \`<input>\`).
+                 * *XML*: Todo elemento sin contenido debe cerrarse de forma obligatoria mediante autocierre (\`<foto src="foto.png" />\`) o etiqueta de cierre explícita (\`<foto></foto>\`).
             `,
             table: {
               headers: ["Característica", "HTML", "XML"],
@@ -521,14 +546,21 @@ const UNIT_1_DATA = {
           {
             title: "2. Herramientas de edición en el aula",
             content: `
-              En el CIFP Carlos III empleamos herramientas profesionales para el desarrollo del módulo:
+              En el CIFP Carlos III empleamos las siguientes herramientas profesionales durante las clases:
               
-              * **Visual Studio Code (VS Code)**: Editor de código estándar. Extensiones recomendadas:
-                * *XML Tools*: Formateo automático de código XML y evaluación de expresiones XPath.
-                * *XML by Red Hat*: Validación sintáctica en tiempo real y soporte para esquemas XSD.
-                * *Prettier*: Formateador de código para HTML y CSS.
-              * **Navegadores web (Chrome, Edge, Firefox)**: Incluyen analizadores XML nativos con vista de árbol colapsable y detección de errores.
-              * **XML Copy Editor**: Editor ligero especializado para validaciones contra DTD y esquemas.
+              * **Visual Studio Code (VS Code)**:
+                * Editor de código estándar en la industria del software.
+                * Extensiones imprescindibles para el módulo:
+                  * *XML Tools*: Formateo automático de código XML y evaluador de expresiones XPath.
+                  * *XML by Red Hat*: Validación sintáctica en tiempo real y soporte para esquemas XSD.
+                  * *Prettier*: Formateador de código para HTML y CSS.
+                  
+              * **Navegadores web modernos (Chrome, Edge, Firefox)**:
+                * Incorporan analizadores XML nativos.
+                * Permiten visualizar la estructura arbórea colapsable y muestran avisos de error sintáctico con indicación exacta de línea y columna.
+                
+              * **XML Copy Editor**:
+                * Editor ligero especializado para validaciones rápidas contra DTD y XML Schema.
             `
           }
         ]
@@ -671,65 +703,93 @@ const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Un documento XML posee una **estructura estrictamente jerárquica en forma de árbol invertido**. La primera exigencia de cualquier archivo XML es estar **bien formado** (*well-formed*). Si viola una sola regla sintáctica, ningún procesador podrá interpretarlo.
+          Un documento XML posee una **estructura estrictamente jerárquica en forma de árbol invertido**.
+          
+          La primera condición innegociable de cualquier archivo XML es estar **bien formado** (*well-formed*). Si se incumple una sola regla sintáctica, ningún procesador informático podrá leerlo.
         `,
         sections: [
           {
             title: "1. El Prólogo XML",
             content: `
-              El prólogo es la cabecera técnica obligatoria en entornos de producción:
+              El prólogo es la cabecera técnica obligatoria que encabeza todo documento XML profesional:
               \`\`\`xml
               <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
               \`\`\`
               
-              Directivas del prólogo:
-              * **version**: Versión de la recomendación XML utilizada (habitualmente \`"1.0"\`).
-              * **encoding**: Codificación de caracteres. \`"UTF-8"\` es el estándar universal (soporta tildes, eñes y caracteres internacionales).
-              * **standalone**: Vale \`"yes"\` si el archivo no depende de declaraciones de tipo externas (como una DTD externa), o \`"no"\` si depende de un archivo exterior.
-              
+              Directivas configurables del prólogo:
+              * **version**: Versión de la especificación XML utilizada (habitualmente \`"1.0"\`).
+              * **encoding**: Codificación de caracteres del archivo. \`"UTF-8"\` es el estándar recomendado para admitir tildes, eñes y caracteres internacionales sin corrupción.
+              * **standalone**:
+                * \`"yes"\`: El archivo es autónomo y no depende de definiciones externas (como una DTD externa).
+                * \`"no"\`: El documento requiere un archivo externo para su validación completa.
+                
               > ⚠️ **Reglas de oro del prólogo**:
-              > * Debe figurar en la **línea 1, columna 1** del archivo (sin espacios previos ni líneas en blanco).
-              > * La palabra \`xml\` debe ir en **minúsculas**.
+              > * Debe figurar en la **línea 1, columna 1** del archivo (sin ningún espacio previo ni línea vacía).
+              > * La palabra \`xml\` debe escribirse estrictamente en **minúsculas**.
             `
           },
           {
             title: "2. Reglas fundamentales de un documento bien formado",
             content: `
-              Un documento XML está **bien formado** si cumple todas las reglas de la especificación:
+              Para que un documento XML se considere **bien formado**, debe cumplir rigurosamente el siguiente decálogo de sintaxis:
               
-              1. **Único elemento raíz**: Todo el contenido debe estar englobado dentro de un único elemento contenedor raíz.
-              2. **Cierre obligatorio**: Toda etiqueta que se abre debe cerrarse.
-              3. **Anidamiento correcto**: Prohibido el solapamiento. El último elemento que se abre debe ser el primero en cerrarse (\`<modulo><nombre>LMSGI</nombre></modulo>\`).
-              4. **Comillas obligatorias en atributos**: Todos los valores de atributos deben ir entre comillas dobles o simples (\`codigo="LMSGI"\`).
-              5. **Nombres válidos**: Las etiquetas deben comenzar por letra o guion bajo (\`_\`), nunca por números, espacios ni por la secuencia reservada \`xml\`.
+              1. **Único elemento raíz**:
+                 * Todo el documento debe estar contenido dentro de una única etiqueta envolvente raíz.
+                 * *Ejemplo*: \`<catalogo> ... </catalogo>\`.
+                 
+              2. **Cierre obligatorio de todas las etiquetas**:
+                 * Cualquier elemento que se abre debe cerrarse (\`<precio>20</precio>\`).
+                 * Los elementos vacíos deben incluir la barra de autocierre (\`<salto />\`).
+                 
+              3. **Anidamiento correcto (sin solapamientos)**:
+                 * La última etiqueta en abrirse debe ser la primera en cerrarse (estructura LIFO / pila).
+                 * *Correcto*: \`<modulo><nombre>LMSGI</nombre></modulo>\`.
+                 * *Incorrecto*: \`<modulo><nombre>LMSGI</modulo></nombre>\`.
+                 
+              4. **Comillas obligatorias en todos los atributos**:
+                 * Los valores de atributos deben ir encerrados entre comillas dobles o simples.
+                 * *Correcto*: \`codigo="LMSGI"\`.
+                 * *Incorrecto*: \`codigo=LMSGI\`.
+                 
+              5. **Nombres de etiquetas válidos**:
+                 * Deben comenzar obligatoriamente por una letra o un guion bajo (\`_\`).
+                 * No pueden comenzar por números, caracteres especiales ni por la secuencia reservada \`xml\` o \`XML\`.
+                 * No pueden contener espacios en blanco.
             `
           },
           {
             title: "3. Caracteres reservados, Entidades y Secciones CDATA",
             content: `
-              En XML los símbolos \`<\` y \`&\` están estrictamente reservados:
-              * \`<\` inicia etiquetas.
-              * \`&\` inicia entidades.
+              En XML existen dos caracteres estrictamente reservados para el analizador:
+              * El símbolo \`<\` (indica el comienzo de una etiqueta).
+              * El símbolo \`&\` (indica el comienzo de una entidad).
               
-              Si necesitas escribir estos símbolos en el texto, debes sustituirlos por su **entidad predefinida**:
-              * \`&lt;\` representa el signo menor que (&lt;)
-              * \`&gt;\` representa el signo mayor que (&gt;)
-              * \`&amp;\` representa el signo ampersand (&amp;)
-              * \`&quot;\` representa comillas dobles (&quot;)
-              * \`&apos;\` representa comilla simple o apóstrofe (&apos;)
+              Para incluir estos caracteres en el texto de un elemento, es obligatorio sustituirlos por su **entidad predefinida**:
+              * \`&lt;\` &rarr; Signo menor que (&lt;)
+              * \`&gt;\` &rarr; Signo mayor que (&gt;)
+              * \`&amp;\` &rarr; Signo ampersand (&amp;)
+              * \`&quot;\` &rarr; Comillas dobles (&quot;)
+              * \`&apos;\` &rarr; Comilla simple o apóstrofe (&apos;)
+              
+              ---
               
               **Secciones CDATA (Character Data)**:
-              Para incrustar bloques de código de programación (JavaScript, scripts SQL o fórmulas con muchos \`<\` y \`&&\`) sin tener que escapar cada carácter, se utiliza:
+              
+              Cuando necesitamos incluir fragmentos extensos con abundantes símbolos especiales (como scripts de JavaScript, sentencias SQL con operadores lógicos o código de fórmulas), escapar carácter por carácter resulta tedioso.
+              
+              Para estos casos se utilizan las secciones **CDATA**:
               \`\`\`xml
-              <script_ejemplo>
+              <script_validacion>
                 <![CDATA[
                   if (nota >= 5 && faltas < 10) {
-                    aprobado = true;
+                    resultado = "Aprobado";
                   }
                 ]]>
-              </script_ejemplo>
+              </script_validacion>
               \`\`\`
-              Todo lo que esté dentro de \`<![CDATA[ ... ]]>\` es tratado como texto plano sin interpretar etiquetas.
+              
+              > **Comportamiento de CDATA**:
+              > Todo el contenido situado entre \`<![CDATA[\` y \`]]>\` es tratado por el procesador como texto plano puro, ignorando etiquetas y símbolos reservados.
             `
           }
         ]
@@ -877,48 +937,53 @@ const UNIT_1_DATA = {
       ],
       theory: {
         intro: `
-          Al integrar información procedente de múltiples fuentes o vocabularios (por ejemplo, datos comerciales combinados con una tabla HTML o un gráfico SVG), se producen inevitablemente **colisiones de nombres**: dos etiquetas con idéntico nombre pero con propósitos totalmente distintos. Para solucionar esto existen los **Espacios de Nombres en XML (Namespaces)**.
+          Al integrar información procedente de múltiples fuentes o vocabularios dentro de un mismo documento (por ejemplo, datos comerciales junto a tablas XHTML o gráficos SVG), se producen inevitablemente **colisiones de nombres**.
+          
+          Esto sucede cuando dos etiquetas coinciden en su grafía pero tienen propósitos conceptuales completamente distintos.
+          
+          Para resolver este problema de manera universal, el W3C definió los **Espacios de Nombres en XML (Namespaces)**.
         `,
         sections: [
           {
             title: "1. El problema de la colisión de nombres",
             content: `
-              Observa el siguiente dilema en un mismo documento:
+              Observa el siguiente conflicto dentro de un inventario comercial:
               \`\`\`xml
               <inventario>
-                <!-- ¿A qué se refiere 'tabla'? ¿Al mobiliario o a una tabla HTML? -->
+                <!-- ¿A qué hace referencia 'tabla'? ¿Al mobiliario de oficina o a una tabla HTML? -->
                 <tabla>
                   <nombre>Mesa de Roble</nombre>
                   <precio>120</precio>
                 </tabla>
                 <tabla>
-                  <tr><td>Celda de datos</td></tr>
+                  <tr><td>Celda de datos de presentación</td></tr>
                 </tabla>
               </inventario>
               \`\`\`
-              Para un procesador automático es imposible diferenciar ambas etiquetas sin un calificador de contexto.
+              
+              Para cualquier analizador automático o aplicación externa, resulta imposible distinguir ambas etiquetas sin un calificador de contexto unívoco.
             `
           },
           {
             title: "2. Declaración con atributo xmlns y Prefijos",
             content: `
-              Un espacio de nombres asocia un **prefijo** con un identificador unívoco universal (habitualmente una URI / URL):
+              Un espacio de nombres asocia un **prefijo corto** con un identificador unívoco universal (habitualmente una dirección URI o URL):
               \`\`\`xml
               xmlns:prefijo="URI_identificadora"
               \`\`\`
               
-              Ejemplo resuelto mediante prefijos:
+              Resolución del conflicto mediante prefijos cualificados:
               \`\`\`xml
               <inventario xmlns:mueble="https://tienda.es/muebles"
                           xmlns:html="http://www.w3.org/1999/xhtml">
                           
-                <!-- Elemento cualificado del vocabulario de muebles -->
+                <!-- Elemento perteneciente al vocabulario de mobiliario -->
                 <mueble:tabla>
                   <mueble:nombre>Mesa de Roble</mueble:nombre>
                   <mueble:precio>120</mueble:precio>
                 </mueble:tabla>
                 
-                <!-- Elemento cualificado del vocabulario HTML -->
+                <!-- Elemento perteneciente al vocabulario XHTML estándar -->
                 <html:table>
                   <html:tr>
                     <html:td>Celda de datos</html:td>
@@ -928,16 +993,23 @@ const UNIT_1_DATA = {
               </inventario>
               \`\`\`
               
-              > **Punto clave**: La URI **no necesita ser una página web que exista físicamente en internet**. El analizador XML no descarga nada de esa dirección; simplemente la utiliza como una cadena de texto única para distinguir un vocabulario de otro.
+              > **Aclaración fundamental sobre la URI**:
+              > La URI declarada **no necesita existir físicamente como página web en internet**. El procesador XML no descarga ningún archivo de esa dirección; simplemente la utiliza como una cadena de texto identificadora única en todo el mundo.
             `
           },
           {
             title: "3. Espacio de nombres por defecto y Ámbito (Scope)",
             content: `
               * **Espacio de nombres por defecto**:
-                Si declaramos \`xmlns="URI"\` sin ningún prefijo, todos los elementos contenidos en ese nodo que no lleven prefijo pertenecerán automáticamente a ese espacio de nombres.
-              * **Ámbito (*Scope*)**:
-                Un espacio de nombres tiene vigencia únicamente en el elemento donde se declara y en todos sus elementos descendientes.
+                * Se declara mediante la sintaxis \`xmlns="URI"\` (sin especificar prefijo).
+                * Todos los elementos contenidos dentro de ese nodo que no lleven prefijo pertenecerán automáticamente a dicho espacio de nombres.
+                
+              * **Ámbito de vigencia (*Scope*)**:
+                * Un espacio de nombres tiene validez únicamente en el elemento en el que se declara y en toda su descendencia de elementos hijos y nietos.
+                
+              * **Atributos y espacios de nombres**:
+                * Los atributos sin prefijo **nunca** pertenecen al espacio de nombres por defecto.
+                * Para que un atributo pertenezca a un namespace, debe llevar siempre un prefijo explícito (por ejemplo: \`xml:lang="es"\` o \`xlink:href="..."\`).
             `
           }
         ]
@@ -2425,6 +2497,11 @@ class LMSGIApp {
     this.isSidebarCollapsed = localStorage.getItem("lmsgi_sidebar_collapsed") === "true";
     this.sidebarWidth = parseInt(localStorage.getItem("lmsgi_sidebar_width") || "320", 10);
 
+    // Contenidos teóricos personalizados por el docente (persistentes en localStorage)
+    this.customTheories = JSON.parse(localStorage.getItem("lmsgi_custom_theories") || "{}");
+    this.editingBlockId = null;
+    this.activeEditorInputId = "edit-theory-intro";
+
     this.initTheme();
     this.init();
   }
@@ -2687,7 +2764,20 @@ class LMSGIApp {
       toggleSolution: (exerciseId) => this.toggleSolution(exerciseId),
       copyCode: (elementId) => this.copyCode(elementId),
       downloadCode: (exerciseId, filename, lang) => this.downloadCode(exerciseId, filename, lang),
-      showEvaluationInfoModal: () => this.showEvaluationInfoModal()
+      showEvaluationInfoModal: () => this.showEvaluationInfoModal(),
+      openTheoryEditor: (blockId) => this.openTheoryEditor(blockId),
+      closeTheoryEditor: () => this.closeTheoryEditor(),
+      switchEditorTab: (tab) => this.switchEditorTab(tab),
+      setActiveEditorInput: (id) => this.setActiveEditorInput(id),
+      insertEditorFormat: (type) => this.insertEditorFormat(type),
+      addEditorSection: () => this.addEditorSection(),
+      removeEditorSection: (btnOrIdx) => this.removeEditorSection(btnOrIdx),
+      saveTheoryEditor: () => this.saveTheoryEditor(),
+      resetTheoryToDefault: (blockId) => this.resetTheoryToDefault(blockId),
+      resetCurrentEditedBlock: () => this.resetCurrentEditedBlock(),
+      exportCustomContent: () => this.exportCustomContent(),
+      importCustomContent: () => this.importCustomContent(),
+      handleImportFile: (e) => this.handleImportFile(e)
     };
 
     this.render();
@@ -2883,59 +2973,71 @@ class LMSGIApp {
   }
 
   getCurrentBlockData() {
+    let block;
     if (this.currentUnitId === "ut1") {
-      return UNIT_1_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_1_DATA.blocks[0];
+      block = UNIT_1_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_1_DATA.blocks[0];
+    } else {
+      const currentUnit = this.getCurrentUnit();
+      const blockMeta = currentUnit.blocks.find(b => b.id === this.currentBlockId) || currentUnit.blocks[0];
+      const unitOverview = UNITS_OVERVIEW_DATA[this.currentUnitId];
+      const detailed = unitOverview && unitOverview.blocksDetailed ? unitOverview.blocksDetailed[blockMeta.id] : null;
+
+      block = {
+        id: blockMeta.id,
+        blockNumber: blockMeta.blockNumber,
+        title: blockMeta.title,
+        duration: blockMeta.duration || "2 horas",
+        session: blockMeta.session || `Sesión ${blockMeta.blockNumber}`,
+        evaluation: blockMeta.evaluation || currentUnit.evaluation,
+        ce: blockMeta.ce || [],
+        objectives: detailed ? detailed.objectives : ["Dominar los conceptos teóricos y prácticos de este bloque de 2 horas."],
+        theory: {
+          intro: detailed ? detailed.theorySummary : "Contenido didáctico programado para esta sesión de 2 horas del módulo.",
+          sections: [
+            {
+              title: "Desarrollo del Bloque de 2 Horas",
+              content: detailed ? detailed.theorySummary : "Consulta los materiales de la sesión en el aula y realiza los ejercicios propuestos."
+            }
+          ]
+        },
+        quiz: detailed && detailed.quizSample ? [
+          {
+            id: `q-${blockMeta.id}`,
+            question: detailed.quizSample.question,
+            options: detailed.quizSample.options,
+            correctIndex: detailed.quizSample.correctIndex,
+            explanation: detailed.quizSample.explanation
+          }
+        ] : [],
+        exercises: detailed && detailed.exerciseSample ? [
+          {
+            id: `ex-${blockMeta.id}`,
+            title: `Práctica de la sesión: ${blockMeta.title}`,
+            description: detailed.exerciseSample,
+            initialCode: `<!-- Espacio de trabajo para la sesión ${blockMeta.blockNumber} -->\n`,
+            language: this.currentUnitId === "ut2" || this.currentUnitId === "ut3" ? "html" : "xml",
+            tasks: [
+              "1. Abre tu editor Visual Studio Code.",
+              "2. Implementa las especificaciones descritas en el enunciado.",
+              "3. Valida la estructura y prepara tu entrega para el aula virtual de clase."
+            ],
+            solution: `<!-- Solución de referencia trabajada en el aula de informática -->`,
+            hints: "Revisa las explicaciones de clase y la documentación técnica oficial."
+          }
+        ] : []
+      };
     }
 
-    const currentUnit = this.getCurrentUnit();
-    const blockMeta = currentUnit.blocks.find(b => b.id === this.currentBlockId) || currentUnit.blocks[0];
-    const unitOverview = UNITS_OVERVIEW_DATA[this.currentUnitId];
-    const detailed = unitOverview && unitOverview.blocksDetailed ? unitOverview.blocksDetailed[blockMeta.id] : null;
+    // Si el profesor ha modificado la teoría de este bloque, aplicar la versión personalizada
+    if (this.customTheories && this.customTheories[block.id]) {
+      return {
+        ...block,
+        isCustomized: true,
+        theory: this.customTheories[block.id]
+      };
+    }
 
-    return {
-      id: blockMeta.id,
-      blockNumber: blockMeta.blockNumber,
-      title: blockMeta.title,
-      duration: blockMeta.duration || "2 horas",
-      session: blockMeta.session || `Sesión ${blockMeta.blockNumber}`,
-      evaluation: blockMeta.evaluation || currentUnit.evaluation,
-      ce: blockMeta.ce || [],
-      objectives: detailed ? detailed.objectives : ["Dominar los conceptos teóricos y prácticos de este bloque de 2 horas."],
-      theory: {
-        intro: detailed ? detailed.theorySummary : "Contenido didáctico programado para esta sesión de 2 horas del módulo.",
-        sections: [
-          {
-            title: "Desarrollo del Bloque de 2 Horas",
-            content: detailed ? detailed.theorySummary : "Consulta los materiales de la sesión en el aula y realiza los ejercicios propuestos."
-          }
-        ]
-      },
-      quiz: detailed && detailed.quizSample ? [
-        {
-          id: `q-${blockMeta.id}`,
-          question: detailed.quizSample.question,
-          options: detailed.quizSample.options,
-          correctIndex: detailed.quizSample.correctIndex,
-          explanation: detailed.quizSample.explanation
-        }
-      ] : [],
-      exercises: detailed && detailed.exerciseSample ? [
-        {
-          id: `ex-${blockMeta.id}`,
-          title: `Práctica de la sesión: ${blockMeta.title}`,
-          description: detailed.exerciseSample,
-          initialCode: `<!-- Espacio de trabajo para la sesión ${blockMeta.blockNumber} -->\n`,
-          language: this.currentUnitId === "ut2" || this.currentUnitId === "ut3" ? "html" : "xml",
-          tasks: [
-            "1. Abre tu editor Visual Studio Code.",
-            "2. Implementa las especificaciones descritas en el enunciado.",
-            "3. Valida la estructura y prepara tu entrega para el aula virtual de clase."
-          ],
-          solution: `<!-- Solución de referencia trabajada en el aula de informática -->`,
-          hints: "Revisa las explicaciones de clase y la documentación técnica oficial."
-        }
-      ] : []
-    };
+    return block;
   }
 
   getStatistics() {
@@ -3047,6 +3149,20 @@ class LMSGIApp {
               <svg class="w-3 h-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
               Cambiar Contraseña Docente
             </button>
+            <div class="flex items-center gap-1.5 pt-1.5 border-t border-teal-200/60 dark:border-teal-900/60 mt-1.5">
+              <button onclick="window.LMSGI_APP.exportCustomContent()" 
+                      class="flex-1 py-1 px-1.5 text-[10px] font-semibold rounded bg-white dark:bg-slate-800 text-teal-800 dark:text-teal-200 hover:bg-teal-100 dark:hover:bg-teal-900/60 border border-teal-200 dark:border-teal-800 transition-colors flex items-center justify-center gap-1"
+                      title="Descargar copia de seguridad en JSON de tus textos personalizados">
+                <svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Exportar JSON
+              </button>
+              <button onclick="window.LMSGI_APP.importCustomContent()" 
+                      class="flex-1 py-1 px-1.5 text-[10px] font-semibold rounded bg-white dark:bg-slate-800 text-teal-800 dark:text-teal-200 hover:bg-teal-100 dark:hover:bg-teal-900/60 border border-teal-200 dark:border-teal-800 transition-colors flex items-center justify-center gap-1"
+                      title="Cargar modificaciones previas desde un archivo JSON">
+                <svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                Importar JSON
+              </button>
+            </div>
           </div>
         `
             : ""
@@ -3366,6 +3482,50 @@ class LMSGIApp {
 
     let html = `
       <div class="space-y-6 text-slate-800 dark:text-slate-200">
+        <!-- Barra de Gestión Docente (Modo Docente) -->
+        ${
+          this.isAdminMode
+            ? `
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-teal-50 via-teal-50/60 to-indigo-50/60 dark:from-teal-950/40 dark:via-teal-950/20 dark:to-indigo-950/30 border border-teal-200 dark:border-teal-900/60 shadow-xs flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                  <span>Edición Didáctica de la Sesión</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-100 dark:bg-teal-900/60 text-teal-800 dark:text-teal-200 font-semibold">Modo Docente</span>
+                  ${currentBlock.isCustomized ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 font-semibold border border-amber-300 dark:border-amber-700">Contenido Personalizado Activo</span>' : ''}
+                </div>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Personaliza la teoría, separa párrafos o añade listas para adaptarlo a tus explicaciones en clase.</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              ${
+                currentBlock.isCustomized
+                  ? `
+                <button type="button" 
+                        onclick="window.LMSGI_APP.resetTheoryToDefault('${currentBlock.id}')"
+                        class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/50 text-slate-700 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-300 transition-colors flex items-center gap-1.5"
+                        title="Restaurar a la programación oficial">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  Restaurar Original
+                </button>
+              `
+                  : ""
+              }
+              <button type="button" 
+                      onclick="window.LMSGI_APP.openTheoryEditor('${currentBlock.id}')"
+                      class="px-4 py-1.5 text-xs font-semibold rounded-xl bg-teal-600 hover:bg-teal-700 text-white shadow-sm transition-all flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                Editar Teoría
+              </button>
+            </div>
+          </div>
+        `
+            : ""
+        }
+
         <!-- Objetivos formativos -->
         ${
           currentBlock.objectives && currentBlock.objectives.length > 0
@@ -3625,7 +3785,7 @@ class LMSGIApp {
     // 1. Extraer bloques de código multilínea (```...```)
     raw = raw.replace(/```(xml|html|css|javascript)?([\s\S]*?)```/g, (match, lang, code) => {
       const idx = codeTokens.length;
-      const htmlBlock = `<pre class="my-3 p-3 bg-slate-900 text-teal-200 font-mono text-xs rounded-lg overflow-x-auto border border-slate-800 leading-relaxed">${this.escapeHTML(code.trim())}</pre>`;
+      const htmlBlock = `<pre class="my-3 p-3.5 bg-slate-900 text-teal-200 font-mono text-xs rounded-xl overflow-x-auto border border-slate-800 leading-relaxed shadow-sm">${this.escapeHTML(code.trim())}</pre>`;
       codeTokens.push(htmlBlock);
       return `__LMSGI_CODE_BLOCK_${idx}__`;
     });
@@ -3648,16 +3808,30 @@ class LMSGIApp {
     // Cursiva *...*
     raw = raw.replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>');
 
-    // Listas con *
+    // Separadores horizontales
+    raw = raw.replace(/^\s*---\s*$/gm, '<hr class="my-4 border-slate-200 dark:border-slate-800" />');
+
+    // Listas con sangría de nivel 2 (subviñetas)
+    raw = raw.replace(/^\s{2,}[\*\-]\s+(.*)$/gm, '<li class="ml-8 list-circle text-slate-600 dark:text-slate-400 my-0.5 text-xs">$1</li>');
+
+    // Listas principales con viñetas (* o - o &bull;)
     raw = raw.replace(/^\s*&bull;\s+(.*)$/gm, '<li class="ml-4 list-disc text-slate-700 dark:text-slate-300 my-1">$1</li>');
-    raw = raw.replace(/^\s*\*\s+(.*)$/gm, '<li class="ml-4 list-disc text-slate-700 dark:text-slate-300 my-1">$1</li>');
+    raw = raw.replace(/^\s*[\*\-]\s+(.*)$/gm, '<li class="ml-4 list-disc text-slate-700 dark:text-slate-300 my-1">$1</li>');
+
+    // Listas numeradas (1. 2. etc.)
+    raw = raw.replace(/^\s*(\d+)\.\s+(.*)$/gm, '<li class="ml-4 list-decimal text-slate-700 dark:text-slate-300 my-1">$2</li>');
 
     // Citas con &gt;
-    raw = raw.replace(/^\s*&gt;\s+(.*)$/gm, '<blockquote class="my-3 pl-4 border-l-4 border-teal-500 text-slate-600 dark:text-slate-400 italic text-xs sm:text-sm">$1</blockquote>');
+    raw = raw.replace(/^\s*&gt;\s+(.*)$/gm, '<blockquote class="my-3 pl-4 py-2 border-l-4 border-teal-500 bg-teal-50/60 dark:bg-teal-950/30 rounded-r-xl text-slate-700 dark:text-slate-300 italic text-xs sm:text-sm leading-relaxed">$1</blockquote>');
+    // Compactar citas consecutivas
+    raw = raw.replace(/<\/blockquote>\s*<blockquote[^>]*>/g, '<br class="my-1">');
 
     // Párrafos y saltos
     raw = raw.replace(/\n\n+/g, '</p><p class="my-2.5">');
     raw = `<p class="my-2.5">${raw}</p>`;
+
+    // Limpieza de párrafos vacíos
+    raw = raw.replace(/<p class="my-2\.5">\s*<\/p>/g, '');
 
     // 5. Restaurar bloques de código con su HTML escapado correspondiente
     codeTokens.forEach((token, idx) => {
@@ -3666,6 +3840,325 @@ class LMSGIApp {
     });
 
     return raw;
+  }
+
+  // =========================================================================
+  // GESTIÓN DE EDICIÓN DOCENTE DE CONTENIDOS TEÓRICOS
+  // =========================================================================
+
+  openTheoryEditor(blockId) {
+    this.editingBlockId = blockId || this.currentBlockId;
+    const currentBlock = this.getCurrentBlockData();
+    const modal = document.getElementById("modal-edit-theory");
+    const subtitle = document.getElementById("edit-theory-subtitle");
+    const introTextarea = document.getElementById("edit-theory-intro");
+    const sectionsContainer = document.getElementById("edit-theory-sections-container");
+    const restoreBtn = document.getElementById("btn-restore-theory-modal");
+
+    if (!modal || !introTextarea || !sectionsContainer) return;
+
+    if (subtitle) {
+      subtitle.textContent = `${currentBlock.session}: ${currentBlock.title} (${currentBlock.duration})`;
+    }
+
+    introTextarea.value = (currentBlock.theory && currentBlock.theory.intro) ? currentBlock.theory.intro.trim() : "";
+    introTextarea.onfocus = () => this.setActiveEditorInput("edit-theory-intro");
+
+    // Limpiar y renderizar secciones en el modal
+    sectionsContainer.innerHTML = "";
+    const sections = (currentBlock.theory && currentBlock.theory.sections) ? currentBlock.theory.sections : [];
+
+    sections.forEach((sec, idx) => {
+      this.renderEditorSectionCard(idx, sec.title || "", sec.content || "");
+    });
+
+    if (restoreBtn) {
+      if (currentBlock.isCustomized) {
+        restoreBtn.classList.remove("hidden");
+      } else {
+        restoreBtn.classList.add("hidden");
+      }
+    }
+
+    this.switchEditorTab("edit");
+    modal.classList.remove("hidden");
+    introTextarea.focus();
+    this.activeEditorInputId = "edit-theory-intro";
+  }
+
+  closeTheoryEditor() {
+    const modal = document.getElementById("modal-edit-theory");
+    if (modal) modal.classList.add("hidden");
+    this.editingBlockId = null;
+  }
+
+  renderEditorSectionCard(idx, title, content) {
+    const sectionsContainer = document.getElementById("edit-theory-sections-container");
+    if (!sectionsContainer) return;
+
+    const card = document.createElement("div");
+    card.className = "edit-section-card bg-slate-50/70 dark:bg-slate-800/40 p-3.5 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-700/60 space-y-3";
+    card.dataset.index = idx;
+    card.innerHTML = `
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+          Sección <span class="sec-number">${idx + 1}</span>
+        </span>
+        <button type="button" 
+                onclick="window.LMSGI_APP.removeEditorSection(this)" 
+                class="text-xs text-rose-500 hover:text-rose-700 dark:hover:text-rose-400 flex items-center gap-1 transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          Eliminar Sección
+        </button>
+      </div>
+      <div class="space-y-1">
+        <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400">Título de la Sección</label>
+        <input type="text" 
+               class="sec-title-input w-full px-3 py-1.5 text-xs sm:text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-teal-500"
+               value="${this.escapeHTML(title)}" 
+               placeholder="Ej: 1. Elementos fundamentales">
+      </div>
+      <div class="space-y-1">
+        <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400">Contenido (Markdown / Listas / Código)</label>
+        <textarea rows="6" 
+                  class="sec-content-textarea w-full p-3 text-xs sm:text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-teal-500 leading-relaxed"
+                  placeholder="Escribe la explicación teórica, listas con * y ejemplos...">${this.escapeHTML(content)}</textarea>
+      </div>
+    `;
+
+    const textarea = card.querySelector(".sec-content-textarea");
+    if (textarea) {
+      const fieldId = `sec-content-textarea-${Date.now()}-${idx}`;
+      textarea.id = fieldId;
+      textarea.onfocus = () => this.setActiveEditorInput(fieldId);
+    }
+
+    sectionsContainer.appendChild(card);
+  }
+
+  addEditorSection() {
+    const sectionsContainer = document.getElementById("edit-theory-sections-container");
+    if (!sectionsContainer) return;
+    const cards = sectionsContainer.querySelectorAll(".edit-section-card");
+    this.renderEditorSectionCard(cards.length, `Sección ${cards.length + 1}`, "Escribe aquí la teoría en párrafos cortos y listas con *...\n\n* Punto clave 1\n* Punto clave 2");
+    const lastCard = sectionsContainer.lastElementChild;
+    if (lastCard) {
+      lastCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      const input = lastCard.querySelector(".sec-title-input");
+      if (input) input.focus();
+    }
+  }
+
+  removeEditorSection(btnOrIdx) {
+    let card = null;
+    if (typeof btnOrIdx === "number") {
+      const cards = document.querySelectorAll(".edit-section-card");
+      card = cards[btnOrIdx];
+    } else if (btnOrIdx && btnOrIdx.closest) {
+      card = btnOrIdx.closest(".edit-section-card");
+    }
+    if (card) {
+      card.remove();
+      // Renumerar secciones visualmente
+      const remaining = document.querySelectorAll(".edit-section-card");
+      remaining.forEach((c, i) => {
+        const numSpan = c.querySelector(".sec-number");
+        if (numSpan) numSpan.textContent = i + 1;
+      });
+    }
+  }
+
+  setActiveEditorInput(id) {
+    this.activeEditorInputId = id;
+  }
+
+  insertEditorFormat(type) {
+    const activeEl = document.getElementById(this.activeEditorInputId) || document.getElementById("edit-theory-intro");
+    if (!activeEl) return;
+
+    const start = activeEl.selectionStart || 0;
+    const end = activeEl.selectionEnd || 0;
+    const text = activeEl.value || "";
+    const selected = text.substring(start, end);
+
+    let replacement = "";
+    switch (type) {
+      case "bold":
+        replacement = selected ? `**${selected}**` : "**texto en negrita**";
+        break;
+      case "italic":
+        replacement = selected ? `*${selected}*` : "*texto en cursiva*";
+        break;
+      case "bullet":
+        replacement = selected 
+          ? `\n* ${selected}\n` 
+          : "\n* Elemento de lista\n* Segundo elemento\n";
+        break;
+      case "number":
+        replacement = selected 
+          ? `\n1. ${selected}\n` 
+          : "\n1. Primer paso o regla\n2. Segundo paso o regla\n";
+        break;
+      case "quote":
+        replacement = selected 
+          ? `\n> **Nota clave:** ${selected}\n` 
+          : "\n> **Punto clave:** Información destacada para el aula.\n";
+        break;
+      case "code":
+        replacement = selected 
+          ? `\n\`\`\`xml\n${selected}\n\`\`\`\n` 
+          : '\n```xml\n<ejemplo id="1">\n  <dato>Valor</dato>\n</ejemplo>\n```\n';
+        break;
+      case "paragraph":
+        replacement = "\n\n";
+        break;
+      default:
+        replacement = selected;
+    }
+
+    activeEl.value = text.substring(0, start) + replacement + text.substring(end);
+    activeEl.focus();
+    const newCursor = start + replacement.length;
+    activeEl.setSelectionRange(newCursor, newCursor);
+  }
+
+  switchEditorTab(tab) {
+    const tabBtnEditor = document.getElementById("tab-btn-editor");
+    const tabBtnPreview = document.getElementById("tab-btn-preview");
+    const tabEdit = document.getElementById("editor-tab-edit");
+    const tabPreview = document.getElementById("editor-tab-preview");
+    const previewRender = document.getElementById("edit-theory-preview-render");
+
+    if (!tabBtnEditor || !tabBtnPreview || !tabEdit || !tabPreview) return;
+
+    if (tab === "preview") {
+      tabBtnPreview.className = "px-3 py-1 font-semibold rounded-lg bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs transition-all";
+      tabBtnEditor.className = "px-3 py-1 font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all";
+      tabEdit.classList.add("hidden");
+      tabPreview.classList.remove("hidden");
+
+      // Construir vista previa
+      const introText = document.getElementById("edit-theory-intro")?.value || "";
+      const sectionCards = document.querySelectorAll(".edit-section-card");
+      let sectionsHtml = "";
+
+      sectionCards.forEach((card, i) => {
+        const title = card.querySelector(".sec-title-input")?.value || `Sección ${i + 1}`;
+        const content = card.querySelector(".sec-content-textarea")?.value || "";
+        sectionsHtml += `
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+              ${this.escapeHTML(title)}
+            </h3>
+            <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed">
+              ${this.formatMarkdown(content)}
+            </div>
+          </div>
+        `;
+      });
+
+      if (previewRender) {
+        previewRender.innerHTML = `
+          <div class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            ${this.formatMarkdown(introText)}
+          </div>
+          <div class="space-y-4">
+            ${sectionsHtml}
+          </div>
+        `;
+      }
+    } else {
+      tabBtnEditor.className = "px-3 py-1 font-semibold rounded-lg bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs transition-all";
+      tabBtnPreview.className = "px-3 py-1 font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all";
+      tabEdit.classList.remove("hidden");
+      tabPreview.classList.add("hidden");
+    }
+  }
+
+  saveTheoryEditor() {
+    if (!this.editingBlockId) return;
+
+    const intro = document.getElementById("edit-theory-intro")?.value || "";
+    const sectionCards = document.querySelectorAll(".edit-section-card");
+    const sections = [];
+
+    // Recuperar tablas originales si existían
+    const originalBlock = this.getCurrentBlockData();
+    const originalSections = (originalBlock && originalBlock.theory && originalBlock.theory.sections) ? originalBlock.theory.sections : [];
+
+    sectionCards.forEach((card, idx) => {
+      const title = card.querySelector(".sec-title-input")?.value.trim() || `Sección ${idx + 1}`;
+      const content = card.querySelector(".sec-content-textarea")?.value || "";
+      const table = originalSections[idx] ? originalSections[idx].table : null;
+      sections.push({ title, content, ...(table ? { table } : {}) });
+    });
+
+    this.customTheories[this.editingBlockId] = { intro, sections };
+    localStorage.setItem("lmsgi_custom_theories", JSON.stringify(this.customTheories));
+
+    this.closeTheoryEditor();
+    this.render();
+  }
+
+  resetTheoryToDefault(blockId) {
+    const id = blockId || this.editingBlockId || this.currentBlockId;
+    if (!id) return;
+
+    if (confirm("¿Estás seguro de restablecer el contenido original predeterminado de este bloque? Se borrarán tus ediciones personalizadas para esta sesión.")) {
+      delete this.customTheories[id];
+      localStorage.setItem("lmsgi_custom_theories", JSON.stringify(this.customTheories));
+      if (this.editingBlockId) {
+        this.closeTheoryEditor();
+      }
+      this.render();
+    }
+  }
+
+  resetCurrentEditedBlock() {
+    this.resetTheoryToDefault(this.editingBlockId);
+  }
+
+  exportCustomContent() {
+    const count = Object.keys(this.customTheories).length;
+    if (count === 0) {
+      alert("Aún no tienes contenidos modificados para exportar. Edita alguna sesión primero.");
+      return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.customTheories, null, 2));
+    const dlAnchor = document.createElement("a");
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", `lmsgi_contenidos_docente_${new Date().toISOString().slice(0, 10)}.json`);
+    dlAnchor.click();
+  }
+
+  importCustomContent() {
+    const input = document.getElementById("input-import-theories");
+    if (input) input.click();
+  }
+
+  handleImportFile(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const imported = JSON.parse(e.target.result);
+        if (typeof imported !== "object" || imported === null) {
+          throw new Error("Formato JSON no válido.");
+        }
+        this.customTheories = { ...this.customTheories, ...imported };
+        localStorage.setItem("lmsgi_custom_theories", JSON.stringify(this.customTheories));
+        alert("¡Contenidos docentes importados con éxito!");
+        this.render();
+      } catch (err) {
+        alert("Error al importar el archivo JSON: " + err.message);
+      }
+      event.target.value = "";
+    };
+    reader.readAsText(file);
   }
 }
 
