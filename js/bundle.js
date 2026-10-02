@@ -432,7 +432,7 @@ const UNIT_1_DATA = {
         {
           id: "ex1-1",
           title: "Ejercicio 1: Anatomía de un fragmento de marcado",
-          description: "Analiza el siguiente documento de ejemplo e identifica en el editor sus componentes esenciales: elemento raíz, elementos hijos, atributos y contenido textual.",
+          description: "Analiza el siguiente documento de ejemplo en el visor de código e identifica sus componentes esenciales respondiendo a las preguntas interactivas.",
           initialCode: `<instituto codigo="30019702">
   <nombre>CIFP Carlos III</nombre>
   <localidad>Cartagena</localidad>
@@ -447,8 +447,37 @@ const UNIT_1_DATA = {
             "2. Identifica los atributos y sus valores entre comillas.",
             "3. Observa la jerarquía: ¿quién es el padre de <curso>?"
           ],
+          interactiveQuestions: [
+            {
+              id: "ex1-1-q1",
+              label: "1. Localiza cuál es el elemento raíz único del documento:",
+              placeholder: "Escribe el elemento raíz (ej: instituto)",
+              expected: "instituto",
+              accepts: ["instituto", "<instituto>"],
+              explanation: "El elemento raíz único es <instituto>, el cual engloba y contiene a todos los demás nodos del documento.",
+              hint: "El elemento raíz es el único nodo que no tiene elemento padre en todo el documento."
+            },
+            {
+              id: "ex1-1-q2",
+              label: "2. Identifica los nombres de los atributos presentes en el código:",
+              placeholder: "Escribe los atributos separados por comas (ej: codigo, nivel, familia)",
+              type: "keywords",
+              requiredKeywords: ["codigo", "nivel", "familia"],
+              explanation: "Los 3 atributos presentes son: 'codigo' (en <instituto>), y 'nivel' y 'familia' (en <ciclo>).",
+              hint: "Busca los pares nombre=\"valor\" situados dentro de las etiquetas de apertura de <instituto> y <ciclo>."
+            },
+            {
+              id: "ex1-1-q3",
+              label: "3. Observa la jerarquía del árbol XML: ¿quién es el elemento padre directo de <curso>?",
+              placeholder: "Escribe el elemento padre (ej: ciclo)",
+              expected: "ciclo",
+              accepts: ["ciclo", "<ciclo>"],
+              explanation: "El elemento padre directo de <curso> es <ciclo>, ya que <curso> se encuentra anidado en su interior.",
+              hint: "Revisa qué etiqueta envuelve directamente a <curso>1</curso>."
+            }
+          ],
           solution: `<!-- Solución comentada:
-1. Elemento raíz: <instituto> (engloba a todos los demás nodos).
+1. Elemento raíz único: <instituto> (engloba a todos los demás nodos).
 2. Atributos:
    - codigo="30019702" en <instituto>
    - nivel="superior" y familia="Informatica" en <ciclo>
@@ -2777,7 +2806,9 @@ class LMSGIApp {
       resetCurrentEditedBlock: () => this.resetCurrentEditedBlock(),
       exportCustomContent: () => this.exportCustomContent(),
       importCustomContent: () => this.importCustomContent(),
-      handleImportFile: (e) => this.handleImportFile(e)
+      handleImportFile: (e) => this.handleImportFile(e),
+      checkInteractiveExercise: (exerciseId) => this.checkInteractiveExercise(exerciseId),
+      resetInteractiveExercise: (exerciseId) => this.resetInteractiveExercise(exerciseId)
     };
 
     this.render();
@@ -2948,6 +2979,152 @@ class LMSGIApp {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  }
+
+  normalizeAnswerText(str) {
+    if (!str) return "";
+    return str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // quita tildes (código -> codigo)
+      .replace(/[<>]/g, "")           // quita delimitadores < y > (<instituto> -> instituto)
+      .replace(/["']/g, "")           // quita comillas
+      .trim();
+  }
+
+  checkInteractiveExercise(exerciseId) {
+    const currentBlock = this.getCurrentBlockData();
+    if (!currentBlock || !currentBlock.exercises) return;
+    const ex = currentBlock.exercises.find(e => e.id === exerciseId);
+    if (!ex || !ex.interactiveQuestions) return;
+
+    let correctCount = 0;
+    const totalCount = ex.interactiveQuestions.length;
+    const savedAnswers = {};
+
+    ex.interactiveQuestions.forEach(q => {
+      const inputEl = document.getElementById(`input-${q.id}`);
+      const badgeEl = document.getElementById(`badge-${q.id}`);
+      const feedbackEl = document.getElementById(`feedback-${q.id}`);
+      const containerEl = document.getElementById(`container-${q.id}`);
+      if (!inputEl) return;
+
+      const rawVal = inputEl.value;
+      savedAnswers[q.id] = rawVal;
+      const normalizedVal = this.normalizeAnswerText(rawVal);
+
+      let isCorrect = false;
+
+      if (q.type === "keywords" && Array.isArray(q.requiredKeywords)) {
+        // Deben estar todas las palabras clave requeridas sin importar el orden
+        const allPresent = q.requiredKeywords.every(kw => {
+          const normKw = this.normalizeAnswerText(kw);
+          return normalizedVal.includes(normKw);
+        });
+        isCorrect = allPresent && normalizedVal.length > 0;
+      } else {
+        // Comprobación con opciones válidas
+        const validOptions = (q.accepts || [q.expected]).map(opt => this.normalizeAnswerText(opt));
+        isCorrect = validOptions.includes(normalizedVal);
+      }
+
+      if (rawVal.trim() === "") {
+        // Campo pendiente / vacío
+        if (badgeEl) {
+          badgeEl.className = "text-xs font-semibold px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 shrink-0";
+          badgeEl.textContent = "Pendiente";
+          badgeEl.classList.remove("hidden");
+        }
+        if (feedbackEl) {
+          feedbackEl.className = "text-[11px] pt-1 text-amber-600 dark:text-amber-400 font-medium";
+          feedbackEl.innerHTML = `⚠️ ${q.hint || "Por favor, escribe una respuesta para comprobar."}`;
+          feedbackEl.classList.remove("hidden");
+        }
+        if (containerEl) {
+          containerEl.classList.remove("border-emerald-400", "dark:border-emerald-600", "border-rose-400", "dark:border-rose-600");
+          containerEl.classList.add("border-amber-300", "dark:border-amber-700");
+        }
+      } else if (isCorrect) {
+        correctCount++;
+        if (badgeEl) {
+          badgeEl.className = "text-xs font-semibold px-2.5 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 shrink-0 flex items-center gap-1";
+          badgeEl.innerHTML = `<span>✓</span> ¡Correcto!`;
+          badgeEl.classList.remove("hidden");
+        }
+        if (feedbackEl) {
+          feedbackEl.className = "text-[11px] pt-1 text-emerald-700 dark:text-emerald-300 font-medium";
+          feedbackEl.innerHTML = `✓ ${this.escapeHTML(q.explanation || "¡Respuesta correcta!")}`;
+          feedbackEl.classList.remove("hidden");
+        }
+        if (containerEl) {
+          containerEl.classList.remove("border-amber-300", "dark:border-amber-700", "border-rose-400", "dark:border-rose-600");
+          containerEl.classList.add("border-emerald-400", "dark:border-emerald-600");
+        }
+      } else {
+        if (badgeEl) {
+          badgeEl.className = "text-xs font-semibold px-2.5 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 shrink-0 flex items-center gap-1";
+          badgeEl.innerHTML = `<span>✗</span> A revisar`;
+          badgeEl.classList.remove("hidden");
+        }
+        if (feedbackEl) {
+          feedbackEl.className = "text-[11px] pt-1 text-rose-600 dark:text-rose-400 font-medium";
+          const hintText = q.hint ? ` Pista: ${q.hint}` : "";
+          feedbackEl.innerHTML = `✗ No es del todo correcto.${this.escapeHTML(hintText)}`;
+          feedbackEl.classList.remove("hidden");
+        }
+        if (containerEl) {
+          containerEl.classList.remove("border-amber-300", "dark:border-amber-700", "border-emerald-400", "dark:border-emerald-600");
+          containerEl.classList.add("border-rose-400", "dark:border-rose-600");
+        }
+      }
+    });
+
+    try {
+      localStorage.setItem("lmsgi_interactive_" + exerciseId, JSON.stringify(savedAnswers));
+    } catch (e) {}
+
+    const summaryEl = document.getElementById(`result-summary-${exerciseId}`);
+    if (summaryEl) {
+      if (correctCount === totalCount) {
+        summaryEl.innerHTML = `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-200 font-bold"><svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ¡Excelente! Has respondido correctamente a todas las preguntas (${correctCount}/${totalCount})</span>`;
+      } else {
+        summaryEl.innerHTML = `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">Aciertos: <strong class="text-teal-600 dark:text-teal-400">${correctCount}</strong> de <strong>${totalCount}</strong></span>`;
+      }
+    }
+  }
+
+  resetInteractiveExercise(exerciseId) {
+    const currentBlock = this.getCurrentBlockData();
+    if (!currentBlock || !currentBlock.exercises) return;
+    const ex = currentBlock.exercises.find(e => e.id === exerciseId);
+    if (!ex || !ex.interactiveQuestions) return;
+
+    ex.interactiveQuestions.forEach(q => {
+      const inputEl = document.getElementById(`input-${q.id}`);
+      const badgeEl = document.getElementById(`badge-${q.id}`);
+      const feedbackEl = document.getElementById(`feedback-${q.id}`);
+      const containerEl = document.getElementById(`container-${q.id}`);
+
+      if (inputEl) inputEl.value = "";
+      if (badgeEl) {
+        badgeEl.className = "hidden";
+        badgeEl.textContent = "";
+      }
+      if (feedbackEl) {
+        feedbackEl.className = "hidden";
+        feedbackEl.textContent = "";
+      }
+      if (containerEl) {
+        containerEl.classList.remove("border-emerald-400", "dark:border-emerald-600", "border-rose-400", "dark:border-rose-600", "border-amber-300", "dark:border-amber-700");
+      }
+    });
+
+    const summaryEl = document.getElementById(`result-summary-${exerciseId}`);
+    if (summaryEl) summaryEl.innerHTML = "";
+
+    try {
+      localStorage.removeItem("lmsgi_interactive_" + exerciseId);
+    } catch (e) {}
   }
 
   showEvaluationInfoModal() {
@@ -3738,6 +3915,75 @@ class LMSGIApp {
 
             <!-- Panel de Resultados del Validador -->
             <div id="output-${ex.id}"></div>
+
+            ${
+              ex.interactiveQuestions && ex.interactiveQuestions.length > 0
+                ? `
+              <!-- Cuestionario de Respuestas Interactivas -->
+              <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-teal-50/60 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-900/60 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-2 border-b border-teal-200/60 dark:border-teal-900/60">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-teal-600 text-white flex items-center justify-center text-xs font-bold shadow-xs">✍️</span>
+                    <h5 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">
+                      Cuestionario Interactivo del Ejercicio
+                    </h5>
+                  </div>
+                  <span class="text-[11px] text-teal-700 dark:text-teal-400 font-medium">
+                    Escribe tu respuesta para cada pregunta y pulsa comprobar
+                  </span>
+                </div>
+
+                <div class="space-y-3">
+                  ${ex.interactiveQuestions
+                    .map((q, qIdx) => {
+                      let savedAnswers = {};
+                      try {
+                        savedAnswers = JSON.parse(localStorage.getItem("lmsgi_interactive_" + ex.id) || "{}");
+                      } catch (e) {}
+                      const userVal = savedAnswers[q.id] || "";
+                      return `
+                    <div class="space-y-1.5 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs" id="container-${q.id}">
+                      <label for="input-${q.id}" class="block text-xs font-semibold text-slate-800 dark:text-slate-200 leading-snug">
+                        ${this.escapeHTML(q.label || q.question)}
+                      </label>
+                      <div class="flex items-center gap-2 pt-0.5">
+                        <input type="text" 
+                               id="input-${q.id}" 
+                               value="${this.escapeHTML(userVal)}"
+                               placeholder="${this.escapeHTML(q.placeholder || '')}"
+                               onkeydown="if(event.key==='Enter') window.LMSGI_APP.checkInteractiveExercise('${ex.id}')"
+                               class="flex-1 px-3 py-2 text-xs rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+                        <div id="badge-${q.id}" class="hidden text-xs font-semibold px-2.5 py-1 rounded-md shrink-0"></div>
+                      </div>
+                      <div id="feedback-${q.id}" class="hidden text-[11px] pt-0.5 font-medium leading-tight"></div>
+                    </div>
+                  `;
+                    })
+                    .join("")}
+                </div>
+
+                <!-- Barra de Acción y Resultado del Cuestionario Interactivo -->
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                  <div id="result-summary-${ex.id}" class="text-xs font-semibold text-slate-700 dark:text-slate-300"></div>
+                  <div class="flex items-center gap-2">
+                    <button type="button" 
+                            onclick="window.LMSGI_APP.resetInteractiveExercise('${ex.id}')"
+                            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                      Limpiar
+                    </button>
+                    <button type="button" 
+                            onclick="window.LMSGI_APP.checkInteractiveExercise('${ex.id}')"
+                            class="px-4 py-2 text-xs font-bold rounded-lg bg-teal-600 hover:bg-teal-700 text-white shadow-sm transition-all flex items-center gap-1.5">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                      Comprobar Respuestas
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `
+                : ""
+            }
 
             <!-- Panel de Solución Guiada -->
             <div id="solution-${ex.id}" class="hidden mt-4 p-4 rounded-xl bg-slate-900 border border-teal-500/30 text-slate-100 text-xs space-y-2">
