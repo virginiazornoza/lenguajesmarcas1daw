@@ -10,7 +10,7 @@ export const UNITS_OVERVIEW_DATA = {
     title: "Utilización de lenguajes de marcas en entornos web",
     ra: "RA2: Utiliza lenguajes de marcas para la transmisión de información a través de la web, analizando la estructura de los documentos e identificando sus elementos.",
     hours: 32,
-    weight: "26%",
+    weight: "28%",
     evaluation: "1ª Evaluación",
     blocksDetailed: {
       "ut2-b1": {
@@ -243,7 +243,7 @@ export const UNITS_OVERVIEW_DATA = {
     unitNumber: 3,
     title: "Manipulación de documentos web mediante scripts y sindicación",
     ra: "RA3: Genera canales de contenidos analizando y utilizando tecnologías de sindicación / Manipulación de documentos web mediante scripts.",
-    hours: 12,
+    hours: 14,
     weight: "12%",
     evaluation: "1ª y 2ª Evaluación",
     blocksDetailed: {
@@ -290,23 +290,37 @@ export const UNITS_OVERVIEW_DATA = {
         exerciseSample: "Crear un interruptor de Modo Oscuro / Modo Claro dinámico mediante JavaScript y classList."
       },
       "ut3-b4": {
-        title: "Creación y eliminación dinámica de nodos en el DOM y gestión de eventos",
+        title: "Gestión de eventos en el DOM (listeners, bubbling y delegación)",
         duration: "2 horas",
-        session: "Sesión 4 (2ª Ev)",
-        objectives: ["Crear nodos con document.createElement y textNode", "Insertar nodos con appendChild y append", "Escuchar eventos de usuario con addEventListener ('click', 'submit', 'input')"],
-        theorySummary: "Ciclo de vida de eventos en el navegador. Delegación de eventos, prevención del comportamiento por defecto con e.preventDefault().",
+        session: "Sesión 4 (1ª Ev)",
+        objectives: ["Escuchar eventos de usuario con addEventListener ('click', 'submit', 'input')", "Prevenir comportamiento por defecto con e.preventDefault()", "Entender la propagación de eventos (bubbling)"],
+        theorySummary: "Manejo interactivo de eventos en el navegador. Interceptar envíos de formularios, respuestas en tiempo real y delegación de eventos.",
         quizSample: {
           question: "¿Qué método se utiliza para evitar que un formulario recargue la página completa al pulsar el botón de envío?",
           options: ["e.stopPropagation()", "e.preventDefault()", "form.cancel()", "window.stop()"],
           correctIndex: 1,
           explanation: "`e.preventDefault()` cancela la acción nativa del evento, permitiendo procesar el formulario de forma asíncrona."
         },
-        exerciseSample: "Construir una lista de tareas (To-Do List) interactiva donde el usuario pueda agregar y eliminar tareas dinámicamente."
+        exerciseSample: "Interceptar el evento submit de un formulario, validar campos vacíos y mostrar un aviso dinámico sin recargar la página."
       },
       "ut3-b5": {
-        title: "Sindicación de contenidos: arquitectura de RSS 2.0 y Atom",
+        title: "Creación y eliminación dinámica de nodos en el DOM",
         duration: "2 horas",
         session: "Sesión 5 (2ª Ev)",
+        objectives: ["Crear nodos con document.createElement y createTextNode", "Insertar nodos con appendChild y append", "Eliminar nodos con remove() y removeChild()"],
+        theorySummary: "Construcción dinámica de elementos en la interfaz. Manipulación del árbol del DOM en tiempo de ejecución.",
+        quizSample: {
+          question: "¿Cómo se añade un nuevo elemento `<p>` como último hijo de un contenedor `#caja`?",
+          options: ["caja.innerHTML = p", "caja.appendChild(p)", "caja.insert(p)", "p.addTo(caja)"],
+          correctIndex: 1,
+          explanation: "`appendChild(p)` añade el nodo `p` como el último hijo del elemento contenedor."
+        },
+        exerciseSample: "Construir una lista de tareas (To-Do List) interactiva donde el usuario pueda agregar y eliminar tareas dinámicamente."
+      },
+      "ut3-b6": {
+        title: "Sindicación de contenidos: arquitectura de RSS 2.0 y Atom",
+        duration: "2 horas",
+        session: "Sesión 6 (2ª Ev)",
         objectives: ["Comprender los canales de sindicación (RSS 2.0 y Atom)", "Estructurar canales con <channel>, <item>, <title>, <link>, <pubDate>", "Identificar la sintaxis de marcado XML en sindicación"],
         theorySummary: "La sindicación web como aplicación directa de XML para la distribución automatizada de noticias, blogs y podcasts.",
         quizSample: {
@@ -317,10 +331,10 @@ export const UNITS_OVERVIEW_DATA = {
         },
         exerciseSample: "Crear un canal de sindicación RSS 2.0 completo con 3 noticias sobre las novedades del CIFP Carlos III."
       },
-      "ut3-b6": {
+      "ut3-b7": {
         title: "Validación de canales de sindicación, consumo con agregadores y proyecto",
         duration: "2 horas",
-        session: "Sesión 6 (2ª Ev)",
+        session: "Sesión 7 (2ª Ev)",
         objectives: ["Validar feeds RSS/Atom con validadores W3C", "Consumir feeds en lectores y agregadores (Feedly, Thunderbird)", "Proyecto evaluativo de la UT3"],
         theorySummary: "Mecanismos de validación formal de feeds web y automatización de distribución de información.",
         quizSample: {
@@ -338,7 +352,7 @@ export const UNITS_OVERVIEW_DATA = {
     title: "Esquemas y vocabularios en XML",
     ra: "RA4: Establece mecanismos de validación para documentos XML utilizando métodos para definir su sintaxis y estructura.",
     hours: 24,
-    weight: "20%",
+    weight: "21%",
     evaluation: "2ª Evaluación",
     blocksDetailed: {
       "ut4-b1": {
@@ -516,7 +530,7 @@ export const UNITS_OVERVIEW_DATA = {
     title: "Conversión y adaptación de documentos XML",
     ra: "RA5: Realiza conversiones sobre documentos XML utilizando técnicas y herramientas de procesamiento.",
     hours: 20,
-    weight: "20%",
+    weight: "18%",
     evaluation: "2ª y 3ª Evaluación",
     blocksDetailed: {
       "ut5-b1": {

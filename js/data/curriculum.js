@@ -19,7 +19,7 @@
  * Total: 48h + 34h + 34h = 116 horas lectivas (58 bloques de 2 horas).
  *
  * Ponderación oficial de RAs:
- * RA1: 8%, RA2: 26%, RA3: 12%, RA4: 20%, RA5: 20%, RA6: 12%, RA7: 2% (Total: 100%).
+ * RA1: 7%, RA2: 28%, RA3: 12%, RA4: 21%, RA5: 18%, RA6: 12%, RA7: 2% (Total: 100%).
  * Todos los RAs son críticos y de obligada superación.
  *
  * Instrumentos de evaluación oficiales (Punto 4.7.2):
@@ -36,7 +36,7 @@ export const COURSE_INFO = {
   center: "CIFP Carlos III - Cartagena",
   professor: "Virginia Zornoza Martínez",
   evaluations: [
-    { name: "1ª Evaluación", hours: 48, unitsSummary: "UT1 (8h), UT2 (32h), UT3 (6h)" },
+    { name: "1ª Evaluación", hours: 48, unitsSummary: "UT1 (8h), UT2 (32h), UT3 (8h)" },
     { name: "2ª Evaluación", hours: 34, unitsSummary: "UT3 (6h), UT4 (24h), UT5 (4h)" },
     { name: "3ª Evaluación", hours: 34, unitsSummary: "UT5 (16h), UT6 (14h), UT7 (4h)" }
   ],
@@ -55,7 +55,7 @@ export const UNITS = [
     shortTitle: "UT1: Características de los lenguajes de marcas",
     ra: "RA1",
     raDescription: "Reconoce las características de lenguajes de marcas, analizando e interpretando fragmentos de código.",
-    weight: "8%",
+    weight: "7%",
     evaluation: "1ª Evaluación",
     hours: 8,
     blockCount: 4,
@@ -110,7 +110,7 @@ export const UNITS = [
     shortTitle: "UT2: Lenguajes de marcas en entornos web (HTML5 y CSS3)",
     ra: "RA2",
     raDescription: "Utiliza lenguajes de marcas para la transmisión de información a través de la web, analizando la estructura de los documentos e identificando sus elementos.",
-    weight: "26%",
+    weight: "28%",
     evaluation: "1ª Evaluación",
     hours: 32,
     blockCount: 16,
@@ -143,16 +143,17 @@ export const UNITS = [
     raDescription: "Genera canales de contenidos analizando y utilizando tecnologías de sindicación / Manipulación de documentos web mediante scripts.",
     weight: "12%",
     evaluation: "1ª y 2ª Evaluación",
-    hours: 12,
-    blockCount: 6,
+    hours: 14,
+    blockCount: 7,
     evaluationDistribution: { exams: "65%", tasks: "25%", quizzes: "10%" },
     blocks: [
       { id: "ut3-b1", blockNumber: 1, title: "Introducción a JavaScript en el navegador y vinculación en HTML", duration: "2 horas", session: "Sesión 1 (1ª Ev)", evaluation: "1ª Evaluación", ce: ["CE3a", "CE3b"] },
       { id: "ut3-b2", blockNumber: 2, title: "El DOM (Document Object Model): estructura arbórea y métodos de selección", duration: "2 horas", session: "Sesión 2 (1ª Ev)", evaluation: "1ª Evaluación", ce: ["CE3c", "CE3d"] },
       { id: "ut3-b3", blockNumber: 3, title: "Modificación dinámica de atributos, contenido textual e inyección de estilos", duration: "2 horas", session: "Sesión 3 (1ª Ev)", evaluation: "1ª Evaluación", ce: ["CE3d", "CE3e"] },
-      { id: "ut3-b4", blockNumber: 4, title: "Creación y eliminación dinámica de nodos en el DOM y gestión de eventos", duration: "2 horas", session: "Sesión 4 (2ª Ev)", evaluation: "2ª Evaluación", ce: ["CE3e", "CE3f"] },
-      { id: "ut3-b5", blockNumber: 5, title: "Sindicación de contenidos: arquitectura de RSS 2.0 y Atom", duration: "2 horas", session: "Sesión 5 (2ª Ev)", evaluation: "2ª Evaluación", ce: ["CE3f", "CE3g"] },
-      { id: "ut3-b6", blockNumber: 6, title: "Validación de canales de sindicación, consumo con agregadores y proyecto", duration: "2 horas", session: "Sesión 6 (2ª Ev)", evaluation: "2ª Evaluación", ce: ["CE3f", "CE3g"] }
+      { id: "ut3-b4", blockNumber: 4, title: "Gestión de eventos en el DOM (listeners, bubbling y delegación)", duration: "2 horas", session: "Sesión 4 (1ª Ev)", evaluation: "1ª Evaluación", ce: ["CE3e", "CE3f"] },
+      { id: "ut3-b5", blockNumber: 5, title: "Creación y eliminación dinámica de nodos en el DOM", duration: "2 horas", session: "Sesión 5 (2ª Ev)", evaluation: "2ª Evaluación", ce: ["CE3e", "CE3f"] },
+      { id: "ut3-b6", blockNumber: 6, title: "Sindicación de contenidos: arquitectura de RSS 2.0 y Atom", duration: "2 horas", session: "Sesión 6 (2ª Ev)", evaluation: "2ª Evaluación", ce: ["CE3f", "CE3g"] },
+      { id: "ut3-b7", blockNumber: 7, title: "Validación de canales de sindicación, consumo con agregadores y proyecto", duration: "2 horas", session: "Sesión 7 (2ª Ev)", evaluation: "2ª Evaluación", ce: ["CE3f", "CE3g"] }
     ]
   },
   {
@@ -162,7 +163,7 @@ export const UNITS = [
     shortTitle: "UT4: Esquemas y vocabularios en XML (DTD y XSD)",
     ra: "RA4",
     raDescription: "Establece mecanismos de validación para documentos XML utilizando métodos para definir su sintaxis y estructura.",
-    weight: "20%",
+    weight: "21%",
     evaluation: "2ª Evaluación",
     hours: 24,
     blockCount: 12,
@@ -189,7 +190,7 @@ export const UNITS = [
     shortTitle: "UT5: Conversión y adaptación de documentos XML (XPath y XSLT)",
     ra: "RA5",
     raDescription: "Realiza conversiones sobre documentos XML utilizando técnicas y herramientas de procesamiento.",
-    weight: "20%",
+    weight: "18%",
     evaluation: "2ª y 3ª Evaluación",
     hours: 20,
     blockCount: 10,

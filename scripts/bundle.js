@@ -8,6 +8,9 @@ const curriculum = fs.readFileSync(path.join(__dirname, '../js/data/curriculum.j
 const unit1 = fs.readFileSync(path.join(__dirname, '../js/data/units/unit1.js'), 'utf8')
   .replace(/export const/g, 'const');
 
+const unit2 = fs.readFileSync(path.join(__dirname, '../js/data/units/unit2.js'), 'utf8')
+  .replace(/export const/g, 'const');
+
 const unitsOverview = fs.readFileSync(path.join(__dirname, '../js/data/units/unitsOverview.js'), 'utf8')
   .replace(/export const/g, 'const');
 
@@ -25,6 +28,8 @@ const combined = `
 ${curriculum}
 
 ${unit1}
+
+${unit2}
 
 ${unitsOverview}
 
