@@ -106,6 +106,49 @@ export class QuizEngine {
   }
 
   /**
+   * Escapa caracteres HTML para evitar que el navegador interprete etiquetas
+   */
+  static escapeHTML(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  /**
+   * Formatea texto de preguntas, opciones y explicaciones:
+   * 1. Preserva y destaca código entre comillas inversas (`código`)
+   * 2. Escapa etiquetas HTML no formateadas para que se visualicen como texto legible
+   */
+  static formatQuizText(str) {
+    if (!str) return "";
+    let raw = String(str);
+    const codeTokens = [];
+
+    // Extraer bloques de código entre backticks `...`
+    raw = raw.replace(/`([^`]+)`/g, (match, code) => {
+      const idx = codeTokens.length;
+      codeTokens.push(
+        `<code class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-700 dark:text-teal-300 font-mono text-xs font-semibold">${QuizEngine.escapeHTML(code)}</code>`
+      );
+      return `__QUIZ_CODE_${idx}__`;
+    });
+
+    // Escapar etiquetas o símbolos HTML restantes (< y >)
+    raw = QuizEngine.escapeHTML(raw);
+
+    // Restaurar los badges de código formateados
+    codeTokens.forEach((token, idx) => {
+      raw = raw.replace(`__QUIZ_CODE_${idx}__`, token);
+    });
+
+    return raw;
+  }
+
+  /**
    * Genera el HTML interactivo del cuestionario
    */
   static renderQuiz(blockId, questions, savedResult = null) {
@@ -195,7 +238,7 @@ export class QuizEngine {
               <span class="inline-block w-6 h-6 text-center text-xs font-bold leading-6 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 mr-1.5">
                 ${qIndex + 1}
               </span>
-              ${q.question}
+              ${QuizEngine.formatQuizText(q.question)}
             </h4>
             ${statusBadge}
           </div>
@@ -232,7 +275,7 @@ export class QuizEngine {
                    ${isSelected ? "checked" : ""} 
                    ${isResolved ? "disabled" : ""}
                    class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-400 border-slate-300 dark:border-slate-700">
-            <span class="flex-1">${optionText}</span>
+            <span class="flex-1">${QuizEngine.formatQuizText(optionText)}</span>
             ${
               isResolved && isThisCorrect
                 ? `<svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`
@@ -261,7 +304,7 @@ export class QuizEngine {
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               ${isCorrect ? "Explicación de acierto:" : "Explicación didáctica del fallo:"}
             </span>
-            ${q.explanation}
+            ${QuizEngine.formatQuizText(q.explanation)}
           </div>
         `;
       }

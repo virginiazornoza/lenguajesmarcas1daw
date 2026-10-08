@@ -1383,7 +1383,7 @@ class LMSGIApp {
               Objetivos de la sesión (2 Horas)
             </h3>
             <ul class="space-y-1.5 text-xs sm:text-sm text-slate-800 dark:text-slate-200">
-              ${currentBlock.objectives.map(obj => `<li class="flex items-start gap-2"><span class="text-teal-500 font-bold">&bull;</span><span>${obj}</span></li>`).join("")}
+              ${currentBlock.objectives.map(obj => `<li class="flex items-start gap-2"><span class="text-teal-500 font-bold">&bull;</span><span>${this.formatInlineCode(obj)}</span></li>`).join("")}
             </ul>
           </div>
         `
@@ -1403,7 +1403,7 @@ class LMSGIApp {
               <div class="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
                 <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-teal-500"></span>
-                  ${sec.title}
+                  ${this.formatInlineCode(sec.title)}
                 </h3>
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed">
                   ${this.formatMarkdown(sec.content)}
@@ -1416,12 +1416,12 @@ class LMSGIApp {
                     <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-800 text-xs sm:text-sm">
                       <thead class="bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-semibold">
                         <tr>
-                          ${sec.table.headers.map(h => `<th class="px-4 py-2.5 text-left">${h}</th>`).join("")}
+                          ${sec.table.headers.map(h => `<th class="px-4 py-2.5 text-left">${this.formatInlineCode(h)}</th>`).join("")}
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300">
                         ${sec.table.rows
-                          .map(row => `<tr>${row.map(cell => `<td class="px-4 py-2.5">${cell}</td>`).join("")}</tr>`)
+                          .map(row => `<tr>${row.map(cell => `<td class="px-4 py-2.5">${this.formatInlineCode(cell)}</td>`).join("")}</tr>`)
                           .join("")}
                       </tbody>
                     </table>
@@ -1489,7 +1489,7 @@ class LMSGIApp {
                 Ejercicio ${idx + 1} de ${exercises.length}
               </div>
               <h4 class="text-base font-bold text-slate-900 dark:text-slate-100 mt-0.5">
-                ${ex.title}
+                ${this.formatInlineCode(ex.title)}
               </h4>
             </div>
             
@@ -1524,7 +1524,7 @@ class LMSGIApp {
                 ? `
               <div class="bg-slate-50 dark:bg-slate-800/50 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-1">
                 <span class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-[11px] block mb-1">Tareas a realizar:</span>
-                ${ex.tasks.map(t => `<div class="flex items-start gap-1.5"><span class="text-teal-500 font-bold">&bull;</span><span>${this.escapeHTML(t)}</span></div>`).join("")}
+                ${ex.tasks.map(t => `<div class="flex items-start gap-1.5"><span class="text-teal-500 font-bold">&bull;</span><span>${this.formatInlineCode(t)}</span></div>`).join("")}
               </div>
             `
                 : ""
@@ -1557,7 +1557,7 @@ class LMSGIApp {
                   <button type="button" 
                           onclick="window.LMSGI_APP.validateEditorCode('${ex.id}')"
                           class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-lg shadow-sm transition-all flex items-center gap-1.5">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <svg class="w-4 h-4 fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Validar XML en Vivo
                   </button>
                 `
@@ -1583,7 +1583,7 @@ class LMSGIApp {
                 ex.hints
                   ? `
                 <div class="text-xs text-slate-500 dark:text-slate-400 italic">
-                  💡 Pista: ${this.escapeHTML(ex.hints)}
+                  💡 Pista: ${this.formatInlineCode(ex.hints)}
                 </div>
               `
                   : ""
@@ -1696,6 +1696,37 @@ class LMSGIApp {
   }
 
   /**
+   * Formatea cadenas cortas (títulos, objetivos formativos, celdas de tabla):
+   * Convierte código entre backticks (`codigo`) en badges visuales destacados,
+   * y escapa de forma segura cualquier etiqueta HTML no formateada (<header>, <main>, etc.)
+   * para que nunca se interpreten como nodos del DOM ni desaparezcan.
+   */
+  formatInlineCode(str) {
+    if (!str) return "";
+    let raw = String(str);
+    const codeTokens = [];
+
+    // 1. Extraer bloques de código entre backticks `...`
+    raw = raw.replace(/`([^`]+)`/g, (match, code) => {
+      const idx = codeTokens.length;
+      codeTokens.push(
+        `<code class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-700 dark:text-teal-300 font-mono text-xs font-semibold">${this.escapeHTML(code)}</code>`
+      );
+      return `__LMSGI_INLINE_CODE_${idx}__`;
+    });
+
+    // 2. Escapar etiquetas HTML no encapsuladas (< y >)
+    raw = this.escapeHTML(raw);
+
+    // 3. Restaurar los badges de código formateados
+    codeTokens.forEach((token, idx) => {
+      raw = raw.replace(`__LMSGI_INLINE_CODE_${idx}__`, token);
+    });
+
+    return raw;
+  }
+
+  /**
    * Renderizador robusto que admite tanto Markdown enriquecido como HTML nativo
    * Preserva etiquetas HTML estándar (p, ul, ol, li, strong, table, etc.)
    * y escapa de forma segura etiquetas desconocidas o de ejemplo (como <titulo>, <alumno>).
@@ -1725,7 +1756,21 @@ class LMSGIApp {
 
     // 3. Extraer y preservar etiquetas HTML estándar válidas
     const HTML_TAG_REGEX = /<\/?(p|br|hr|h[1-6]|ul|ol|li|strong|b|em|i|u|s|span|div|a|blockquote|table|thead|tbody|tr|th|td|code|pre|mark|small)(\s+[^>]*)?\/?>/gi;
-    raw = raw.replace(HTML_TAG_REGEX, (match) => {
+    raw = raw.replace(HTML_TAG_REGEX, (match, tagName) => {
+      const lowerTag = tagName.toLowerCase();
+      const isClosing = match.startsWith("</");
+      const hasAttrs = /\s+[^>]/.test(match);
+      const hasClosingTag = raw.toLowerCase().includes("</" + lowerTag + ">");
+
+      // Si es una etiqueta h1-h6, p, a, table, etc. sin atributos ni etiqueta de cierre correspondiente en el texto,
+      // es una mención de la etiqueta en la explicación didáctica; permitir que se escape en el paso 4
+      if (/^h[1-6]$/i.test(lowerTag) && !isClosing && !hasAttrs && !hasClosingTag) {
+        return match;
+      }
+      if ((lowerTag === "a" || lowerTag === "p") && !isClosing && !hasAttrs && !hasClosingTag) {
+        return match;
+      }
+
       const idx = htmlTokens.length;
       htmlTokens.push(match);
       return `__LMSGI_HTML_TAG_${idx}__`;

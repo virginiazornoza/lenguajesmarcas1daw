@@ -1192,7 +1192,7 @@ const UNIT_1_DATA = {
  * RA2: Utiliza lenguajes de marcas para la transmisión de información a través de la web, analizando la estructura de los documentos e identificando sus elementos.
  * Ponderación: 28% (Curso 2026/2027) - 32 horas lectivas (16 bloques de 2 horas en la 1ª Evaluación)
  * 
- * Diseñado conforme a la progresión didáctica oficial y al modelo de examen integrador de HTML y CSS (Cena de Navidad DAW):
+ * Diseñado conforme a la progresión didáctica oficial y al modelo de proyecto integrador de HTML y CSS (Cena de Navidad DAW):
  * - De HTML básico a formularios y semántica.
  * - De sintaxis CSS y selectores (etiqueta, clase, ID) al Modelo de Caja.
  * - Culminación en maquetación moderna con Flexbox (display: flex, justify-content, align-items, flex-direction: column).
@@ -1353,7 +1353,7 @@ const UNIT_2_DATA = {
       evaluation: "1ª Evaluación",
       ce: ["CE2b", "CE2c"],
       objectives: [
-        "Dominar la función de la cabecera técnica del documento (<head>).",
+        "Dominar la función de la cabecera técnica del documento (`<head>`).",
         "Configurar metadatos esenciales: charset, author, description y viewport.",
         "Enlazar hojas de estilo externas (<link rel=\"stylesheet\">) y el favicon corporativo."
       ],
@@ -1361,9 +1361,9 @@ const UNIT_2_DATA = {
         intro: `
           El elemento **\`<head>\`** es el cerebro invisible de un documento web. No contiene texto que el usuario lea directamente en la página, sino **metadatos**: información sobre el propio documento que utilizan el navegador, los motores de búsqueda (SEO) y las redes sociales.
           
-          En cualquier examen y proyecto profesional de DAW, la configuración pulcra del \`<head>\` es evaluable y obligatoria.
+          En cualquier proyecto profesional o prueba técnica de DAW, la configuración pulcra del \`<head>\` es evaluable y obligatoria.
           
-          > **Metadatos obligatorios en el examen de DAW**:
+          > **Metadatos obligatorios en el proyecto de DAW**:
           > * Idioma del documento: \`<html lang="es">\`
           > * Codificación: \`<meta charset="UTF-8">\`
           > * Título: \`<title>Cena de Navidad DAW 2025</title>\`
@@ -1441,7 +1441,7 @@ const UNIT_2_DATA = {
         },
         {
           id: "q-ut2-b2-2",
-          question: "En las especificaciones del examen: 'Tu nombre como autor de la página (metadato)'. ¿Cómo se codifica exactamente?",
+          question: "En las especificaciones técnicas del proyecto: 'Tu nombre como autor de la página (metadato)'. ¿Cómo se codifica exactamente?",
           options: [
             "<meta name=\"author\" content=\"Nombre del Alumno\">",
             "<author>Nombre del Alumno</author>",
@@ -1455,8 +1455,8 @@ const UNIT_2_DATA = {
       exercises: [
         {
           id: "ex-ut2-b2",
-          title: "Cabecera técnica completa del Examen de DAW",
-          description: "Configura el <head> completo para el proyecto 'Cena de Navidad DAW 2025' cumpliendo con la especificación 1 del examen.",
+          title: "Cabecera técnica completa del Proyecto Web de Navidad",
+          description: "Configura el <head> completo para el proyecto 'Cena de Navidad DAW 2025' cumpliendo con la especificación 1 del proyecto integrador.",
           initialCode: `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1505,7 +1505,7 @@ const UNIT_2_DATA = {
       ce: ["CE2b", "CE2c"],
       objectives: [
         "Reemplazar la vieja práctica del 'div-soup' por marcas semánticas nativas.",
-        "Dominar la función de <header>, <nav>, <main>, <section>, <article>, <aside> y <footer>.",
+        "Dominar la función de `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>` y `<footer>`.",
         "Comprender por qué la semántica es vital para la accesibilidad (a11y) y el SEO."
       ],
       theory: {
@@ -1523,7 +1523,7 @@ const UNIT_2_DATA = {
               * **\`<header>\`**:
                 * Representa la cabecera introductoria de la página o de una sección/artículo.
                 * Suele contener títulos (\`<h1>\`, \`<h2>\`), logotipos, eslóganes o barras de navegación.
-                * *En el examen*: Contiene el título \`<h1>Cena de Navidad DAW\` y \`<h2>Formulario de participación\` junto a la imagen navideña.
+                * *En el proyecto integrador*: Contiene el título \`<h1>Cena de Navidad DAW</h1>\` y \`<h2>Formulario de participación</h2>\` junto a la imagen navideña.
                 
               * **\`<nav>\`**:
                 * Agrupa enlaces de navegación primaria o secundaria del sitio web.
@@ -1532,16 +1532,16 @@ const UNIT_2_DATA = {
               * **\`<main>\`**:
                 * Contiene el **contenido central, único y principal** del documento.
                 * **Regla estricta**: Solo puede existir **un único elemento \`<main>\`** por página y no puede ser hijo de \`<header>\`, \`<nav>\`, \`<article>\` ni \`<footer>\`.
-                * *En el examen*: El elemento \`<main>\` contiene el formulario de la cena.
+                * *En el proyecto integrador*: El elemento \`<main>\` contiene el formulario de la cena.
                 
               * **\`<footer>\`**:
                 * Pie de página del documento o sección.
                 * Contiene información de autoría, derechos de autor (*copyright*), enlaces legales y fecha.
-                * *En el examen*: Contiene el autor, la fecha y el enlace a la web de ideas navideñas.
+                * *En el proyecto integrador*: Contiene el autor, la fecha y el enlace a la web de ideas navideñas.
             `
           },
           {
-            title: "2. Secciones de contenido: <article>, <section> y <aside>",
+            title: "2. Secciones de contenido: `<article>`, `<section>` y `<aside>`",
             content: `
               * **\`<article>\`**:
                 * Representa una unidad de contenido **autocontenida e independiente**, que tendría sentido por sí misma si se distribuyera aisladamente (por ejemplo, en un canal RSS o agregador).
@@ -1618,8 +1618,8 @@ const UNIT_2_DATA = {
       exercises: [
         {
           id: "ex-ut2-b3",
-          title: "Estructura semántica del examen: Header, Main y Footer",
-          description: "Construye el esqueleto semántico del examen 'Cena de Navidad' cumpliendo con la jerarquía de etiquetas estructurales.",
+          title: "Estructura semántica del Proyecto: Header, Main y Footer",
+          description: "Construye el esqueleto semántico del proyecto 'Cena de Navidad' cumpliendo con la jerarquía de etiquetas estructurales.",
           initialCode: `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1683,7 +1683,7 @@ const UNIT_2_DATA = {
       objectives: [
         "Aplicar correctamente la jerarquía de encabezados (h1 a h6).",
         "Diferenciar entre enlaces absolutos y relativos, y dominar el atributo target=\"_blank\".",
-        "Insertar imágenes accesibles con <img>, especificando dimensiones y texto alternativo (alt)."
+        "Insertar imágenes accesibles con `<img>`, especificando dimensiones y texto alternativo (`alt`)."
       ],
       theory: {
         intro: `
@@ -1712,7 +1712,7 @@ const UNIT_2_DATA = {
             `
           },
           {
-            title: "2. Hiperenlaces: La esencia de la Web (<a>)",
+            title: "2. Hiperenlaces: La esencia de la Web (`<a>`)",
             content: `
               La etiqueta \`<a>\` (*anchor*) crea hipervínculos hacia otros documentos, secciones o recursos:
               
@@ -1730,7 +1730,7 @@ const UNIT_2_DATA = {
             `
           },
           {
-            title: "3. Imágenes accesibles con <img>",
+            title: "3. Imágenes accesibles con `<img>`",
             content: `
               La etiqueta \`<img>\` es un elemento vacío (*void*) que incrusta un mapa de bits o vector:
               
@@ -1780,7 +1780,7 @@ const UNIT_2_DATA = {
         {
           id: "ex-ut2-b4",
           title: "Cabecera con imagen y Footer con enlace externo",
-          description: "Implementa la cabecera con la imagen navideña de 70x70px y el pie de página con el enlace a https://www.navidad.es tal y como pide el examen.",
+          description: "Implementa la cabecera con la imagen navideña de 70x70px y el pie de página con el enlace a https://www.navidad.es tal y como pide la especificación del proyecto.",
           initialCode: `<header>
   <div class="titulos-header">
     <h1>Cena de Navidad DAW</h1>
@@ -1832,8 +1832,8 @@ const UNIT_2_DATA = {
       evaluation: "1ª Evaluación",
       ce: ["CE2c"],
       objectives: [
-        "Construir listas desordenadas (<ul>) y listas ordenadas (<ol>).",
-        "Implementar listas de descripción (<dl>, <dt>, <dd>) para glosarios y fichas técnicas.",
+        "Construir listas desordenadas (`<ul>`) y listas ordenadas (`<ol>`).",
+        "Implementar listas de descripción (`<dl>`, `<dt>`, `<dd>`) para glosarios y fichas técnicas.",
         "Anidar listas de forma semánticamente válida para barras de navegación."
       ],
       theory: {
@@ -1842,7 +1842,7 @@ const UNIT_2_DATA = {
         `,
         sections: [
           {
-            title: "1. Listas desordenadas (<ul>) y ordenadas (<ol>)",
+            title: "1. Listas desordenadas (`<ul>`) y ordenadas (`<ol>`)",
             content: `
               * **Listas desordenadas (\`<ul>\`)**:
                 * Se utilizan cuando el orden de los elementos no altera su significado.
@@ -1864,7 +1864,7 @@ const UNIT_2_DATA = {
             `
           },
           {
-            title: "2. Listas de descripción (<dl>, <dt>, <dd>)",
+            title: "2. Listas de descripción (`<dl>`, `<dt>`, `<dd>`)",
             content: `
               A menudo necesitamos representar pares de **término y definición**, o pares clave-valor (por ejemplo, especificaciones de un producto o glosarios técnicos):
               
@@ -1942,7 +1942,7 @@ const UNIT_2_DATA = {
       ce: ["CE2c"],
       objectives: [
         "Comprender la regla de oro: tablas exclusivamente para datos tabulares, nunca para maquetar.",
-        "Construir tablas semánticas completas con <caption>, <thead>, <tbody> y <tfoot>.",
+        "Construir tablas semánticas completas con `<caption>`, `<thead>`, `<tbody>` y `<tfoot>`.",
         "Dominar la combinación de celdas mediante colspan (horizontal) y rowspan (vertical)."
       ],
       theory: {
@@ -2083,7 +2083,7 @@ const UNIT_2_DATA = {
       evaluation: "1ª Evaluación",
       ce: ["CE2c"],
       objectives: [
-        "Construir formularios accesibles con la etiqueta <form>.",
+        "Construir formularios accesibles con la etiqueta `<form>`.",
         "Diferenciar entre los métodos HTTP GET y POST.",
         "Vincular etiquetas <label for=\"id\"> con campos de texto (<input type=\"text\">), radio buttons y checkboxes."
       ],
@@ -2091,11 +2091,11 @@ const UNIT_2_DATA = {
         intro: `
           Los **formularios web** constituyen el canal de comunicación interactivo por excelencia entre el usuario y el servidor. Mediante formularios, un usuario se autentica, compra productos o responde a encuestas.
           
-          En este bloque aprenderás a construir los elementos requeridos en las especificaciones 3, 4 y 5 del examen oficial: el envío mediante método POST, campos de texto con longitud máxima, radio buttons agrupados y casillas de verificación.
+          En este bloque aprenderás a construir los elementos requeridos en las especificaciones 3, 4 y 5 del proyecto integrador: el envío mediante método POST, campos de texto con longitud máxima, radio buttons agrupados y casillas de verificación.
         `,
         sections: [
           {
-            title: "1. La etiqueta <form>: action y method (GET vs POST)",
+            title: "1. La etiqueta `<form>`: action y method (GET vs POST)",
             content: `
               El contenedor principal es \`<form>\`:
               
@@ -2109,7 +2109,7 @@ const UNIT_2_DATA = {
                   * *Uso*: Consultas, filtros y búsquedas que pueden guardarse en marcadores.
                   * *Peligro*: **Nunca usar para contraseñas ni datos sensibles**.
                 * **\`POST\`**: Los datos viajan ocultos en el cuerpo (*body*) de la petición HTTP.
-                  * *Uso*: Envío de formularios con cambios de estado, contraseñas, subida de ficheros y peticiones del examen (\`method="post"\`).
+                  * *Uso*: Envío de formularios con cambios de estado, contraseñas, subida de ficheros y peticiones del proyecto (\`method="post"\`).
             `
           },
           {
@@ -2124,7 +2124,7 @@ const UNIT_2_DATA = {
               
               * **\`id\`**: Identificador único en el documento. Sirve para enlazar el \`<label for="nombre">\` y para aplicar estilos CSS o JavaScript. Al hacer clic en el texto del label, el cursor salta automáticamente al campo.
               * **\`name\`**: **La clave que recibe el servidor**. Si un input no tiene atributo \`name\`, el navegador **no envía ese dato al pulsar enviar**.
-              * **\`maxlength="50"\`**: Limita la entrada a un máximo de 50 caracteres (especificación 5 del examen).
+              * **\`maxlength="50"\`**: Limita la entrada a un máximo de 50 caracteres (especificación 5 del proyecto).
             `
           },
           {
@@ -2176,7 +2176,7 @@ const UNIT_2_DATA = {
         },
         {
           id: "q-ut2-b7-2",
-          question: "¿Qué atributo de `<input type=\"text\">` restringe la longitud a un máximo de 50 caracteres según el examen?",
+          question: "¿Qué atributo de `<input type=\"text\">` restringe la longitud a un máximo de 50 caracteres según el proyecto?",
           options: [
             "length=\"50\"",
             "maxlength=\"50\"",
@@ -2190,7 +2190,7 @@ const UNIT_2_DATA = {
       exercises: [
         {
           id: "ex-ut2-b7",
-          title: "Primer bloque del formulario del examen: Datos del asistente",
+          title: "Primer bloque del formulario del proyecto: Datos del asistente",
           description: "Construye el bloque 1 del formulario con h3, label, input de texto con maxlength=\"50\" y los 3 radio buttons.",
           initialCode: `<form action="procesar_cena.php" method="post">
   <!-- Construye aquí la 1ª parte del formulario -->
@@ -2250,7 +2250,7 @@ const UNIT_2_DATA = {
         `,
         sections: [
           {
-            title: "1. Áreas de texto multilínea (<textarea>)",
+            title: "1. Áreas de texto multilínea (`<textarea>`)",
             content: `
               A diferencia de \`<input>\`, la etiqueta \`<textarea>\` **no es un elemento vacío**; tiene etiqueta de apertura y de cierre:
               
@@ -2259,7 +2259,7 @@ const UNIT_2_DATA = {
               <textarea id="comentarios" name="comentarios" rows="5">Observaciones</textarea>
               \`\`\`
               
-              * **\`rows="5"\`**: Define la altura visible inicial en número de líneas de texto (especificación 6 del examen).
+              * **\`rows="5"\`**: Define la altura visible inicial en número de líneas de texto (especificación 6 del proyecto).
               * **\`cols="30"\`**: Define la anchura visible inicial en número medio de caracteres por línea (aunque en diseño moderno se suele controlar con CSS: \`width: 100%\`).
               * El texto inicial se coloca **entre la etiqueta de apertura y la de cierre**: cualquier espacio o salto de línea entre \`<textarea>\` y \`</textarea>\` se mostrará literalmente al usuario.
             `
@@ -2267,7 +2267,7 @@ const UNIT_2_DATA = {
           {
             title: "2. Botones de acción: submit y reset",
             content: `
-              En el examen oficial se solicita expresamente: *"3ª parte: 2 botones, submit y reset. Centrados, bordes redondeados. Otro color en hover"*:
+              En los requisitos técnicos del proyecto se solicita expresamente: *"3ª parte: 2 botones, submit y reset. Centrados, bordes redondeados. Otro color en hover"*:
               
               \`\`\`html
               <div class="botones-form">
@@ -2367,9 +2367,9 @@ const UNIT_2_DATA = {
       evaluation: "1ª Evaluación",
       ce: ["CE2c"],
       objectives: [
-        "Incrustar vídeo nativo con <video>, controles y múltiples fuentes <source>.",
-        "Reproducir audio accesible con <audio>.",
-        "Integrar contenido externo seguro mediante <iframe> con sandboxing."
+        "Incrustar vídeo nativo con `<video>`, controles y múltiples fuentes `<source>`.",
+        "Reproducir audio accesible con `<audio>`.",
+        "Integrar contenido externo seguro mediante `<iframe>` con sandboxing."
       ],
       theory: {
         intro: `
@@ -2379,7 +2379,7 @@ const UNIT_2_DATA = {
         `,
         sections: [
           {
-            title: "1. Reproducción de vídeo nativo con <video>",
+            title: "1. Reproducción de vídeo nativo con `<video>`",
             content: `
               \`\`\`html
               <video controls width="640" height="360" poster="img/caratula.jpg">
@@ -2395,7 +2395,7 @@ const UNIT_2_DATA = {
             `
           },
           {
-            title: "2. Incrustaciones externas seguras con <iframe>",
+            title: "2. Incrustaciones externas seguras con `<iframe>`",
             content: `
               Un \`<iframe>\` (*inline frame*) permite incrustar otro documento HTML independiente dentro de la página actual (por ejemplo, un mapa de Google Maps o un vídeo de YouTube):
               
@@ -2457,14 +2457,14 @@ const UNIT_2_DATA = {
       ce: ["CE2g", "CE2h"],
       objectives: [
         "Comprender la separación de capas: estructura (HTML) frente a presentación (CSS).",
-        "Comparar formas de inclusión: externa (<link>), interna (<style>) y en línea (style=).",
+        "Comparar formas de inclusión: externa (`<link>`), interna (`<style>`) y en línea (`style=`).",
         "Dominar los selectores elementales: de etiqueta, de clase (.) y de identificador (#)."
       ],
       theory: {
         intro: `
           **CSS** (*Cascading Style Sheets* - Hojas de Estilo en Cascada) es el lenguaje que dota de vida, color, tipografía y distribución espacial al esqueleto HTML.
           
-          En la especificación 9 del examen se exige taxativamente: *"En CSS se hace uso de selectores a nivel de identificador, de clase y de etiqueta"*. En este bloque dominarás con precisión quirúrgica cada uno de estos selectores.
+          En la especificación 9 del proyecto integrador se exige taxativamente: *"En CSS se hace uso de selectores a nivel de identificador, de clase y de etiqueta"*. En este bloque dominarás con precisión quirúrgica cada uno de estos selectores.
         `,
         sections: [
           {
@@ -2476,7 +2476,7 @@ const UNIT_2_DATA = {
                  
               2. **Hoja de estilos interna (\`<style>\`)**:
                  * Las reglas CSS se escriben dentro de la etiqueta \`<style>\` en el \`<head>\` de la página.
-                 * Muy habitual en ejercicios, pruebas rápidas y en el propio examen oficial.
+                 * Muy habitual en ejercicios, pruebas rápidas y en el propio proyecto integrador.
                  
               3. **Estilos en línea (\`style="..."\`)**:
                  * Se escriben directamente como atributo de una etiqueta HTML: \`<p style="color: red;">\`.
@@ -2498,7 +2498,7 @@ const UNIT_2_DATA = {
             `
           },
           {
-            title: "3. Los 3 selectores esenciales del Examen",
+            title: "3. Los 3 selectores esenciales del Proyecto",
             content: `
               * **1. Selector de Tipo o Etiqueta**:
                 * Apunta a todos los elementos HTML con ese nombre de etiqueta.
@@ -2576,8 +2576,8 @@ const UNIT_2_DATA = {
       exercises: [
         {
           id: "ex-ut2-b10",
-          title: "Selectores de etiqueta, clase e ID del examen",
-          description: "Aplica las reglas CSS básicas solicitadas en el examen combinando selectores de etiqueta, clase e identificador.",
+          title: "Selectores de etiqueta, clase e ID del proyecto",
+          description: "Aplica las reglas CSS básicas solicitadas en el proyecto combinando selectores de etiqueta, clase e identificador.",
           initialCode: `<style>
   /* Escribe aquí las reglas CSS */
 </style>
@@ -2648,7 +2648,7 @@ const UNIT_2_DATA = {
               * Se compara de izquierda a derecha. Un solo ID \`(0, 1, 0, 0)\` gana a cualquier cantidad de clases \`(0, 0, 99, 0)\`.
               * Si dos reglas tienen idéntica especificidad, **gana la última escrita en el archivo CSS** (orden de aparición).
               
-              *Ejemplos prácticos del examen*:
+              *Ejemplos prácticos del proyecto integrador*:
               * \`textarea\` &rarr; \`(0, 0, 0, 1)\`
               * \`.bloque-form textarea\` &rarr; \`(0, 0, 1, 1)\`
               * \`#observaciones textarea\` &rarr; \`(0, 1, 0, 1)\` &larr; **¡GANA este selector!**
@@ -2753,7 +2753,7 @@ const UNIT_2_DATA = {
               
               *Notación abreviada (Shorthand)*:
               * 1 valor: \`padding: 15px;\` (aplica a los 4 lados por igual).
-              * 2 valores: \`margin: 0 30px;\` (0 arriba/abajo, 30px izquierda/derecha, como en el \`body\` del examen).
+              * 2 valores: \`margin: 0 30px;\` (0 arriba/abajo, 30px izquierda/derecha, como en el \`body\` del proyecto).
               * 4 valores (sentido horario: arriba, derecha, abajo, izquierda): \`margin: 5px 0 0 0;\` (usado en \`.titulos-header h2\`).
             `
           },
@@ -2772,7 +2772,7 @@ const UNIT_2_DATA = {
           {
             title: "3. Bordes y esquinas redondeadas: border-radius",
             content: `
-              En el examen se especifica:
+              En las especificaciones del proyecto se detalla:
               * Bloques de formulario: \`.bloque-form { border-radius: 10px; padding: 15px; }\`
               * Botones con esquinas redondeadas y sin borde por defecto:
                 \`\`\`css
@@ -2816,7 +2816,7 @@ const UNIT_2_DATA = {
         {
           id: "ex-ut2-b12",
           title: "Estilizado de los bloques de formulario y botones",
-          description: "Aplica las dimensiones, bordes redondeados y rellenos del examen a los bloques de formulario y botones.",
+          description: "Aplica las dimensiones, bordes redondeados y rellenos del proyecto a los bloques de formulario y botones.",
           initialCode: `<style>
   /* Define aquí los estilos para .bloque-form y .botones-form input */
 </style>
@@ -2853,7 +2853,7 @@ const UNIT_2_DATA = {
 <div class="botones-form">
   <input type="submit" value="Enviar">
 </div>`,
-          hints: "El radio de borde de 10px en .bloque-form y 5px en los botones cumple con las especificaciones 4 y 7 del examen."
+          hints: "El radio de borde de 10px en .bloque-form y 5px en los botones cumple con las especificaciones 4 y 7 del proyecto integrador."
         }
       ]
     },
@@ -2882,7 +2882,7 @@ const UNIT_2_DATA = {
           {
             title: "1. Tipografía y pila de fuentes seguras",
             content: `
-              En el examen se requiere:
+              En las especificaciones del proyecto se requiere:
               \`\`\`css
               body {
                 font-family: Verdana, sans-serif;
@@ -2894,9 +2894,9 @@ const UNIT_2_DATA = {
             `
           },
           {
-            title: "2. Paleta cromática oficial del examen",
+            title: "2. Paleta cromática oficial del proyecto integrador",
             content: `
-              El examen utiliza un esquema cromático navideño y funcional:
+              El proyecto utiliza un esquema cromático navideño y funcional:
               * **Rojo institucional**: \`#c62828\` (para el fondo del \`header\` y \`footer\`).
               * **Verde abeto**: \`#2e7d32\` (para el fondo de los dos bloques del formulario).
               * **Blanco nieve**: \`#fff\` y \`#faf5f2\` (para textos y contraste sobre fondos oscuros).
@@ -2919,7 +2919,7 @@ const UNIT_2_DATA = {
                 transition: background-color 0.2s;
               }
 
-              /* Estado al pasar el ratón por encima (especificación 7 del examen) */
+              /* Estado al pasar el ratón por encima (especificación 7 del proyecto) */
               .botones-form input:hover {
                 background-color: #ffc107;
               }
@@ -2945,8 +2945,8 @@ const UNIT_2_DATA = {
       exercises: [
         {
           id: "ex-ut2-b13",
-          title: "Efecto Hover en los botones del examen",
-          description: "Aplica los colores oficiales del examen y el cambio de color en hover a la botonera.",
+          title: "Efecto Hover en los botones del proyecto",
+          description: "Aplica los colores del proyecto integrador y el cambio de color en hover a la botonera.",
           initialCode: `<style>
   /* Define el botón y su estado hover */
 </style>
@@ -3027,7 +3027,7 @@ const UNIT_2_DATA = {
           {
             title: "2. El gran reto histórico: Colocar dos cajas al 50% lado a lado",
             content: `
-              En el examen se requiere: *"El formulario está dividido en 3 partes. Las 2 primeras partes, quedan alineadas, y ocupan cada una el 50%"*.
+              En las especificaciones del proyecto se requiere: *"El formulario está dividido en 3 partes. Las 2 primeras partes, quedan alineadas, y ocupan cada una el 50%"*.
               
               Si intentas hacer esto con cajas de bloque normales, aunque les pongas \`width: 50%\`, la segunda caja se colocará **debajo** de la primera debido al salto de línea forzado de los bloques.
               
@@ -3107,13 +3107,13 @@ const UNIT_2_DATA = {
       objectives: [
         "Activar el modelo Flexbox mediante display: flex.",
         "Dominar los dos ejes de Flexbox: Eje Principal (Main Axis) y Eje Transversal (Cross Axis).",
-        "Alinear elementos con justify-content: space-between y align-items: center conforme al examen."
+        "Alinear elementos con justify-content: space-between y align-items: center conforme a las especificaciones técnicas."
       ],
       theory: {
         intro: `
           **Flexbox** (*Flexible Box Layout*) es el estándar definitivo de CSS3 para maquetar interfaces unidimensionales. Resuelve de forma elegante el centrado vertical, la distribución equitativa del espacio y la alineación de columnas.
           
-          En este bloque aprenderás a implementar exactamente las especificaciones 2 y 4 del examen oficial.
+          En este bloque aprenderás a implementar exactamente las especificaciones 2 y 4 del proyecto integrador.
         `,
         sections: [
           {
@@ -3132,8 +3132,8 @@ const UNIT_2_DATA = {
               
               * **\`space-between\`**:
                 * El primer elemento se pega al borde izquierdo absoluto y el último al borde derecho absoluto. El espacio sobrante se reparte equitativamente entre los elementos intermedios.
-                * *En el examen (especificación 2)*: \`header { display: flex; justify-content: space-between; align-items: center; }\`. Hace que los títulos queden a la izquierda y la imagen navideña pegada al extremo derecho.
-                * *En el examen (especificación 4)*: \`form { display: flex; justify-content: space-between; gap: 20px; }\`. Hace que los dos bloques del formulario queden alineados lado a lado ocupando el 50% cada uno.
+                * *En el proyecto (especificación 2)*: \`header { display: flex; justify-content: space-between; align-items: center; }\`. Hace que los títulos queden a la izquierda y la imagen navideña pegada al extremo derecho.
+                * *En el proyecto (especificación 4)*: \`form { display: flex; justify-content: space-between; gap: 20px; }\`. Hace que los dos bloques del formulario queden alineados lado a lado ocupando el 50% cada uno.
                 
               * Otros valores habituales:
                 * \`center\`: Centra todos los elementos en el medio.
@@ -3148,7 +3148,7 @@ const UNIT_2_DATA = {
               
               * **\`center\`**:
                 * Centra los elementos verticalmente respecto a la línea media del contenedor.
-                * *En el examen*: En el \`<header>\`, los títulos y la imagen de 70x70px quedan centrados verticalmente de forma impecable sin necesidad de márgenes forzados.
+                * *En el proyecto*: En el \`<header>\`, los títulos y la imagen de 70x70px quedan centrados verticalmente de forma impecable sin necesidad de márgenes forzados.
               * **\`stretch\`** (valor por defecto): Las cajas hijas se estiran para ocupar la misma altura total que la caja más alta.
             `
           }
@@ -3157,7 +3157,7 @@ const UNIT_2_DATA = {
       quiz: [
         {
           id: "q-ut2-b15-1",
-          question: "En la especificación 2 del examen: 'Header: modo alineado horizontal: space-between. Modo alineado vertical: center'. ¿Qué código CSS cumple esta instrucción?",
+          question: "En la especificación 2 del proyecto: 'Header: modo alineado horizontal: space-between. Modo alineado vertical: center'. ¿Qué código CSS cumple esta instrucción?",
           options: [
             "header { display: flex; justify-content: space-between; align-items: center; }",
             "header { text-align: space-between; vertical-align: middle; }",
@@ -3234,19 +3234,19 @@ const UNIT_2_DATA = {
     {
       id: "ut2-b16",
       blockNumber: 16,
-      title: "Maquetación con Flexbox II: Dirección en columna y Caso Práctico Integrador del Examen",
+      title: "Maquetación con Flexbox II: Dirección en columna y Caso Práctico Integrador",
       duration: "2 horas",
       session: "Sesión 16",
       evaluation: "1ª Evaluación",
       ce: ["CE2c", "CE2g", "CE2h"],
       objectives: [
         "Dominar la propiedad flex-direction: column para apilar elementos en vertical dentro de Flexbox.",
-        "Integrar paso a paso todos los requisitos técnicos de la rúbrica oficial del examen (Cena de Navidad DAW).",
+        "Integrar paso a paso todos los requisitos técnicos de la rúbrica del proyecto integrador (Cena de Navidad DAW).",
         "Validar y depurar la página completa con HTML5 semántico y CSS3 con Flexbox, con código comentado."
       ],
       theory: {
         intro: `
-          Llegamos a la sesión culminante de la Unidad de Trabajo 2. En este bloque aprenderás a cambiar la dirección del eje flexible mediante **\`flex-direction: column\`** (requerido para los radio buttons de opciones de plato) y construiremos juntos el **examen oficial íntegro paso a paso**.
+          Llegamos a la sesión culminante de la Unidad de Trabajo 2. En este bloque aprenderás a cambiar la dirección del eje flexible mediante **\`flex-direction: column\`** (requerido para los radio buttons de opciones de plato) y construiremos juntos el **proyecto integrador completo paso a paso**.
           
           Al finalizar esta sesión, dominarás con soltura el 100% de los criterios de evaluación del RA2.
         `,
@@ -3264,13 +3264,13 @@ const UNIT_2_DATA = {
                 flex-direction: column;
               }
               \`\`\`
-              * En el examen (especificación 5): *"Párrafo y 3 input radio en columna con opciones"*. Con \`flex-direction: column\`, cada \`<label>\` que contiene un radio button se sitúa en una línea vertical propia, logrando una presentación clara y limpia.
+              * En el proyecto (especificación 5): *"Párrafo y 3 input radio en columna con opciones"*. Con \`flex-direction: column\`, cada \`<label>\` que contiene un radio button se sitúa en una línea vertical propia, logrando una presentación clara y limpia.
             `
           },
           {
-            title: "2. Rúbrica Oficial del Examen Desglosada (10 Puntos)",
+            title: "2. Rúbrica del Proyecto Integrador Desglosada (10 Puntos)",
             content: `
-              Repasemos las 11 especificaciones técnicas del examen oficial de Diciembre 2025:
+              Repasemos las 11 especificaciones técnicas del proyecto integrador (Cena Navideña DAW):
               
               | Nº | Especificación Técnica | Puntuación |
               |:---|:---|:---:|
@@ -3285,7 +3285,7 @@ const UNIT_2_DATA = {
               | **9** | En CSS: uso de selectores de identificador (\`#\`), de clase (\`.\`) y de etiqueta | 1.0 p |
               | **10** | Aspecto visual fiel a la ilustración (espaciados, colores y dimensiones respetadas) | 1.5 p |
               | **11** | Código comentado pedagógicamente (\`<!-- ... -->\` y \`/* ... */\`) | 0.25 p |
-              | **TOTAL** | **Calificación Máxima Oficial del Examen de RA2** | **10 PUNTOS** |
+              | **TOTAL** | **Calificación Máxima del Proyecto Integrador de RA2** | **10 PUNTOS** |
             `
           },
           {
@@ -3458,7 +3458,7 @@ const UNIT_2_DATA = {
         },
         {
           id: "q-ut2-b16-2",
-          question: "En el examen, ¿por qué los botones submit y reset están situados fuera de las dos columnas del 50%?",
+          question: "En el proyecto integrador, ¿por qué los botones submit y reset están situados fuera de las dos columnas del 50%?",
           options: [
             "Porque representan la 3ª parte del formulario y deben aparecer debajo de ambas columnas centrados en la pantalla.",
             "Porque submit no funciona dentro de un contenedor flex.",
@@ -3472,8 +3472,8 @@ const UNIT_2_DATA = {
       exercises: [
         {
           id: "ex-ut2-b16",
-          title: "Proyecto Integrador del Examen Oficial (Cena de Navidad DAW)",
-          description: "Desarrolla la página completa de la Cena de Navidad DAW con HTML5 semántico y CSS3 con Flexbox, cumpliendo las 11 especificaciones oficiales del examen.",
+          title: "Proyecto Integrador de Maquetación Web (Cena de Navidad DAW)",
+          description: "Desarrolla la página completa de la Cena de Navidad DAW con HTML5 semántico y CSS3 con Flexbox, cumpliendo las 11 especificaciones técnicas del proyecto integrador.",
           initialCode: `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -4784,6 +4784,49 @@ class QuizEngine {
   }
 
   /**
+   * Escapa caracteres HTML para evitar que el navegador interprete etiquetas
+   */
+  static escapeHTML(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  /**
+   * Formatea texto de preguntas, opciones y explicaciones:
+   * 1. Preserva y destaca código entre comillas inversas (`código`)
+   * 2. Escapa etiquetas HTML no formateadas para que se visualicen como texto legible
+   */
+  static formatQuizText(str) {
+    if (!str) return "";
+    let raw = String(str);
+    const codeTokens = [];
+
+    // Extraer bloques de código entre backticks `...`
+    raw = raw.replace(/`([^`]+)`/g, (match, code) => {
+      const idx = codeTokens.length;
+      codeTokens.push(
+        `<code class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-700 dark:text-teal-300 font-mono text-xs font-semibold">${QuizEngine.escapeHTML(code)}</code>`
+      );
+      return `__QUIZ_CODE_${idx}__`;
+    });
+
+    // Escapar etiquetas o símbolos HTML restantes (< y >)
+    raw = QuizEngine.escapeHTML(raw);
+
+    // Restaurar los badges de código formateados
+    codeTokens.forEach((token, idx) => {
+      raw = raw.replace(`__QUIZ_CODE_${idx}__`, token);
+    });
+
+    return raw;
+  }
+
+  /**
    * Genera el HTML interactivo del cuestionario
    */
   static renderQuiz(blockId, questions, savedResult = null) {
@@ -4873,7 +4916,7 @@ class QuizEngine {
               <span class="inline-block w-6 h-6 text-center text-xs font-bold leading-6 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 mr-1.5">
                 ${qIndex + 1}
               </span>
-              ${q.question}
+              ${QuizEngine.formatQuizText(q.question)}
             </h4>
             ${statusBadge}
           </div>
@@ -4910,7 +4953,7 @@ class QuizEngine {
                    ${isSelected ? "checked" : ""} 
                    ${isResolved ? "disabled" : ""}
                    class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-400 border-slate-300 dark:border-slate-700">
-            <span class="flex-1">${optionText}</span>
+            <span class="flex-1">${QuizEngine.formatQuizText(optionText)}</span>
             ${
               isResolved && isThisCorrect
                 ? `<svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`
@@ -4939,7 +4982,7 @@ class QuizEngine {
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               ${isCorrect ? "Explicación de acierto:" : "Explicación didáctica del fallo:"}
             </span>
-            ${q.explanation}
+            ${QuizEngine.formatQuizText(q.explanation)}
           </div>
         `;
       }
@@ -6349,7 +6392,7 @@ class LMSGIApp {
               Objetivos de la sesión (2 Horas)
             </h3>
             <ul class="space-y-1.5 text-xs sm:text-sm text-slate-800 dark:text-slate-200">
-              ${currentBlock.objectives.map(obj => `<li class="flex items-start gap-2"><span class="text-teal-500 font-bold">&bull;</span><span>${obj}</span></li>`).join("")}
+              ${currentBlock.objectives.map(obj => `<li class="flex items-start gap-2"><span class="text-teal-500 font-bold">&bull;</span><span>${this.formatInlineCode(obj)}</span></li>`).join("")}
             </ul>
           </div>
         `
@@ -6369,7 +6412,7 @@ class LMSGIApp {
               <div class="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
                 <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-teal-500"></span>
-                  ${sec.title}
+                  ${this.formatInlineCode(sec.title)}
                 </h3>
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed">
                   ${this.formatMarkdown(sec.content)}
@@ -6382,12 +6425,12 @@ class LMSGIApp {
                     <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-800 text-xs sm:text-sm">
                       <thead class="bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-semibold">
                         <tr>
-                          ${sec.table.headers.map(h => `<th class="px-4 py-2.5 text-left">${h}</th>`).join("")}
+                          ${sec.table.headers.map(h => `<th class="px-4 py-2.5 text-left">${this.formatInlineCode(h)}</th>`).join("")}
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300">
                         ${sec.table.rows
-                          .map(row => `<tr>${row.map(cell => `<td class="px-4 py-2.5">${cell}</td>`).join("")}</tr>`)
+                          .map(row => `<tr>${row.map(cell => `<td class="px-4 py-2.5">${this.formatInlineCode(cell)}</td>`).join("")}</tr>`)
                           .join("")}
                       </tbody>
                     </table>
@@ -6455,7 +6498,7 @@ class LMSGIApp {
                 Ejercicio ${idx + 1} de ${exercises.length}
               </div>
               <h4 class="text-base font-bold text-slate-900 dark:text-slate-100 mt-0.5">
-                ${ex.title}
+                ${this.formatInlineCode(ex.title)}
               </h4>
             </div>
             
@@ -6490,7 +6533,7 @@ class LMSGIApp {
                 ? `
               <div class="bg-slate-50 dark:bg-slate-800/50 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-1">
                 <span class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-[11px] block mb-1">Tareas a realizar:</span>
-                ${ex.tasks.map(t => `<div class="flex items-start gap-1.5"><span class="text-teal-500 font-bold">&bull;</span><span>${this.escapeHTML(t)}</span></div>`).join("")}
+                ${ex.tasks.map(t => `<div class="flex items-start gap-1.5"><span class="text-teal-500 font-bold">&bull;</span><span>${this.formatInlineCode(t)}</span></div>`).join("")}
               </div>
             `
                 : ""
@@ -6523,7 +6566,7 @@ class LMSGIApp {
                   <button type="button" 
                           onclick="window.LMSGI_APP.validateEditorCode('${ex.id}')"
                           class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-lg shadow-sm transition-all flex items-center gap-1.5">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <svg class="w-4 h-4 fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Validar XML en Vivo
                   </button>
                 `
@@ -6549,7 +6592,7 @@ class LMSGIApp {
                 ex.hints
                   ? `
                 <div class="text-xs text-slate-500 dark:text-slate-400 italic">
-                  💡 Pista: ${this.escapeHTML(ex.hints)}
+                  💡 Pista: ${this.formatInlineCode(ex.hints)}
                 </div>
               `
                   : ""
@@ -6662,6 +6705,37 @@ class LMSGIApp {
   }
 
   /**
+   * Formatea cadenas cortas (títulos, objetivos formativos, celdas de tabla):
+   * Convierte código entre backticks (`codigo`) en badges visuales destacados,
+   * y escapa de forma segura cualquier etiqueta HTML no formateada (<header>, <main>, etc.)
+   * para que nunca se interpreten como nodos del DOM ni desaparezcan.
+   */
+  formatInlineCode(str) {
+    if (!str) return "";
+    let raw = String(str);
+    const codeTokens = [];
+
+    // 1. Extraer bloques de código entre backticks `...`
+    raw = raw.replace(/`([^`]+)`/g, (match, code) => {
+      const idx = codeTokens.length;
+      codeTokens.push(
+        `<code class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-700 dark:text-teal-300 font-mono text-xs font-semibold">${this.escapeHTML(code)}</code>`
+      );
+      return `__LMSGI_INLINE_CODE_${idx}__`;
+    });
+
+    // 2. Escapar etiquetas HTML no encapsuladas (< y >)
+    raw = this.escapeHTML(raw);
+
+    // 3. Restaurar los badges de código formateados
+    codeTokens.forEach((token, idx) => {
+      raw = raw.replace(`__LMSGI_INLINE_CODE_${idx}__`, token);
+    });
+
+    return raw;
+  }
+
+  /**
    * Renderizador robusto que admite tanto Markdown enriquecido como HTML nativo
    * Preserva etiquetas HTML estándar (p, ul, ol, li, strong, table, etc.)
    * y escapa de forma segura etiquetas desconocidas o de ejemplo (como <titulo>, <alumno>).
@@ -6691,7 +6765,21 @@ class LMSGIApp {
 
     // 3. Extraer y preservar etiquetas HTML estándar válidas
     const HTML_TAG_REGEX = /<\/?(p|br|hr|h[1-6]|ul|ol|li|strong|b|em|i|u|s|span|div|a|blockquote|table|thead|tbody|tr|th|td|code|pre|mark|small)(\s+[^>]*)?\/?>/gi;
-    raw = raw.replace(HTML_TAG_REGEX, (match) => {
+    raw = raw.replace(HTML_TAG_REGEX, (match, tagName) => {
+      const lowerTag = tagName.toLowerCase();
+      const isClosing = match.startsWith("</");
+      const hasAttrs = /\s+[^>]/.test(match);
+      const hasClosingTag = raw.toLowerCase().includes("</" + lowerTag + ">");
+
+      // Si es una etiqueta h1-h6, p, a, table, etc. sin atributos ni etiqueta de cierre correspondiente en el texto,
+      // es una mención de la etiqueta en la explicación didáctica; permitir que se escape en el paso 4
+      if (/^h[1-6]$/i.test(lowerTag) && !isClosing && !hasAttrs && !hasClosingTag) {
+        return match;
+      }
+      if ((lowerTag === "a" || lowerTag === "p") && !isClosing && !hasAttrs && !hasClosingTag) {
+        return match;
+      }
+
       const idx = htmlTokens.length;
       htmlTokens.push(match);
       return `__LMSGI_HTML_TAG_${idx}__`;
