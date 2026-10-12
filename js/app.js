@@ -13,7 +13,7 @@
 
 import { COURSE_INFO, UNITS } from "./data/curriculum.js";
 import { UNIT_1_DATA } from "./data/units/unit1.js";
-import { UNIT_2_DATA } from "./data/units/unit2.js";
+import { UNIT_2_DATA, UNIT_2_PROJECT } from "./data/units/unit2.js";
 import { UNITS_OVERVIEW_DATA } from "./data/units/unitsOverview.js";
 import { QuizEngine } from "./quiz-engine.js";
 import { CodeValidator } from "./parser-validator.js";
@@ -21,7 +21,8 @@ import { CodeValidator } from "./parser-validator.js";
 const DEFAULT_UNLOCKED = [
   "ut1-b1", "ut1-b2", "ut1-b3", "ut1-b4",
   "ut2-b1", "ut2-b2", "ut2-b3", "ut2-b4", "ut2-b5", "ut2-b6", "ut2-b7", "ut2-b8",
-  "ut2-b9", "ut2-b10", "ut2-b11", "ut2-b12", "ut2-b13", "ut2-b14", "ut2-b15", "ut2-b16"
+  "ut2-b9", "ut2-b10", "ut2-b11", "ut2-b12", "ut2-b13", "ut2-b14", "ut2-b15", "ut2-b16",
+  "ut2-proyecto"
 ];
 
 class LMSGIApp {
@@ -314,6 +315,7 @@ class LMSGIApp {
   init() {
     // Exponer API para eventos en el DOM
     window.LMSGI_APP = {
+      getInstance: () => this,
       selectBlock: (unitId, blockId) => this.selectBlock(unitId, blockId),
       setTab: (tabName) => this.setTab(tabName),
       submitQuiz: (blockId) => this.submitQuiz(blockId),
@@ -772,6 +774,7 @@ class LMSGIApp {
   }
 
   isBlockUnlocked(blockId) {
+    if (blockId === "ut2-proyecto") return true;
     return this.unlockedBlocks.includes(blockId);
   }
 
@@ -780,7 +783,11 @@ class LMSGIApp {
     if (this.currentUnitId === "ut1") {
       block = UNIT_1_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_1_DATA.blocks[0];
     } else if (this.currentUnitId === "ut2") {
-      block = UNIT_2_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_2_DATA.blocks[0];
+      if (this.currentBlockId === "ut2-proyecto") {
+        block = UNIT_2_DATA.project || UNIT_2_PROJECT;
+      } else {
+        block = UNIT_2_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_2_DATA.blocks[0];
+      }
     } else {
       const currentUnit = this.getCurrentUnit();
       const blockMeta = currentUnit.blocks.find(b => b.id === this.currentBlockId) || currentUnit.blocks[0];
@@ -1031,7 +1038,12 @@ class LMSGIApp {
         );
       });
 
-      if (this.searchQuery && filteredBlocks.length === 0) {
+      const matchesProject = unit.id === "ut2" && (
+        !this.searchQuery ||
+        "proyecto integrador cena de navidad daw flexbox html5 reto global".includes(this.searchQuery.toLowerCase())
+      );
+
+      if (this.searchQuery && filteredBlocks.length === 0 && !matchesProject) {
         return;
       }
 
@@ -1073,6 +1085,39 @@ class LMSGIApp {
             isCurrentUnit || this.searchQuery
               ? `
             <div class="pl-6 pr-2 py-1.5 space-y-1 bg-slate-50/40 dark:bg-slate-900/30">
+              ${
+                unit.id === "ut2" && matchesProject
+                  ? `
+                <!-- Apartado Especial: Proyecto Integrador UT2 (Separado de las sesiones) -->
+                <div class="mb-2 pb-2.5 border-b border-indigo-200/80 dark:border-indigo-900/60">
+                  <div class="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-1 px-1 flex items-center justify-between">
+                    <span class="flex items-center gap-1"><span>🎯</span> Proyecto Integrador</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 font-semibold">Sin Resolver</span>
+                  </div>
+                  <button onclick="window.LMSGI_APP.selectBlock('ut2', 'ut2-proyecto')"
+                          class="w-full text-left p-2.5 rounded-xl text-xs flex items-start gap-2.5 transition-all border ${
+                            this.currentBlockId === "ut2-proyecto"
+                              ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium shadow-md border-amber-400"
+                              : "bg-amber-50/90 dark:bg-amber-950/40 text-amber-950 dark:text-amber-100 border-amber-200/90 dark:border-amber-900/70 hover:bg-amber-100/90 dark:hover:bg-amber-900/50 shadow-xs"
+                          }">
+                    <span class="text-base shrink-0 mt-0.5">🎄</span>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center justify-between text-[10px] opacity-80 mb-0.5">
+                        <span>Reto Global UT2</span>
+                        <span class="font-mono text-[9px]">1ª Eval</span>
+                      </div>
+                      <div class="truncate text-xs font-bold ${this.currentBlockId === "ut2-proyecto" ? "text-white" : "text-slate-900 dark:text-slate-100"}">
+                        Cena de Navidad DAW
+                      </div>
+                      <div class="text-[10px] ${this.currentBlockId === "ut2-proyecto" ? "text-amber-100" : "text-slate-500 dark:text-slate-400"} mt-0.5 truncate">
+                        HTML5 Semántico + Flexbox
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                `
+                  : ""
+              }
               ${filteredBlocks
                 .map(block => {
                   const isCurrentBlock = block.id === this.currentBlockId;
@@ -1170,13 +1215,17 @@ class LMSGIApp {
             <span>&rsaquo;</span>
             <span class="font-medium text-teal-600 dark:text-teal-400">UT${currentUnit.unitNumber} (${currentUnit.ra})</span>
             <span>&rsaquo;</span>
-            <span class="text-slate-900 dark:text-slate-100 font-semibold">${currentBlock.session}</span>
+            <span class="text-slate-900 dark:text-slate-100 font-semibold">${currentBlock.session || (currentBlock.isProject ? "Proyecto Integrador" : "")}</span>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${
+              currentBlock.isProject
+                ? "bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
+                : "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+            }">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              Bloque: 2 Horas
+              ${currentBlock.isProject ? "Reto Global UT2 (Sin Resolver)" : "Bloque: 2 Horas"}
             </span>
 
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
@@ -1198,8 +1247,8 @@ class LMSGIApp {
                     }">
               ${
                 isDone
-                  ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Bloque Completado`
-                  : `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/></svg> Marcar como realizado`
+                  ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ${currentBlock.isProject ? "Proyecto Completado" : "Bloque Completado"}`
+                  : `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/></svg> ${currentBlock.isProject ? "Marcar proyecto como realizado" : "Marcar como realizado"}`
               }
             </button>
           </div>
@@ -1209,8 +1258,10 @@ class LMSGIApp {
         <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight leading-tight flex items-center gap-2">
           ${currentBlock.title}
           ${
-            !isUnlocked
-              ? `<span class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg> Bloqueado para alumnos</span>`
+            currentBlock.isProject
+              ? `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300">🎯 Reto Global Integrador</span>`
+              : !isUnlocked
+              ? `<span class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg> Bloqueado para alumnos</span>`
               : ""
           }
         </h1>
@@ -1506,11 +1557,22 @@ class LMSGIApp {
                 Descargar .${ex.language}
               </button>
 
-              <button id="btn-solution-${ex.id}" onclick="window.LMSGI_APP.toggleSolution('${ex.id}')"
-                      class="px-2.5 py-1.5 text-xs font-medium bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 dark:hover:bg-teal-900 rounded-lg flex items-center gap-1 transition-colors">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                Ver Solución Guiada
-              </button>
+              ${
+                ex.id === "ex-ut2-proyecto" || currentBlock.isProject
+                  ? `
+                <span class="px-2.5 py-1.5 text-xs font-semibold bg-amber-50 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300 dark:border-amber-800 rounded-lg flex items-center gap-1.5 shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zM10 7a2 2 0 012-2h0a2 2 0 012 2v4H10V7z"/></svg>
+                  🔒 Proyecto Sin Resolver
+                </span>
+                `
+                  : `
+                <button id="btn-solution-${ex.id}" onclick="window.LMSGI_APP.toggleSolution('${ex.id}')"
+                        class="px-2.5 py-1.5 text-xs font-medium bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 dark:hover:bg-teal-900 rounded-lg flex items-center gap-1 transition-colors">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  Ver Solución Guiada
+                </button>
+                `
+              }
             </div>
           </div>
 
@@ -1663,6 +1725,10 @@ class LMSGIApp {
             }
 
             <!-- Panel de Solución Guiada -->
+            ${
+              ex.id === "ex-ut2-proyecto" || currentBlock.isProject
+                ? ""
+                : `
             <div id="solution-${ex.id}" class="hidden mt-4 p-4 rounded-xl bg-slate-900 border border-teal-500/30 text-slate-100 text-xs space-y-2">
               <div class="flex items-center justify-between font-bold text-teal-300 text-xs pb-1 border-b border-slate-800">
                 <span class="flex items-center gap-1.5">
@@ -1673,6 +1739,8 @@ class LMSGIApp {
               </div>
               <pre class="font-mono text-xs overflow-x-auto p-2 bg-slate-950/60 rounded text-teal-300 leading-relaxed">${this.escapeHTML(ex.solution)}</pre>
             </div>
+            `
+            }
           </div>
         </div>
       `;

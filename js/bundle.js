@@ -1332,8 +1332,6 @@ const UNIT_2_DATA = {
   <title>Inicio · 1º DAW</title>
 </head>
 <body>
-  <h1>Bienvenido a Lenguajes de Marcas</h1>
-  <p>Entorno de aprendizaje web para 1º DAW.</p>
 </body>
 </html>`,
           hints: "El doctype debe ser la primera línea absoluta del archivo, sin espacios previos."
@@ -1479,7 +1477,7 @@ const UNIT_2_DATA = {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Alumno de 1º DAW">
+  <meta name="author" content="Alumno 1º DAW">
   <title>Cena de Navidad DAW 2025</title>
   <link rel="stylesheet" href="estilos.css">
 </head>
@@ -1652,15 +1650,12 @@ const UNIT_2_DATA = {
     </div>
     <img src="navidad.webp" alt="Icono navideño">
   </header>
-
   <main>
-    <!-- Aquí se integrará el formulario en los siguientes bloques -->
+    <!-- Futuro formulario de participación -->
   </main>
-
   <footer>
-    <p>Autor: Alumno DAW</p>
-    <p>Fecha: 9/12/2025</p>
-    <p>Más ideas navideñas en <a href="https://www.navidad.es" target="_blank">esta página</a>.</p>
+    <p>Autor: Alumno 1º DAW · Diciembre 2025</p>
+    <a href="https://www.navidad.es">Más información navideña</a>
   </footer>
 </body>
 </html>`,
@@ -2544,6 +2539,26 @@ const UNIT_2_DATA = {
                 }
                 \`\`\`
             `
+          },
+          {
+            title: "4. Actividad Interactiva Gamificada: CSS Diner (Selectores)",
+            content: `
+              Para entrenar y dominar los selectores de CSS de una forma dinámica y divertida, recomendamos jugar a **CSS Diner**:
+              
+              * 🍽️ **[CSS Diner - Where we feast on CSS Selectors!](https://flukeout.github.io/)**
+              
+              * **¿En qué consiste el juego?**:
+                * Presenta una mesa interactiva con platos (\`plate\`), recipientes bento (\`bento\`), manzanas (\`apple\`) y naranjas (\`orange\`).
+                * En cada uno de sus 32 niveles, debes escribir en la consola del juego el selector CSS exacto para seleccionar los elementos solicitados.
+                
+              * **Niveles clave recomendados para esta sesión**:
+                * **Niveles 1 a 4**: Selector de tipo o etiqueta (\`plate\`, \`bento\`).
+                * **Niveles 5 a 6**: Selector de identificador con almohadilla (\`#fancy\`).
+                * **Niveles 7 a 9**: Selectores descendientes anidados (\`plate apple\`, \`#fancy pickle\`).
+                * **Niveles 10 a 12**: Selector de clase con punto (\`.small\`, \`orange.small\`).
+                
+              * **Recomendación para 1º DAW**: Entra en [CSS Diner](https://flukeout.github.io/) y completa al menos los 10 primeros niveles para afianzar con soltura los tres selectores esenciales.
+            `
           }
         ]
       },
@@ -3151,6 +3166,23 @@ const UNIT_2_DATA = {
                 * *En el proyecto*: En el \`<header>\`, los títulos y la imagen de 70x70px quedan centrados verticalmente de forma impecable sin necesidad de márgenes forzados.
               * **\`stretch\`** (valor por defecto): Las cajas hijas se estiran para ocupar la misma altura total que la caja más alta.
             `
+          },
+                              {
+            title: "4. Juegos y Laboratorios Didácticos de Flexbox",
+            content: `
+              Para interiorizar la mecánica de los contenedores flexibles y sus alineaciones antes de maquetar el proyecto, disponemos de dos herramientas interactivas imprescindibles:
+              
+              * 🐸 **[Flexbox Froggy - Un juego para aprender CSS flexbox](https://flexboxfroggy.com/#es)**:
+                * Un juego visual interactivo en español de 24 niveles donde debes guiar a la rana Froggy y sus amigas hasta sus hojas de nenúfar escribiendo reglas de Flexbox.
+                * **Niveles clave para esta sesión**:
+                  * Niveles 1 al 4: Alineación horizontal con \`justify-content\` (\`flex-end\`, \`center\`, \`space-between\`, \`space-around\`).
+                  * Niveles 5 al 8: Alineación vertical con \`align-items\` (\`flex-end\`, \`center\`, \`flex-start\`).
+                  * Niveles 9 al 13: Combinación de ambos ejes (\`justify-content\` + \`align-items\`).
+                
+              * 🧪 **[Flexbox Labs](https://flexboxlabs.netlify.app/)**:
+                * Un laboratorio visual en tiempo real donde puedes añadir y quitar elementos, cambiar interactivamente las propiedades \`justify-content\`, \`align-items\`, \`gap\` y observar al instante el comportamiento del flujo flexible.
+                * Permite inspeccionar y copiar el código CSS generado para usarlo en tus maquetaciones.
+            `
           }
         ]
       },
@@ -3288,157 +3320,15 @@ const UNIT_2_DATA = {
               | **TOTAL** | **Calificación Máxima del Proyecto Integrador de RA2** | **10 PUNTOS** |
             `
           },
-          {
-            title: "3. Solución Técnica Oficial Comentada",
+                              {
+            title: "3. Consejos de Depuración y Práctica Recomendada con Juegos",
             content: `
-              A continuación tienes el código fuente de referencia que resuelve el 100% de las especificaciones:
+              Al maquetar una interfaz completa con Flexbox, ten en cuenta estos consejos clave de depuración:
               
-              \`\`\`html
-              <!DOCTYPE html>
-              <html lang="es">
-              <head>
-                <meta charset="UTF-8">
-                <title>Cena de Navidad DAW 2025</title>
-                <!-- Metadato de autoría oficial -->
-                <meta name="author" content="Nombre del Alumno">
-                <style>
-                  /* Estilos generales */
-                  body {
-                    font-family: Verdana, sans-serif;
-                    margin: 0 30px;
-                  }
-                  header, footer {
-                    background-color: #c62828;
-                    color: #fff;
-                    padding: 15px;
-                  }
-                  /* Cabecera con Flexbox */
-                  header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  }
-                  .titulos-header h1 {
-                    margin: 0;
-                  }
-                  .titulos-header h2 {
-                    margin: 5px 0 0 0;
-                  }
-                  header img {
-                    width: 70px;
-                    height: 70px;
-                  }
-                  main {
-                    margin-top: 20px;
-                  }
-                  /* Formulario en dos columnas con Flexbox */
-                  form {
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 20px;
-                  }
-                  .bloque-form {
-                    width: 50%;
-                    background-color: #2e7d32;
-                    border-radius: 10px;
-                    padding: 15px;
-                    color: #faf5f2;
-                    box-sizing: border-box;
-                  }
-                  /* Radio buttons en columna con Flexbox */
-                  .opciones-plato {
-                    display: flex;
-                    flex-direction: column;
-                  }
-                  #observaciones textarea {
-                    width: 100%;
-                    margin: 10px auto;
-                    color: rgb(70, 69, 69);
-                    box-sizing: border-box;
-                  }
-                  /* Botonera */
-                  .botones-form {
-                    margin: 20px;
-                    text-align: center;
-                  }
-                  .botones-form input {
-                    margin: 0 10px;
-                    padding: 8px 16px;
-                    background-color: #ffca28;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                  }
-                  .botones-form input:hover {
-                    background-color: #ffc107;
-                  }
-                  /* Pie de página */
-                  footer {
-                    text-align: center;
-                  }
-                  a {
-                    color: #fff59d;
-                    text-decoration: none;
-                  }
-                </style>
-              </head>
-              <body>
-                <!-- Cabecera semántica -->
-                <header>
-                  <div class="titulos-header">
-                    <h1>Cena de Navidad DAW</h1>
-                    <h2>Formulario de participación</h2>
-                  </div>
-                  <img src="navidad.webp" alt="Icono navideño">
-                </header>
-
-                <!-- Contenido central -->
-                <main>
-                  <form action="procesar_cena.php" method="post">
-                    <!-- 1ª parte: Datos del asistente -->
-                    <div class="bloque-form" id="datos-personales">
-                      <h3>Datos del asistente</h3>
-                      <label for="nombre">Nombre completo:</label>
-                      <input type="text" id="nombre" name="nombre" maxlength="50">
-
-                      <p>Plato favorito para la cena:</p>
-                      <div class="opciones-plato">
-                        <label><input type="radio" name="plato" value="pavo"> Pavo asado</label>
-                        <label><input type="radio" name="plato" value="lasaña"> Lasaña</label>
-                        <label><input type="radio" name="plato" value="pescado"> Pescado al horno</label>
-                      </div>
-                    </div>
-
-                    <!-- 2ª parte: Observaciones -->
-                    <div class="bloque-form" id="observaciones">
-                      <h3>Observaciones</h3>
-                      <label for="comentarios">Comentarios (alergias, peticiones especiales):</label>
-                      <textarea id="comentarios" name="comentarios" rows="5">Observaciones</textarea>
-                      <label>
-                        <input type="checkbox" name="confirmacion" value="si"> Confirmo que asistiré a la cena
-                      </label>
-                    </div>
-                  </form>
-
-                  <!-- 3ª parte: Botones centrados -->
-                  <div class="botones-form">
-                    <input type="submit" value="Enviar formulario">
-                    <input type="reset" value="Borrar datos">
-                  </div>
-                </main>
-
-                <!-- Pie de página -->
-                <footer>
-                  <p>Autor: Nombre del Alumno</p>
-                  <p>Fecha: 9/12/2025</p>
-                  <p>
-                    Más ideas navideñas en
-                    <a href="https://www.navidad.es" target="_blank" rel="noopener noreferrer">esta página</a>.
-                  </p>
-                </footer>
-              </body>
-              </html>
-              \`\`\`
+              * **Usa la caja de inspección del navegador (F12)**: En Chrome, Firefox o Edge, haz clic derecho sobre el contenedor y selecciona *Inspeccionar*. Los navegadores modernos muestran una insignia que dice **flex**; al pulsarla, se dibuja en pantalla una rejilla con las líneas del eje principal y transversal.
+              * **Box-sizing en columnas**: Cuando dividas cajas en un 50% de ancho con márgenes internos (\`padding\`), añade siempre \`box-sizing: border-box\` para evitar que el relleno sume píxeles al ancho y rompa la fila horizontal.
+              * **Entrenamiento con Flexbox Froggy**: Si tienes dudas al cambiar de eje con \`flex-direction: column\`, practica los niveles 10 al 13 de **[Flexbox Froggy](https://flexboxfroggy.com/#es)**, donde el eje principal gira 90 grados.
+              * **Experimentación en Flexbox Labs**: Comprueba tus valores de alineación antes de aplicarlos en tu código con **[Flexbox Labs](https://flexboxlabs.netlify.app/)**.
             `
           }
         ]
@@ -3499,156 +3389,315 @@ const UNIT_2_DATA = {
             "5. Cumple la especificación 8: footer centrado con enlace a https://www.navidad.es.",
             "6. Cumple la especificación 9 y 11: selectores de etiqueta, clase e id, y código comentado."
           ],
-          solution: `<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Cena de Navidad DAW 2025</title>
-  <!-- Metadato de autoría requerido en la especificación 1 -->
-  <meta name="author" content="Nombre del Alumno">
-  <style>
-    /* Estilos globales */
-    body {
-      font-family: Verdana, sans-serif;
-      margin: 0 30px;
-    }
-    header, footer {
-      background-color: #c62828;
-      color: #fff;
-      padding: 15px;
-    }
-    /* Especificación 2: Header alineado con Flexbox */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .titulos-header h1 {
-      margin: 0;
-    }
-    .titulos-header h2 {
-      margin: 5px 0 0 0;
-    }
-    header img {
-      width: 70px;
-      height: 70px;
-    }
-    main {
-      margin-top: 20px;
-    }
-    /* Especificación 4: Formulario en dos columnas del 50% con Flexbox */
-    form {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .bloque-form {
-      width: 50%;
-      background-color: #2e7d32;
-      border-radius: 10px;
-      padding: 15px;
-      color: #faf5f2;
-      box-sizing: border-box;
-    }
-    /* Especificación 5: Radios en columna con Flexbox */
-    .opciones-plato {
-      display: flex;
-      flex-direction: column;
-    }
-    #observaciones textarea {
-      width: 100%;
-      margin: 10px auto;
-      color: rgb(70, 69, 69);
-      box-sizing: border-box;
-    }
-    /* Especificación 7: Botones centrados con hover */
-    .botones-form {
-      margin: 20px;
-      text-align: center;
-    }
-    .botones-form input {
-      margin: 0 10px;
-      padding: 8px 16px;
-      background-color: #ffca28;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .botones-form input:hover {
-      background-color: #ffc107;
-    }
-    /* Especificación 8: Footer centrado y enlace */
-    footer {
-      text-align: center;
-    }
-    a {
-      color: #fff59d;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-  <!-- Cabecera -->
-  <header>
-    <div class="titulos-header">
-      <h1>Cena de Navidad DAW</h1>
-      <h2>Formulario de participación</h2>
-    </div>
-    <img src="navidad.webp" alt="Icono navideño">
-  </header>
-
-  <!-- Contenido principal -->
-  <main>
-    <form action="procesar_cena.php" method="post">
-      <!-- 1ª parte: Datos del asistente -->
-      <div class="bloque-form" id="datos-personales">
-        <h3>Datos del asistente</h3>
-        <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" name="nombre" maxlength="50">
-
-        <p>Plato favorito para la cena:</p>
-        <div class="opciones-plato">
-          <label><input type="radio" name="plato" value="pavo"> Pavo asado</label>
-          <label><input type="radio" name="plato" value="lasaña"> Lasaña</label>
-          <label><input type="radio" name="plato" value="pescado"> Pescado al horno</label>
-        </div>
-      </div>
-
-      <!-- 2ª parte: Observaciones -->
-      <div class="bloque-form" id="observaciones">
-        <h3>Observaciones</h3>
-        <label for="comentarios">Comentarios (alergias, peticiones especiales):</label>
-        <textarea id="comentarios" name="comentarios" rows="5">Observaciones</textarea>
-        <label>
-          <input type="checkbox" name="confirmacion" value="si"> Confirmo que asistiré a la cena
-        </label>
-      </div>
-    </form>
-
-    <!-- 3ª parte: Botonera -->
-    <div class="botones-form">
-      <input type="submit" value="Enviar formulario">
-      <input type="reset" value="Borrar datos">
-    </div>
-  </main>
-
-  <!-- Pie de página -->
-  <footer>
-    <p>Autor: Nombre del Alumno</p>
-    <p>Fecha: 9/12/2025</p>
-    <p>
-      Más ideas navideñas en
-      <a href="https://www.navidad.es" target="_blank" rel="noopener noreferrer">esta página</a>.
-    </p>
-  </footer>
-</body>
-</html>`,
+          solution: `<!-- Pautas de resolución para el taller integrador:
+1. Revisa las 11 especificaciones técnicas en el apartado del Proyecto Integrador.
+2. Implementa en el <head> los metadatos y la etiqueta <style>.
+3. Añade en <header> display: flex con space-between y align-items: center.
+4. En <main>, envuelve las dos columnas en <form method="post"> con display: flex y gap: 20px.
+5. Cada columna .bloque-form debe tener width: 50% y box-sizing: border-box.
+6. La botonera .botones-form va fuera de las dos columnas, centrada debajo.
+7. Comprueba tu diseño con el botón 'Previsualizar HTML/CSS en Vivo'. -->`,
           hints: "Comprueba que las dos partes del formulario estén dentro de <form> y los botones estén debajo centrados en .botones-form."
         }
       ]
     }
   ]
 };
+
+/* =============================================================================
+   APARTADO DEDICADO: PROYECTO INTEGRADOR DE LA UT2 (CENA NAVIDEÑA DAW)
+   Separado de las 16 sesiones lectivas, sin resolver, para que los alumnos
+   conozcan el objetivo integrador de la unidad desde el primer día.
+   ============================================================================= */
+const UNIT_2_PROJECT = {
+  id: "ut2-proyecto",
+  blockNumber: 0,
+  title: "Proyecto Integrador: Cena de Navidad DAW",
+  subtitle: "Reto Global de Maquetación Web con HTML5 Semántico y CSS3 con Flexbox (Sin Resolver)",
+  session: "Proyecto Integrador",
+  duration: "Reto Global UT2",
+  evaluation: "1ª Evaluación",
+  isProject: true,
+  ce: ["CE2a", "CE2b", "CE2c", "CE2d", "CE2e", "CE2f", "CE2g", "CE2h"],
+  objectives: [
+    "Conocer con antelación el objetivo integrador de la UT2 y comprender todas las referencias prácticas de clase.",
+    "Comprender la arquitectura semántica del formulario web y su maquetación con Flexbox.",
+    "Disponer de las 11 especificaciones técnicas y la maqueta visual sin código resuelto para guiar el autoaprendizaje.",
+    "Practicar con juegos y herramientas interactivas (CSS Diner, Flexbox Froggy, Flexbox Labs)."
+  ],
+  theory: {
+    intro: `
+      ¡Bienvenido/a al **Proyecto Integrador de la Unidad 2**!
+      
+      Esta sección te presenta el **reto global** que deberás ser capaz de construir al finalizar el tema. No es una sesión de clase aislada de 2 horas, sino la meta formativa hacia la que convergen los aprendizajes de las 16 sesiones de la UT2.
+      
+      > 💡 **¿Por qué está este proyecto aquí desde el primer día?**  
+      > Para que no sientas que los contenidos teóricos son abstractos o inconexos. Al conocer de antemano el diseño, la maqueta y los requisitos técnicos de la página de la **Cena de Navidad de 1º DAW**, sabrás exactamente para qué sirve cada etiqueta y propiedad CSS cuando en clase se haga referencia a una especificación del proyecto.
+      
+      A continuación dispones del briefing del proyecto, la maqueta del diseño, las 11 especificaciones técnicas explicadas paso a paso y los enlaces a los juegos interactivos para entrenar. **El proyecto se presenta sin resolver**, ofreciéndote un espacio de trabajo para poner en práctica tus conocimientos.
+    `,
+    sections: [
+      {
+        title: "1. Briefing del Caso Práctico: Convocatoria de la Cena Navideña",
+        content: `
+          El grupo de 1º de Desarrollo de Aplicaciones Web (DAW) del CIFP Carlos III va a celebrar su tradicional Cena de Navidad. Como futuros desarrolladores web profesionales, se os encomienda la tarea de diseñar la página web oficial para convocar a los compañeros y recoger las inscripciones y preferencias de menú.
+          
+          * **Requisitos generales**:
+            * Código HTML5 estrictamente semántico y bien formado.
+            * Estilos CSS3 modernos en hoja interna o externa, utilizando exclusivamente **Flexbox** para la maquetación (sin recurrir a tablas para diseño ni maquetación flotante obsoleta).
+            * Formulario interactivo con método de envío \`POST\`.
+            * Experiencia visual limpia, contrastada y con un esquema cromático festivo y sobrio.
+        `
+      },
+      {
+        title: "2. Maqueta Visual y Estructura Arquitectónica",
+        content: `
+          La página se estructura visualmente en cuatro grandes zonas verticales:
+          
+          \`\`\`text
++--------------------------------------------------------------------------------+
+| [HEADER] Fondo rojo (#c62828). Padding: 15px. Flexbox space-between            |
+|   (Izquierda)                                                   (Derecha)      |
+|   H1: Cena de Navidad DAW                                       Imagen 70x70px |
+|   H2: Formulario de participación                               (centrada vert)|
++--------------------------------------------------------------------------------+
+| [MAIN - FORM] method="post"                                                    |
+|   +------------------------------------+  +----------------------------------+ |
+|   | Bloque 1: Datos Asistente (50%)    |  | Bloque 2: Menú y Comentarios(50%)| |
+|   | Fondo verde (#2e7d32). Radius: 10px|  | Fondo verde (#2e7d32).Radius:10px| |
+|   | - Nombre (maxlength="50")          |  | - Menú: 3 radio buttons en       | |
+|   | - Curso: 3 radio buttons en        |  |   columna con Flexbox            | |
+|   |   columna (1º DAW, 2º DAW, Prof)   |  | - Observaciones:                 | |
+|   | - Preferencias: Checkboxes         |  |   <textarea rows="5">            | |
+|   +------------------------------------+  +----------------------------------+ |
+|                                                                                |
+|   +--------------------------------------------------------------------------+ |
+|   | Bloque 3: Botonera Centrada                                              | |
+|   | - Botón [Enviar inscripción] (submit) con border-radius                  | |
+|   | - Botón [Borrar datos] (reset) con border-radius                         | |
+|   | - Efecto :hover con cambio de color en ambos botones                     | |
+|   +--------------------------------------------------------------------------+ |
++--------------------------------------------------------------------------------+
+| [FOOTER] Fondo rojo (#c62828). Padding: 15px.                                  |
+|   - Autor: Tu Nombre                                                           |
+|   - Fecha: Diciembre 2025                                                      |
+|   - Enlace externo: Más ideas navideñas en https://www.navidad.es              |
++--------------------------------------------------------------------------------+
+          \`\`\`
+        `
+      },
+      {
+        title: "3. Mapa de las 11 Especificaciones Técnicas (Dónde se aprende cada una)",
+        content: `
+          A continuación tienes el desglose de los 11 requisitos técnicos que componen el proyecto y la sesión de la UT2 en la que se profundiza en cada uno:
+          
+          * **Especificación 1: Cabecera técnica (\`<head>\`)** &rarr; *Sesión 2*
+            * Incluir título descriptivo \`<title>\`, codificación \`UTF-8\`, configuración de \`viewport\`, autor y descripción mediante etiquetas \`<meta>\`.
+            
+          * **Especificación 2: Cabecera visual (\`<header>\`)** &rarr; *Sesión 3 y 15*
+            * Elemento semántico \`<header>\` con títulos \`<h1>\` y \`<h2>\` a la izquierda y la imagen navideña de 70x70px a la derecha. Alineación con Flexbox: \`justify-content: space-between\` y \`align-items: center\`.
+            
+          * **Especificación 3: Formulario con método POST** &rarr; *Sesión 7*
+            * Etiqueta \`<form action="..." method="post">\` envolviendo todos los bloques de entrada de datos.
+            
+          * **Especificación 4: Disposición en dos columnas del 50% con Flexbox** &rarr; *Sesión 14 y 15*
+            * Las dos primeras partes del formulario deben quedar alineadas lado a lado en horizontal ocupando cada una el 50% del ancho (\`display: flex\` en el formulario o contenedor).
+            
+          * **Especificación 5: Campos del primer bloque y radio buttons en columna** &rarr; *Sesión 7 y 16*
+            * Campo de texto para nombre con atributo \`maxlength="50"\`.
+            * Grupo de 3 radio buttons apilados en columna vertical mediante \`flex-direction: column\`.
+            * Casillas de verificación (\`checkbox\`) para opciones de dieta/alergias.
+            
+          * **Especificación 6: Segundo bloque con área de texto** &rarr; *Sesión 8*
+            * Opciones de plato y elemento \`<textarea rows="5">\` para observaciones o intolerancias.
+            
+          * **Especificación 7: Botonera inferior con efecto Hover** &rarr; *Sesión 8, 12 y 13*
+            * Dos botones: \`<input type="submit">\` y \`<input type="reset">\`.
+            * Centrados horizontalmente, con esquinas redondeadas (\`border-radius: 5px\`) y cambio cromático evidente al pasar el cursor por encima (\`:hover\`).
+            
+          * **Especificación 8: Pie de página semántico (\`<footer>\`)** &rarr; *Sesión 3 y 4*
+            * Elemento \`<footer>\` con información del autor, fecha y un hiperenlace \`<a>\` apuntando a una web navideña externa.
+            
+          * **Especificación 9: Uso estricto de los 3 tipos de selectores CSS** &rarr; *Sesión 10*
+            * En la hoja de estilos debe haber reglas aplicadas mediante selector de **etiqueta** (\`body\`, \`header\`, \`footer\`), de **clase** (\`.bloque-form\`, \`.botones-form\`) y de **identificador** (\`#...\`).
+            
+          * **Especificación 10: Paleta cromática y tipografía** &rarr; *Sesión 13*
+            * Aplicar tipografía sans-serif (\`Verdana, sans-serif\`) a todo el \`body\`. Fondo rojo institucional (\`#c62828\`) en cabecera y pie; fondo verde (\`#2e7d32\`) en los bloques del formulario.
+            
+          * **Especificación 11: Código limpio y comentado** &rarr; *Todas las sesiones*
+            * El archivo debe contener comentarios pedagógicos explicativos (\`<!-- Comentarios HTML -->\` y \`/* Comentarios CSS */\`).
+        `
+      },
+      {
+        title: "4. Rúbrica de Valoración del Proyecto (10 Puntos)",
+        content: `
+          El proyecto se evalúa sobre un total de 10 puntos distribuidos con la siguiente ponderación:
+          
+          | Criterio | Especificación Evaluada | Puntuación |
+          | :--- | :--- | :---: |
+          | **1** | Configuración completa y rigurosa del \`<head>\` (metadatos, título, viewport) | **1.00 p** |
+          | **2** | Cabecera semántica con títulos, imagen y Flexbox (\`space-between\` y \`center\`) | **1.00 p** |
+          | **3** | Formulario correctamente estructurado con método POST | **0.50 p** |
+          | **4** | División del formulario en 2 columnas al 50% con Flexbox | **1.00 p** |
+          | **5** | Campos del bloque 1: texto con \`maxlength="50"\`, radio buttons en columna y checks | **1.00 p** |
+          | **6** | Segundo bloque del formulario: plato y \`<textarea rows="5">\` | **1.00 p** |
+          | **7** | Botonera: botones submit y reset centrados, redondeados y con estado \`:hover\` | **1.00 p** |
+          | **8** | Pie de página semántico con autoría, fecha e hiperenlace externo | **1.00 p** |
+          | **9** | Empleo justificado de los 3 selectores CSS: etiqueta, clase e ID | **1.00 p** |
+          | **10** | Tipografía Verdana en \`body\` y esquema de colores (#c62828, #2e7d32) | **1.25 p** |
+          | **11** | Código limpio, indentado y con comentarios explicativos | **0.25 p** |
+          | **TOTAL** | **Calificación Máxima del Proyecto Integrador de la UT2** | **10.00 PUNTOS** |
+        `
+      },
+      {
+        title: "5. Juegos y Actividades Didácticas Interactivas de CSS",
+        content: `
+          Para entrenar antes y durante la construcción del proyecto, te recomendamos encarecidamente utilizar estas tres plataformas gamificadas:
+          
+          * 🍽️ **[CSS Diner - Where we feast on CSS Selectors!](https://flukeout.github.io/)**
+            * *Habilidad*: Selectores CSS (etiqueta, clase, ID, hijos, pseudoclases).
+            * *Por qué te sirve*: Te enseñará a dominar con soltura la **Especificación 9** del proyecto integrador.
+            
+          * 🐸 **[Flexbox Froggy - Un juego para aprender CSS flexbox](https://flexboxfroggy.com/#es)**
+            * *Habilidad*: Maquetación con Flexbox (\`justify-content\`, \`align-items\`, \`flex-direction\`).
+            * *Por qué te sirve*: Te permitirá entender cómo alinear la cabecera (**Especificación 2**), las dos columnas del formulario (**Especificación 4**) y los radio buttons apilados (**Especificación 5**).
+            
+          * 🧪 **[Flexbox Labs](https://flexboxlabs.netlify.app/)**
+            * *Habilidad*: Laboratorio visual en tiempo real para experimentar con modelos de cajas flexibles.
+            * *Por qué te sirve*: Podrás probar interactivamente cómo se comportan dos cajas al 50% antes de escribir el código final.
+        `
+      }
+    ]
+  },
+  quiz: [
+    {
+      id: "q-ut2-proyecto-1",
+      question: "¿Cuál es el propósito pedagógico principal de conocer las especificaciones del Proyecto Integrador desde el inicio de la UT2?",
+      options: [
+        "Saber exactamente hacia qué meta técnica se avanza en cada una de las 16 sesiones de clase.",
+        "Copiar el código de internet el primer día sin asistir a las explicaciones.",
+        "Aprender únicamente JavaScript en lugar de HTML y CSS.",
+        "Aprender sin realizar ningún proyecto práctico de maquetación."
+      ],
+      correctIndex: 0,
+      explanation: "Conocer el proyecto integrador de antemano proporciona un mapa de ruta claro para comprender la utilidad directa de cada etiqueta y regla CSS aprendida en las sesiones."
+    },
+    {
+      id: "q-ut2-proyecto-2",
+      question: "¿En qué sesiones se aprenden las propiedades de Flexbox necesarias para alinear el header y las columnas del proyecto integrador?",
+      options: [
+        "En las Sesiones 15 y 16 (Maquetación Moderna con Flexbox I y II).",
+        "En la Sesión 1 exclusivamente con el doctype.",
+        "Únicamente en el módulo de Bases de Datos.",
+        "En la Sesión 5 con las listas de descripción."
+      ],
+      correctIndex: 0,
+      explanation: "Flexbox se imparte a fondo en las Sesiones 15 y 16, donde se aprende justify-content: space-between, align-items: center y flex-direction: column."
+    }
+  ],
+  exercises: [
+    {
+      id: "ex-ut2-proyecto",
+      title: "Espacio de Trabajo del Proyecto Integrador (Cena Navideña DAW)",
+      description: "Desarrolla aquí la página web completa de la Cena de Navidad DAW con HTML5 semántico y CSS3 con Flexbox, cumpliendo las 11 especificaciones técnicas del proyecto. **Este espacio de trabajo no tiene solución resuelta** para que construyas tu propia implementación progresivamente conforme avances en las sesiones.",
+      initialCode: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tu Nombre">
+  <meta name="description" content="Formulario de inscripción a la Cena de Navidad de 1º DAW">
+  <title>Cena de Navidad DAW 2025</title>
+  <style>
+    /* =========================================================================
+       ESTILOS CSS - PROYECTO INTEGRADOR (CENA NAVIDEÑA DAW)
+       Tipografía general: Verdana, sans-serif
+       Colores: Cabecera/pie: #c62828 | Bloques form: #2e7d32
+       ========================================================================= */
+
+    /* Especificación 9 y 10: Selector de etiqueta para body */
+    body {
+      font-family: Verdana, sans-serif;
+      margin: 0 30px;
+      background-color: #faf5f2;
+    }
+
+    /* Especificación 2: Cabecera con Flexbox (space-between y align-items: center) */
+    header {
+      /* Escribe aquí tus estilos del header */
+    }
+
+    /* Especificación 4: Formulario con Flexbox (columnas al 50%) */
+    form {
+      /* Escribe aquí la distribución de las columnas */
+    }
+
+    /* Especificación 5 y 6: Bloques del formulario */
+    .bloque-form {
+      /* Estilos de las cajas del formulario */
+    }
+
+    /* Especificación 7: Botonera centrada y efecto :hover */
+    .botones-form {
+      /* Centrado de los botones */
+    }
+
+    /* Especificación 8: Pie de página */
+    footer {
+      /* Estilos del pie de página */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. CABECERA SEMÁNTICA (Especificación 2)
+       Títulos h1 y h2 a la izquierda, imagen navideña de 70x70px a la derecha
+       ========================================================================= -->
+  <header>
+    <!-- Tu código aquí -->
+  </header>
+
+  <!-- =========================================================================
+       2. CONTENIDO PRINCIPAL Y FORMULARIO (Especificaciones 3, 4, 5, 6 y 7)
+       method="post", 2 columnas al 50% y botonera inferior
+       ========================================================================= -->
+  <main>
+    <form action="procesar_cena.php" method="post">
+      <!-- Columna 1: Datos del asistente -->
+
+      <!-- Columna 2: Menú y observaciones -->
+
+      <!-- Botonera: Submit y Reset -->
+    </form>
+  </main>
+
+  <!-- =========================================================================
+       3. PIE DE PÁGINA SEMÁNTICO (Especificación 8)
+       Autor, fecha y enlace a https://www.navidad.es
+       ========================================================================= -->
+  <footer>
+    <!-- Tu código aquí -->
+  </footer>
+
+</body>
+</html>`,
+      language: "html",
+      tasks: [
+        "1. Revisa las 11 especificaciones técnicas en la pestaña de Enunciado.",
+        "2. Construye la cabecera semántica con títulos y la imagen navideña con Flexbox.",
+        "3. Estructura el formulario en dos columnas del 50% con display: flex.",
+        "4. Añade los campos de texto con maxlength=\"50\", radio buttons en columna y casillas de verificación.",
+        "5. Incorpora el área de texto con rows=\"5\" y la botonera centrada con efecto hover.",
+        "6. Completa el footer con autor, fecha y enlace, y añade comentarios pedagógicos a tu código."
+      ],
+      solution: `<!-- Este proyecto integrador no cuenta con solución directa para fomentar tu aprendizaje autónomo y activo. Utiliza el botón 'Previsualizar HTML/CSS en Vivo' para comprobar tu diseño e interactúa con el profesor en clase para resolver tus dudas. -->`,
+      hints: "Recuerda que cada técnica se explica paso a paso en las sesiones de la unidad. ¡Usa las herramientas Flexbox Froggy y CSS Diner para entrenar!"
+    }
+  ]
+};
+
+UNIT_2_DATA.project = UNIT_2_PROJECT;
 
 
 /**
@@ -5030,7 +5079,8 @@ class QuizEngine {
 const DEFAULT_UNLOCKED = [
   "ut1-b1", "ut1-b2", "ut1-b3", "ut1-b4",
   "ut2-b1", "ut2-b2", "ut2-b3", "ut2-b4", "ut2-b5", "ut2-b6", "ut2-b7", "ut2-b8",
-  "ut2-b9", "ut2-b10", "ut2-b11", "ut2-b12", "ut2-b13", "ut2-b14", "ut2-b15", "ut2-b16"
+  "ut2-b9", "ut2-b10", "ut2-b11", "ut2-b12", "ut2-b13", "ut2-b14", "ut2-b15", "ut2-b16",
+  "ut2-proyecto"
 ];
 
 class LMSGIApp {
@@ -5323,6 +5373,7 @@ class LMSGIApp {
   init() {
     // Exponer API para eventos en el DOM
     window.LMSGI_APP = {
+      getInstance: () => this,
       selectBlock: (unitId, blockId) => this.selectBlock(unitId, blockId),
       setTab: (tabName) => this.setTab(tabName),
       submitQuiz: (blockId) => this.submitQuiz(blockId),
@@ -5781,6 +5832,7 @@ class LMSGIApp {
   }
 
   isBlockUnlocked(blockId) {
+    if (blockId === "ut2-proyecto") return true;
     return this.unlockedBlocks.includes(blockId);
   }
 
@@ -5789,7 +5841,11 @@ class LMSGIApp {
     if (this.currentUnitId === "ut1") {
       block = UNIT_1_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_1_DATA.blocks[0];
     } else if (this.currentUnitId === "ut2") {
-      block = UNIT_2_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_2_DATA.blocks[0];
+      if (this.currentBlockId === "ut2-proyecto") {
+        block = UNIT_2_DATA.project || UNIT_2_PROJECT;
+      } else {
+        block = UNIT_2_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_2_DATA.blocks[0];
+      }
     } else {
       const currentUnit = this.getCurrentUnit();
       const blockMeta = currentUnit.blocks.find(b => b.id === this.currentBlockId) || currentUnit.blocks[0];
@@ -6040,7 +6096,12 @@ class LMSGIApp {
         );
       });
 
-      if (this.searchQuery && filteredBlocks.length === 0) {
+      const matchesProject = unit.id === "ut2" && (
+        !this.searchQuery ||
+        "proyecto integrador cena de navidad daw flexbox html5 reto global".includes(this.searchQuery.toLowerCase())
+      );
+
+      if (this.searchQuery && filteredBlocks.length === 0 && !matchesProject) {
         return;
       }
 
@@ -6082,6 +6143,39 @@ class LMSGIApp {
             isCurrentUnit || this.searchQuery
               ? `
             <div class="pl-6 pr-2 py-1.5 space-y-1 bg-slate-50/40 dark:bg-slate-900/30">
+              ${
+                unit.id === "ut2" && matchesProject
+                  ? `
+                <!-- Apartado Especial: Proyecto Integrador UT2 (Separado de las sesiones) -->
+                <div class="mb-2 pb-2.5 border-b border-indigo-200/80 dark:border-indigo-900/60">
+                  <div class="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-1 px-1 flex items-center justify-between">
+                    <span class="flex items-center gap-1"><span>🎯</span> Proyecto Integrador</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 font-semibold">Sin Resolver</span>
+                  </div>
+                  <button onclick="window.LMSGI_APP.selectBlock('ut2', 'ut2-proyecto')"
+                          class="w-full text-left p-2.5 rounded-xl text-xs flex items-start gap-2.5 transition-all border ${
+                            this.currentBlockId === "ut2-proyecto"
+                              ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium shadow-md border-amber-400"
+                              : "bg-amber-50/90 dark:bg-amber-950/40 text-amber-950 dark:text-amber-100 border-amber-200/90 dark:border-amber-900/70 hover:bg-amber-100/90 dark:hover:bg-amber-900/50 shadow-xs"
+                          }">
+                    <span class="text-base shrink-0 mt-0.5">🎄</span>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center justify-between text-[10px] opacity-80 mb-0.5">
+                        <span>Reto Global UT2</span>
+                        <span class="font-mono text-[9px]">1ª Eval</span>
+                      </div>
+                      <div class="truncate text-xs font-bold ${this.currentBlockId === "ut2-proyecto" ? "text-white" : "text-slate-900 dark:text-slate-100"}">
+                        Cena de Navidad DAW
+                      </div>
+                      <div class="text-[10px] ${this.currentBlockId === "ut2-proyecto" ? "text-amber-100" : "text-slate-500 dark:text-slate-400"} mt-0.5 truncate">
+                        HTML5 Semántico + Flexbox
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                `
+                  : ""
+              }
               ${filteredBlocks
                 .map(block => {
                   const isCurrentBlock = block.id === this.currentBlockId;
@@ -6179,13 +6273,17 @@ class LMSGIApp {
             <span>&rsaquo;</span>
             <span class="font-medium text-teal-600 dark:text-teal-400">UT${currentUnit.unitNumber} (${currentUnit.ra})</span>
             <span>&rsaquo;</span>
-            <span class="text-slate-900 dark:text-slate-100 font-semibold">${currentBlock.session}</span>
+            <span class="text-slate-900 dark:text-slate-100 font-semibold">${currentBlock.session || (currentBlock.isProject ? "Proyecto Integrador" : "")}</span>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${
+              currentBlock.isProject
+                ? "bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
+                : "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+            }">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              Bloque: 2 Horas
+              ${currentBlock.isProject ? "Reto Global UT2 (Sin Resolver)" : "Bloque: 2 Horas"}
             </span>
 
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
@@ -6207,8 +6305,8 @@ class LMSGIApp {
                     }">
               ${
                 isDone
-                  ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Bloque Completado`
-                  : `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/></svg> Marcar como realizado`
+                  ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ${currentBlock.isProject ? "Proyecto Completado" : "Bloque Completado"}`
+                  : `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/></svg> ${currentBlock.isProject ? "Marcar proyecto como realizado" : "Marcar como realizado"}`
               }
             </button>
           </div>
@@ -6218,8 +6316,10 @@ class LMSGIApp {
         <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight leading-tight flex items-center gap-2">
           ${currentBlock.title}
           ${
-            !isUnlocked
-              ? `<span class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg> Bloqueado para alumnos</span>`
+            currentBlock.isProject
+              ? `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300">🎯 Reto Global Integrador</span>`
+              : !isUnlocked
+              ? `<span class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg> Bloqueado para alumnos</span>`
               : ""
           }
         </h1>
@@ -6515,11 +6615,22 @@ class LMSGIApp {
                 Descargar .${ex.language}
               </button>
 
-              <button id="btn-solution-${ex.id}" onclick="window.LMSGI_APP.toggleSolution('${ex.id}')"
-                      class="px-2.5 py-1.5 text-xs font-medium bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 dark:hover:bg-teal-900 rounded-lg flex items-center gap-1 transition-colors">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                Ver Solución Guiada
-              </button>
+              ${
+                ex.id === "ex-ut2-proyecto" || currentBlock.isProject
+                  ? `
+                <span class="px-2.5 py-1.5 text-xs font-semibold bg-amber-50 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300 dark:border-amber-800 rounded-lg flex items-center gap-1.5 shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zM10 7a2 2 0 012-2h0a2 2 0 012 2v4H10V7z"/></svg>
+                  🔒 Proyecto Sin Resolver
+                </span>
+                `
+                  : `
+                <button id="btn-solution-${ex.id}" onclick="window.LMSGI_APP.toggleSolution('${ex.id}')"
+                        class="px-2.5 py-1.5 text-xs font-medium bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 dark:hover:bg-teal-900 rounded-lg flex items-center gap-1 transition-colors">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  Ver Solución Guiada
+                </button>
+                `
+              }
             </div>
           </div>
 
@@ -6672,6 +6783,10 @@ class LMSGIApp {
             }
 
             <!-- Panel de Solución Guiada -->
+            ${
+              ex.id === "ex-ut2-proyecto" || currentBlock.isProject
+                ? ""
+                : `
             <div id="solution-${ex.id}" class="hidden mt-4 p-4 rounded-xl bg-slate-900 border border-teal-500/30 text-slate-100 text-xs space-y-2">
               <div class="flex items-center justify-between font-bold text-teal-300 text-xs pb-1 border-b border-slate-800">
                 <span class="flex items-center gap-1.5">
@@ -6682,6 +6797,8 @@ class LMSGIApp {
               </div>
               <pre class="font-mono text-xs overflow-x-auto p-2 bg-slate-950/60 rounded text-teal-300 leading-relaxed">${this.escapeHTML(ex.solution)}</pre>
             </div>
+            `
+            }
           </div>
         </div>
       `;
