@@ -545,7 +545,7 @@ class LMSGIApp {
             </div>
             <span class="text-[10px] text-slate-400">100% Escala</span>
           </div>
-          <iframe id="iframe-preview-${exerciseId}" class="w-full min-h-[420px] bg-white text-slate-900 border-0" sandbox="allow-same-origin allow-scripts"></iframe>
+          <iframe id="iframe-preview-${exerciseId}" class="w-full min-h-[420px] bg-white text-slate-900 border-0" sandbox="allow-same-origin allow-scripts allow-forms allow-modals"></iframe>
         </div>
       </div>
     `;

@@ -1048,12 +1048,14 @@ export const UNIT_2_DATA = {
       ce: ["CE2c"],
       objectives: [
         "Manejar áreas de texto multilínea (<textarea rows=\"5\">).",
-        "Implementar botones de tipo submit y reset (<input type=\"submit\"> e <input type=\"reset\">).",
-        "Aplicar atributos de validación nativa HTML5: required, pattern, min, max."
+        "Comprender la función real y diferenciada de for, id y name en un formulario.",
+        "Aprender a enviar datos a un email mediante una cuenta gratuita en Formspree.io.",
+        "Implementar botones de tipo submit y reset (<button type=\"submit\"> e <input type=\"reset\">).",
+        "Aplicar atributos de validación nativa HTML5: required, type=\"email\", min, max."
       ],
       theory: {
         intro: `
-          Completamos el estudio de los formularios web abordando la entrada de texto multilínea para comentarios u observaciones, la botonera de envío y reseteo, y el sistema de validaciones en cliente que ofrece HTML5 sin necesidad de escribir código JavaScript.
+          Completamos el estudio de los formularios web abordando la entrada de texto multilínea para comentarios u observaciones, la botonera de envío y reseteo, la conexión real con servicios de correo mediante el atributo **\`action\`** y **Formspree.io**, y el sistema de validaciones en cliente que ofrece HTML5 sin necesidad de escribir código JavaScript.
         `,
         sections: [
           {
@@ -1072,20 +1074,60 @@ export const UNIT_2_DATA = {
             `
           },
           {
-            title: "2. Botones de acción: submit y reset",
+            title: "2. Envío a correo con Formspree: El atributo action y cómo funcionan for, id y name",
             content: `
-              En los requisitos técnicos del proyecto se solicita expresamente: *"3ª parte: 2 botones, submit y reset. Centrados, bordes redondeados. Otro color en hover"*:
+              Al diseñar un formulario web, es fundamental comprender qué ocurre cuando el usuario pulsa el botón de envío y cómo se coordinan los atributos **\`for\`**, **\`id\`** y **\`name\`**:
+
+              * **\`for\` (en \`<label>\`)**: Apunta al \`id\` del control de formulario. Garantiza la **accesibilidad** (para lectores de pantalla) y la usabilidad: al hacer clic sobre el texto de la etiqueta, el cursor se sitúa automáticamente dentro del campo.
+              * **\`id\` (en el control)**: Es el identificador único del elemento en el documento HTML. Sirve para enlazar el \`label\`, aplicar estilos CSS o manipularlo con JavaScript. **El servidor web nunca recibe el \`id\`**.
+              * **\`name\` (en el control)**: **Es la clave o variable que viaja al servidor**. Al pulsar enviar, el navegador empaqueta parejas clave=valor (\`name=valor\`). **Si un campo no tiene atributo \`name\`, su contenido nunca se enviará**.
+
+              ### ¿A dónde se envían los datos? El atributo \`action\`
+              
+              * **Envío con \`mailto:\`**: \`action="mailto:correo@dominio.com"\`. Depende de que el usuario tenga un programa de correo cliente instalado y configurado en su equipo local (como Outlook o Thunderbird). Si el usuario navega desde un móvil o un navegador sin cliente local, no funciona. Por ello, **no es una solución web profesional**.
+              * **Envío a un script en servidor (\`action="procesar.php"\`)**: Es la solución tradicional en producción, pero requiere disponer de un servidor web con intérprete de PHP configurado y base de datos (materia que se estudiará más adelante).
+              * **La solución real y efectiva: Formspree.io**:
+                * Permite registrar una **cuenta gratuita** en **[formspree.io](https://formspree.io/)**.
+                * Al crear un nuevo formulario en su panel, te proporciona un enlace único para tu formulario (por ejemplo: \`https://formspree.io/f/xzedjnqj\`).
+                * Copiamos ese enlace en el atributo \`action\` de nuestro formulario y usamos \`method="POST"\`.
+                * Al rellenar los datos y pulsar el botón de envío, **los datos llegan directamente a tu bandeja de correo electrónico** y se registran en el panel web de Formspree.
+
+              ### Ejemplo básico funcional de formulario conectado a email:
               
               \`\`\`html
-              <div class="botones-form">
-                <input type="submit" value="Enviar formulario">
-                <input type="reset" value="Borrar datos">
-              </div>
+              <!DOCTYPE html>
+              <html lang="es">
+              <head>
+                <meta charset="UTF-8">
+                <title>Enviar Formulario a Email</title>
+              </head>
+              <body>
+
+                <h2>Contacto por Correo</h2>
+
+                <!-- Pones la URL de Formspree en action y usas method="POST" -->
+                <form action="https://formspree.io/f/xzedjnqj" method="POST">
+                  
+                  <label for="email">Tu correo:</label><br>
+                  <input type="email" id="email" name="email_remitente" required>
+
+                  <br><br>
+
+                  <label for="obs">Observaciones:</label><br>
+                  <textarea id="obs" name="observaciones" rows="4" cols="40" required></textarea>
+
+                  <br><br>
+
+                  <button type="submit">Enviar al correo</button>
+                </form>
+
+              </body>
+              </html>
               \`\`\`
               
-              * **\`<input type="submit">\`**: Envía los datos del formulario al script indicado en el atributo \`action\`.
-              * **\`<input type="reset">\`**: Devuelve todos los campos del formulario a sus valores iniciales por defecto.
-              * El atributo \`value="..."\` determina el texto que aparece serigrafiado sobre el botón.
+              * **Botonera (\`submit\` y \`reset\`)**:
+                * **\`<button type="submit">\`** (o \`<input type="submit">\`): Dispara la validación y envía los datos al \`action\`.
+                * **\`<input type="reset">\`**: Restablece todos los campos a su estado inicial.
             `
           },
           {
@@ -1125,39 +1167,58 @@ export const UNIT_2_DATA = {
           ],
           correctIndex: 1,
           explanation: "type=\"reset\" restaura el formulario a su estado original inicial, limpiando el texto tecleado por el usuario."
+        },
+        {
+          id: "q-ut2-b8-3",
+          question: "¿Cuál es la función exacta del atributo `name` frente a `id` y `for` en un formulario conectado a Formspree?",
+          options: [
+            "`name` es la clave o variable que recibe el servidor con el dato, `id` identifica el control en el DOM y `for` en el `<label>` vincula la etiqueta accesible con dicho `id`.",
+            "`id` es la variable que llega por correo electrónico y `name` solo sirve para decorarlo con CSS.",
+            "`for`, `id` y `name` deben tener obligatoriamente siempre el mismo valor en todos los navegadores.",
+            "`name` se utiliza únicamente para el botón reset."
+          ],
+          correctIndex: 0,
+          explanation: "El atributo 'name' define el nombre del parámetro que viaja en la petición HTTP POST hacia el servidor o servicio (como Formspree); 'id' identifica al elemento en el documento y 'for' en <label> se enlaza con el id para garantizar la accesibilidad."
         }
       ],
       exercises: [
         {
           id: "ex-ut2-b8",
-          title: "Bloque 2 y 3 del formulario: Observaciones y Botonera",
-          description: "Implementa el bloque de observaciones (textarea y checkbox) y la botonera (submit y reset).",
-          initialCode: `<!-- Bloque 2: Observaciones -->
-<!-- Bloque 3: Botonera -->`,
+          title: "Formulario funcional con Formspree: Observaciones y Botonera",
+          description: "Implementa el formulario web completo conectándolo a Formspree para verificar el funcionamiento real de for, id y name al recibir la información por correo electrónico.",
+          initialCode: `<!-- Pones la URL de Formspree en action y usas method="POST" -->
+<form action="https://formspree.io/f/xzedjnqj" method="POST" target="_blank">
+  <!-- Bloque 2: Observaciones (textarea con id/name="observaciones" y checkbox) -->
+
+  <!-- Bloque 3: Botonera (submit y reset) -->
+</form>`,
           language: "html",
           tasks: [
-            "1. Crea el contenedor <div class=\"bloque-form\" id=\"observaciones\">.",
-            "2. Añade un <h3> con 'Observaciones'.",
-            "3. Añade el label 'Comentarios (alergias, peticiones especiales):' asociado al textarea con id=\"comentarios\".",
-            "4. Añade <textarea id=\"comentarios\" name=\"comentarios\" rows=\"5\">Observaciones</textarea>.",
-            "5. Añade el checkbox <input type=\"checkbox\" name=\"confirmacion\" value=\"si\"> con el texto 'Confirmo que asistiré a la cena'.",
-            "6. Debajo del formulario, añade <div class=\"botones-form\"> con los inputs submit ('Enviar formulario') y reset ('Borrar datos')."
+            "1. Envuelve los bloques dentro de la etiqueta <form action=\"https://formspree.io/f/xzedjnqj\" method=\"POST\" target=\"_blank\"> (puedes crear tu propia cuenta gratuita en formspree.io y usar tu propio enlace).",
+            "2. Crea el contenedor <div class=\"bloque-form\" id=\"observaciones\"> con un <h3>Observaciones</h3>.",
+            "3. Añade <label for=\"obs\">Comentarios (alergias, peticiones especiales):</label> vinculado mediante for al id=\"obs\" del textarea.",
+            "4. Añade <textarea id=\"obs\" name=\"observaciones\" rows=\"5\" cols=\"40\" required>Observaciones</textarea> con name=\"observaciones\" para que Formspree reciba este campo.",
+            "5. Añade la casilla <input type=\"checkbox\" id=\"confirmacion\" name=\"confirmacion\" value=\"si\"> con su <label for=\"confirmacion\">Confirmo que asistiré a la cena</label>.",
+            "6. En <div class=\"botones-form\">, añade el botón de envío <button type=\"submit\">Enviar al correo</button> y el botón reset <input type=\"reset\" value=\"Borrar datos\">.",
+            "7. Prueba el envío pulsando 'Enviar al correo' para comprobar cómo Formspree recibe los datos."
           ],
-          solution: `<div class="bloque-form" id="observaciones">
-  <h3>Observaciones</h3>
-  <label for="comentarios">Comentarios (alergias, peticiones especiales):</label>
-  <textarea id="comentarios" name="comentarios" rows="5">Observaciones</textarea>
-  <label>
-    <input type="checkbox" name="confirmacion" value="si">
-    Confirmo que asistiré a la cena
-  </label>
-</div>
+          solution: `<form action="https://formspree.io/f/xzedjnqj" method="POST" target="_blank">
+  <div class="bloque-form" id="observaciones">
+    <h3>Observaciones</h3>
+    <label for="obs">Comentarios (alergias, peticiones especiales):</label>
+    <textarea id="obs" name="observaciones" rows="5" cols="40" required>Observaciones</textarea>
+    <label for="confirmacion">
+      <input type="checkbox" id="confirmacion" name="confirmacion" value="si">
+      Confirmo que asistiré a la cena
+    </label>
+  </div>
 
-<div class="botones-form">
-  <input type="submit" value="Enviar formulario">
-  <input type="reset" value="Borrar datos">
-</div>`,
-          hints: "El textarea debe tener rows=\"5\" y el texto inicial 'Observaciones' entre sus etiquetas."
+  <div class="botones-form">
+    <button type="submit">Enviar al correo</button>
+    <input type="reset" value="Borrar datos">
+  </div>
+</form>`,
+          hints: "Recuerda: 'for' en label debe coincidir con 'id' en el campo para la accesibilidad, mientras que 'name' es la variable que recibirá Formspree por correo. Puedes crear tu propia cuenta gratuita en formspree.io para recibir los mensajes en tu email."
         }
       ]
     },
