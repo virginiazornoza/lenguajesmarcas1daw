@@ -14,6 +14,7 @@
 import { COURSE_INFO, UNITS } from "./data/curriculum.js";
 import { UNIT_1_DATA } from "./data/units/unit1.js";
 import { UNIT_2_DATA, UNIT_2_PROJECT } from "./data/units/unit2.js";
+import { UNIT_3_DATA, UNIT_3_PROJECT } from "./data/units/unit3.js";
 import { UNITS_OVERVIEW_DATA } from "./data/units/unitsOverview.js";
 import { QuizEngine } from "./quiz-engine.js";
 import { CodeValidator } from "./parser-validator.js";
@@ -22,7 +23,9 @@ const DEFAULT_UNLOCKED = [
   "ut1-b1", "ut1-b2", "ut1-b3", "ut1-b4",
   "ut2-b1", "ut2-b2", "ut2-b3", "ut2-b4", "ut2-b5", "ut2-b6", "ut2-b7", "ut2-b8",
   "ut2-b9", "ut2-b10", "ut2-b11", "ut2-b12", "ut2-b13", "ut2-b14", "ut2-b15", "ut2-b16",
-  "ut2-proyecto"
+  "ut2-proyecto",
+  "ut3-b1", "ut3-b2", "ut3-b3", "ut3-b4", "ut3-b5", "ut3-b6", "ut3-b7",
+  "ut3-proyecto"
 ];
 
 class LMSGIApp {
@@ -65,6 +68,23 @@ class LMSGIApp {
       });
       localStorage.setItem("lmsgi_unlocked_blocks", JSON.stringify(this.unlockedBlocks));
       localStorage.setItem("lmsgi_project_ut2_synced_v1", "true");
+    }
+
+    if (!localStorage.getItem("lmsgi_project_ut3_synced_v1")) {
+      if (this.customTheories) {
+        for (let i = 1; i <= 7; i++) {
+          delete this.customTheories[`ut3-b${i}`];
+        }
+        delete this.customTheories["ut3-proyecto"];
+        localStorage.setItem("lmsgi_custom_theories", JSON.stringify(this.customTheories));
+      }
+      DEFAULT_UNLOCKED.forEach(bId => {
+        if (!this.unlockedBlocks.includes(bId)) {
+          this.unlockedBlocks.push(bId);
+        }
+      });
+      localStorage.setItem("lmsgi_unlocked_blocks", JSON.stringify(this.unlockedBlocks));
+      localStorage.setItem("lmsgi_project_ut3_synced_v1", "true");
     }
 
     this.editingBlockId = null;
@@ -774,7 +794,7 @@ class LMSGIApp {
   }
 
   isBlockUnlocked(blockId) {
-    if (blockId === "ut2-proyecto") return true;
+    if (blockId === "ut2-proyecto" || blockId === "ut3-proyecto") return true;
     return this.unlockedBlocks.includes(blockId);
   }
 
@@ -787,6 +807,12 @@ class LMSGIApp {
         block = UNIT_2_DATA.project || UNIT_2_PROJECT;
       } else {
         block = UNIT_2_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_2_DATA.blocks[0];
+      }
+    } else if (this.currentUnitId === "ut3") {
+      if (this.currentBlockId === "ut3-proyecto") {
+        block = UNIT_3_DATA.project || UNIT_3_PROJECT;
+      } else {
+        block = UNIT_3_DATA.blocks.find(b => b.id === this.currentBlockId) || UNIT_3_DATA.blocks[0];
       }
     } else {
       const currentUnit = this.getCurrentUnit();
@@ -1038,10 +1064,13 @@ class LMSGIApp {
         );
       });
 
-      const matchesProject = unit.id === "ut2" && (
+      const matchesProject = (unit.id === "ut2" && (
         !this.searchQuery ||
         "proyecto integrador cena de navidad daw flexbox html5 reto global".includes(this.searchQuery.toLowerCase())
-      );
+      )) || (unit.id === "ut3" && (
+        !this.searchQuery ||
+        "proyecto integrador portal de novedades rss sindicacion dom javascript".includes(this.searchQuery.toLowerCase())
+      ));
 
       if (this.searchQuery && filteredBlocks.length === 0 && !matchesProject) {
         return;
@@ -1111,6 +1140,39 @@ class LMSGIApp {
                       </div>
                       <div class="text-[10px] ${this.currentBlockId === "ut2-proyecto" ? "text-amber-100" : "text-slate-500 dark:text-slate-400"} mt-0.5 truncate">
                         HTML5 Semántico + Flexbox
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                `
+                  : ""
+              }
+              ${
+                unit.id === "ut3" && matchesProject
+                  ? `
+                <!-- Apartado Especial: Proyecto Integrador UT3 (Separado de las sesiones) -->
+                <div class="mb-2 pb-2.5 border-b border-teal-200/80 dark:border-teal-900/60">
+                  <div class="text-[10px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400 mb-1 px-1 flex items-center justify-between">
+                    <span class="flex items-center gap-1"><span>🎯</span> Proyecto Integrador</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-teal-100 dark:bg-teal-900/60 text-teal-800 dark:text-teal-300 font-semibold">Sin Resolver</span>
+                  </div>
+                  <button onclick="window.LMSGI_APP.selectBlock('ut3', 'ut3-proyecto')"
+                          class="w-full text-left p-2.5 rounded-xl text-xs flex items-start gap-2.5 transition-all border ${
+                            this.currentBlockId === "ut3-proyecto"
+                              ? "bg-gradient-to-r from-teal-500 to-teal-600 text-white font-medium shadow-md border-teal-400"
+                              : "bg-teal-50/90 dark:bg-teal-950/40 text-teal-950 dark:text-teal-100 border-teal-200/90 dark:border-teal-900/70 hover:bg-teal-100/90 dark:hover:bg-teal-900/50 shadow-xs"
+                          }">
+                    <span class="text-base shrink-0 mt-0.5">📡</span>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center justify-between text-[10px] opacity-80 mb-0.5">
+                        <span>Reto Global UT3</span>
+                        <span class="font-mono text-[9px]">2ª Eval</span>
+                      </div>
+                      <div class="truncate text-xs font-bold ${this.currentBlockId === "ut3-proyecto" ? "text-white" : "text-slate-900 dark:text-slate-100"}">
+                        Portal Dinámico y RSS 2.0
+                      </div>
+                      <div class="text-[10px] ${this.currentBlockId === "ut3-proyecto" ? "text-teal-100" : "text-slate-500 dark:text-slate-400"} mt-0.5 truncate">
+                        DOM + Eventos + Sindicación
                       </div>
                     </div>
                   </button>
@@ -1558,7 +1620,7 @@ class LMSGIApp {
               </button>
 
               ${
-                ex.id === "ex-ut2-proyecto" || currentBlock.isProject
+                ex.id === "ex-ut2-proyecto" || ex.id === "ex-ut3-proyecto" || currentBlock.isProject
                   ? `
                 <span class="px-2.5 py-1.5 text-xs font-semibold bg-amber-50 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300 dark:border-amber-800 rounded-lg flex items-center gap-1.5 shadow-xs">
                   <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zM10 7a2 2 0 012-2h0a2 2 0 012 2v4H10V7z"/></svg>
@@ -1726,7 +1788,7 @@ class LMSGIApp {
 
             <!-- Panel de Solución Guiada -->
             ${
-              ex.id === "ex-ut2-proyecto" || currentBlock.isProject
+              ex.id === "ex-ut2-proyecto" || ex.id === "ex-ut3-proyecto" || currentBlock.isProject
                 ? ""
                 : `
             <div id="solution-${ex.id}" class="hidden mt-4 p-4 rounded-xl bg-slate-900 border border-teal-500/30 text-slate-100 text-xs space-y-2">
@@ -2434,8 +2496,19 @@ class LMSGIApp {
       const b = UNIT_1_DATA.blocks.find(b => b.id === id);
       if (b) officialTheory = b.theory;
     } else if (id.startsWith("ut2-")) {
-      const b = UNIT_2_DATA.blocks.find(b => b.id === id);
-      if (b) officialTheory = b.theory;
+      if (id === "ut2-proyecto") {
+        officialTheory = (UNIT_2_DATA.project || UNIT_2_PROJECT).theory;
+      } else {
+        const b = UNIT_2_DATA.blocks.find(b => b.id === id);
+        if (b) officialTheory = b.theory;
+      }
+    } else if (id.startsWith("ut3-")) {
+      if (id === "ut3-proyecto") {
+        officialTheory = (UNIT_3_DATA.project || UNIT_3_PROJECT).theory;
+      } else {
+        const b = UNIT_3_DATA.blocks.find(b => b.id === id);
+        if (b) officialTheory = b.theory;
+      }
     } else {
       const u = UNITS.find(un => un.id === this.currentUnitId);
       if (u) {

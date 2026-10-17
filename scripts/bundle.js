@@ -11,6 +11,9 @@ const unit1 = fs.readFileSync(path.join(__dirname, '../js/data/units/unit1.js'),
 const unit2 = fs.readFileSync(path.join(__dirname, '../js/data/units/unit2.js'), 'utf8')
   .replace(/export const/g, 'const');
 
+const unit3 = fs.readFileSync(path.join(__dirname, '../js/data/units/unit3.js'), 'utf8')
+  .replace(/export const/g, 'const');
+
 const unitsOverview = fs.readFileSync(path.join(__dirname, '../js/data/units/unitsOverview.js'), 'utf8')
   .replace(/export const/g, 'const');
 
@@ -30,6 +33,8 @@ ${curriculum}
 ${unit1}
 
 ${unit2}
+
+${unit3}
 
 ${unitsOverview}
 
